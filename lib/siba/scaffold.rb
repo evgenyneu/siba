@@ -59,6 +59,8 @@ module Siba
           raise Siba::Error, "Filed to create init file '#{init_file_dest}'"
         end
 
+        replace_siba_version dest_tmp_dir
+
         # Replace "cy6" with category, and "demo" with name
         replace_category_and_name dest_tmp_dir        
 
@@ -99,17 +101,29 @@ module Siba
 
     def replace_file_contents(path_to_file)
       return unless siba_file.file_file? path_to_file
-      file_text = Siba::FileHelper.read path_to_file
-      file_text.gsub! CATEGORY_REPLACE_TEXT, category 
-      file_text.gsub! CATEGORY_REPLACE_TEXT.capitalize, category.capitalize
-      file_text.gsub! NAME_REPLACE_TEXT, name 
-      file_text.gsub! NAME_REPLACE_TEXT.capitalize, name_camelized 
-      Siba::FileHelper.write path_to_file, file_text
+      Siba::FileHelper.change_file(path_to_file) do |file_text|
+        file_text.gsub! CATEGORY_REPLACE_TEXT, category 
+        file_text.gsub! CATEGORY_REPLACE_TEXT.capitalize, category.capitalize
+        file_text.gsub! NAME_REPLACE_TEXT, name 
+        file_text.gsub! NAME_REPLACE_TEXT.capitalize, name_camelized 
+        file_text
+      end
     end
 
     def gitify(path_to_project)
       siba_file.file_utils_cd path_to_project
       siba_file.run_shell "git init", "Failed to init git repository"
+      siba_file.run_shell "git add ."
+      siba_file.run_shell "git commit -a -m 'Initial commit'"
+    end
+
+    def replace_siba_version(project_dir)
+      path_to_gemspec = File.join project_dir, "siba-c6y-demo.gemspec"
+      raise Siba::Error, "Can not find gemspec file #{path_to_gemspec}" unless siba_file.file_file? path_to_gemspec
+      Siba::FileHelper.change_file(path_to_gemspec) do |file_text|
+        version = Siba::VERSION.split('.')[0..-2].join('.')
+        file_text.gsub "siba_version", version 
+      end
     end
   end
 end

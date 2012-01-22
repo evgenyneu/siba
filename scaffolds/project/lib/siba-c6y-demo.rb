@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 require "siba-c6y-demo/version"
 require "siba-c6y-demo/init"
 

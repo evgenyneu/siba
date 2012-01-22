@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module Siba
   module C6y
     module Demo

@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module Siba::C6y
   module Demo                 
     class Init                 
@@ -42,6 +44,7 @@ module Siba::C6y
         siba_file.run_this do
           # This code will not be run during unit tests
           # but only during normal execution and integration tests
+          files_and_dirs = Siba::FileHelper.entries(current_dir)
         end
 
         # These methods can be used directly as they do not access file system
@@ -61,7 +64,6 @@ module Siba::C6y
         # so there is no need to clean anything.
         
         # Siba::FileHelper methods
-        files_and_dirs = Siba::FileHelper.entries(current_dir)
         my_file = File.join tmp_dir, "myfile"
         Siba::FileHelper.write my_file, "Write UTF-8 text"
         Siba::FileHelper.read my_file

@@ -32,6 +32,17 @@ module Siba
         end
       end
 
+      # Used to replace text in file
+      # Example:
+      #   change_file("/path") do |file_text|
+      #     file_text.gsub "one", "two"
+      #   end
+      def change_file(path_to_file, &block)
+        file_text = Siba::FileHelper.read path_to_file
+        file_text = block.call file_text
+        Siba::FileHelper.write path_to_file, file_text
+      end
+
       # Retuns an array containing all dir entires except '.' and '..' dirs
       def entries(dir)
         siba_file.dir_entries(dir) - %w{ . .. }
