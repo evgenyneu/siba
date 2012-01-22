@@ -57,15 +57,15 @@ class MiniTest::Unit::TestCase
       @options = yml_file_name_or_options_hash
     end
     
-    unless @plugin_name
-      raise Siba::Error, "Initialize '@plugin_name' variable ('source', 'destination', etc.)"
+    unless @plugin_category
+      raise Siba::Error, "Initialize '@plugin_category' variable (#{Siba::Plugin.categories_str})"
     end
 
     unless @plugin_type
-      raise Siba::Error, "Initialize '@plugin_type' variable with your gem type ('cloud', 'ftp' etc)."
+      raise Siba::Error, "Initialize '@plugin_type' variable with your gem name ('cloud', 'ftp' etc)."
     end
 
-    Siba::PluginLoader.loader.load(@plugin_name, @plugin_type, @options)
+    Siba::PluginLoader.loader.load(@plugin_category, @plugin_type, @options)
   end
 
   def load_options(yml_name)

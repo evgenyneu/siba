@@ -5,7 +5,7 @@ require 'siba/plugins/encryption/gpg/init'
 
 describe Siba::Encryption::Gpg::Init do
   before do
-    @plugin_name="encryption"
+    @plugin_category="encryption"
     @plugin_type="gpg"
     @options = {'passphrase' => "my pass word", "cipher" => "AES256"}
   end

@@ -6,7 +6,7 @@ require 'siba/plugins/archive/tar/init'
 describe Siba::Archive::Tar::Init do
   before do    
     @yml_path = File.expand_path('../yml/init', __FILE__)
-    @plugin_name="archive"
+    @plugin_category="archive"
     @plugin_type="tar"
   end
 

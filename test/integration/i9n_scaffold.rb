@@ -20,6 +20,8 @@ describe Siba::Scaffold do
     dest_dir = File.join dest_dir, @gem_name
     File.directory?(dest_dir).must_equal true
     Siba::FileHelper.dirs_count(dest_dir).must_be :>, 1
+    git_dir = File.join dest_dir, ".git"
+    File.directory?(git_dir).must_equal true, "Must create git repository"
     verify_log
   end
 end

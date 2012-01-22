@@ -61,6 +61,8 @@ module Siba
 
         # Replace "cy6" with category, and "demo" with name
         replace_category_and_name dest_tmp_dir        
+
+        gitify dest_tmp_dir
        
         # Finally, copy the project to destination
         dest_dir = File.join dest_dir, name
@@ -103,6 +105,11 @@ module Siba
       file_text.gsub! NAME_REPLACE_TEXT, name 
       file_text.gsub! NAME_REPLACE_TEXT.capitalize, name_camelized 
       Siba::FileHelper.write path_to_file, file_text
+    end
+
+    def gitify(path_to_project)
+      siba_file.file_utils_cd path_to_project
+      siba_file.run_shell "git init", "Failed to init git repository"
     end
   end
 end

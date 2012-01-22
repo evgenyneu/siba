@@ -15,6 +15,7 @@ module Siba
         end
       end
 
+      # Reads a file in UTF-8 encoding
       def read(file)
         str = File.read file, { open_args: ["r:bom|utf-8"]}
         unless str.valid_encoding?
@@ -23,6 +24,7 @@ module Siba
         str
       end
 
+      # Write to file in UTF-8 encoding
       def write(file, data)
         siba_file.file_utils_remove_entry_secure file if siba_file.file_file? file
         File.open(file, "w:utf-8") do |file|

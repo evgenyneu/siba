@@ -6,7 +6,7 @@ require 'siba/plugins/source/files/init'
 describe Siba::Source::Files::Init do
   before do    
     @yml_path = File.expand_path('../yml', __FILE__)
-    @plugin_name="source"
+    @plugin_category="source"
     @plugin_type="files"
   end
 
