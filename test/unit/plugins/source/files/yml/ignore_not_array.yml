@@ -1,0 +1,5 @@
+type: files
+include:
+  - file
+ignore: 
+  not: an array

@@ -1,0 +1,12 @@
+source:
+  type: files
+  include:
+    - dir1/
+    - dir2/subdir2/
+    - file1
+destination:
+  type: dir
+  dir: somedir/
+erb: <%= 2*2 %>
+settings:
+  key: value

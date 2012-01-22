@@ -1,0 +1,6 @@
+type: files
+include:
+  - dir1/
+  - dir2/subdir2/
+  - file1
+include_subdirs: false

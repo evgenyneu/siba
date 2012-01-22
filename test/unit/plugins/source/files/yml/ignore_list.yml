@@ -1,0 +1,8 @@
+type: files
+include:
+  - /dir/somefile
+ignore:
+  - file1
+  - file2
+  - ".*"
+  - /dir/dir2/file3

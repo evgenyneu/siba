@@ -1,0 +1,7 @@
+source:
+  type: files
+  include:
+      - dir
+
+archive:
+  type: tar

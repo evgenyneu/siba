@@ -1,0 +1,16 @@
+source:
+  type: files
+  include:
+    - #_replace_src_dir
+    - #_replace_src_file
+
+archive:
+  type: tar
+
+encryption:
+  type: gpg
+  passphrase: "this is a пароль"
+
+destination:
+  type: dir
+  dir: #_replace_dest_dir
