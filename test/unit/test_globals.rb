@@ -23,4 +23,12 @@ describe Siba do
     Siba::LoggerPlug.opened?.must_equal false
     Siba.tmp_dir_clean?.must_equal true
   end
+
+  it "should get current_dir" do
+    Siba.current_dir.wont_be_nil
+  end
+
+  it "should get settings" do
+    Siba.settings.wont_be_nil
+  end
 end

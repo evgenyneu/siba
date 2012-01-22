@@ -16,11 +16,18 @@ module Siba
       end
 
       def read(file)
-        str = File.read(file, { open_args: ["r:bom|utf-8"] })
+        str = File.read file, { open_args: ["r:bom|utf-8"]}
         unless str.valid_encoding?
           raise Siba::Error, "Incorrect file encoding. Please save the options with UTF-8 encoding."
         end
         str
+      end
+
+      def write(file, data)
+        siba_file.file_utils_remove_entry_secure file if siba_file.file_file? file
+        File.open(file, "w:utf-8") do |file|
+          file << data
+        end
       end
 
       # Retuns an array containing all dir entires except '.' and '..' dirs

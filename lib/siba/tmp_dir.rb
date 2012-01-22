@@ -48,7 +48,7 @@ settings:
 
     def create
       siba_file.run_this "create tmp dir" do
-        tmp_dir_from_settings = Siba.settings["tmp_dir"]
+        tmp_dir_from_settings = Siba.settings && Siba.settings["tmp_dir"]
         tmp_path = nil
         if tmp_dir_from_settings.nil?
           tmp_path = siba_file.dir_mktmpdir TmpDirPrefix 

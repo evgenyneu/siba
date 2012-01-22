@@ -1,4 +1,4 @@
-module Siba::Destination
+module Siba::C6y
   module Demo                 
     class Init                 
       def initialize(options)  

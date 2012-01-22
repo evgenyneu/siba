@@ -1,5 +1,5 @@
 module Siba
-  module Destination
+  module C6y
     module Demo
       VERSION = "0.0.1"
     end

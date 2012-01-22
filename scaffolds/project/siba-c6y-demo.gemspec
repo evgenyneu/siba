@@ -1,17 +1,17 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "siba-destination-demo/version"
+require "siba-c6y-demo/version"
 
 Gem::Specification.new do |s|
-  s.name        = "siba-destination-demo"
-  s.version     = Siba::Destination::Demo::VERSION
+  s.name        = "siba-c6y-demo"
+  s.version     = Siba::C6y::Demo::VERSION
   s.authors     = ["Write your name"]
   s.email       = ["Write your email"]
   s.homepage    = ""
   s.summary     = %q{Write a gem summary}
   s.description = %q{Write a gem description}
 
-  s.rubyforge_project = "siba-destination-demo"
+  s.rubyforge_project = "siba-c6y-demo"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

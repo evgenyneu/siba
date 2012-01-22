@@ -3,7 +3,10 @@
 module Siba
   class Scaffold
     include Siba::FilePlug
-    attr_accessor :category, :name
+    include Siba::LoggerPlug
+    attr_accessor :category, :name, :name_camelized
+    CATEGORY_REPLACE_TEXT = "c6y"
+    NAME_REPLACE_TEXT = "demo"
     
     def initialize(category, name)
       @category = category
@@ -13,19 +16,93 @@ module Siba
 
       @name = Siba::StringHelper.str_to_alphnumeric name
       raise Siba::Error, "first character of gem name can not be number" if name =~ /^[0-9]/
+
+      @name_camelized = StringHelper.camelize name
     end
 
     def scaffold(dest_dir)
+      run_scaffold dest_dir
+    ensure
+      Siba.cleanup
+    end
+
+    private
+
+    def run_scaffold(dest_dir)
       siba_file.run_this "scaffold" do
-        src_dir = siba_file.file_expand_path "../../../scaffolds", __FILE__  
-        src_dir = File.join src_dir, category
-        puts "Src dir: #{src_dir}"
-        raise Siba::Error, "No scaffolds for '#{category}'" unless siba_file.file_directory? src_dir
+        LoggerPlug.create "Scaffolding", nil
+        raise Siba::Error, "Please install GIT first" unless siba_file.shell_ok? "git help"
+        scaffolds_dir = siba_file.file_expand_path "../../../scaffolds", __FILE__
+        
+        # create a tmp file where we will generace the project
         dest_tmp_dir = Siba::TestFiles.mkdir_in_tmp_dir "scaffold"
-        siba_file.file_utils_cp_r src_dir, dest_tmp_dir
-        #replace demo with name
-        siba_file.file_utils_cp_r dest_tmp_dir, dest_dir
+
+        # Copy project files (which are the same for all plugin categories)
+        project_dir = File.join scaffolds_dir, "project"
+        unless siba_file.file_directory? project_dir
+          raise Siba::Error, "Scaffold project dir does not exist '#{project_dir}'"
+        end
+        siba_file.file_utils_cp_r File.join(project_dir,"."), dest_tmp_dir
+        
+        # Copy init file (different for each plugin category)
+        init_file = File.join scaffolds_dir, "#{category}.rb"
+        unless siba_file.file_file? init_file
+          raise Siba::Error, "Scaffold init file does not exist '#{init_file}'"
+        end
+        init_dir = File.join dest_tmp_dir, "lib", "siba-#{CATEGORY_REPLACE_TEXT}-demo"  
+        unless siba_file.file_directory? init_dir
+          raise Siba::Error, "Source dir does not exist '#{init_dir}'"
+        end
+        init_file_dest = File.join init_dir,"init.rb"
+        siba_file.file_utils_cp init_file, init_file_dest 
+        unless siba_file.file_file? init_file_dest
+          raise Siba::Error, "Filed to create init file '#{init_file_dest}'"
+        end
+
+        # Replace "cy6" with category, and "demo" with name
+        replace_category_and_name dest_tmp_dir        
+       
+        # Finally, copy the project to destination
+        dest_dir = File.join dest_dir, name
+        siba_file.file_utils_mkpath dest_dir
+        siba_file.file_utils_cp_r File.join(dest_tmp_dir,"."), dest_dir
       end
+    rescue Exception => e 
+      logger.fatal e
+      logger.log_exception e, true
+    end
+
+    def replace_category_and_name(dir)
+      Siba::FileHelper.entries(dir).each do |entry|
+        entry_path = replace_path dir, entry
+        if siba_file.file_directory? entry_path
+          replace_category_and_name entry_path 
+        else
+          replace_file_contents entry_path
+        end
+      end
+    end
+
+    def replace_path(dir, entry)
+      entry_path = File.join dir, entry
+      entry_after = entry.gsub CATEGORY_REPLACE_TEXT, category 
+      entry_after = entry_after.gsub NAME_REPLACE_TEXT, name 
+      if entry_after != entry
+        entry_path_after = File.join(dir, entry_after)
+        siba_file.file_utils_mv entry_path, entry_path_after
+        entry_path = entry_path_after
+      end
+      entry_path
+    end
+
+    def replace_file_contents(path_to_file)
+      return unless siba_file.file_file? path_to_file
+      file_text = Siba::FileHelper.read path_to_file
+      file_text.gsub! CATEGORY_REPLACE_TEXT, category 
+      file_text.gsub! CATEGORY_REPLACE_TEXT.capitalize, category.capitalize
+      file_text.gsub! NAME_REPLACE_TEXT, name 
+      file_text.gsub! NAME_REPLACE_TEXT.capitalize, name_camelized 
+      Siba::FileHelper.write path_to_file, file_text
     end
   end
 end
