@@ -164,5 +164,11 @@ describe Siba::SibaLogger do
       @logger.info test_message
       @logger.to_s.must_match /#{test_message}$/
     end
+
+    it "should access :finish_success_msg" do
+      @logger.finish_success_msg = "Hi"
+      @logger.close
+      Siba::SibaLogger.messages.last.msg.must_equal "Hi"
+    end
   end
 end

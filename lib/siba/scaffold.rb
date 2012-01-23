@@ -30,7 +30,8 @@ module Siba
 
     def run_scaffold(dest_dir)
       siba_file.run_this "scaffold" do
-        LoggerPlug.create "Scaffolding", nil
+        LoggerPlug.create nil, nil
+        logger.debug "Scaffolding started"
         dest_dir = File.join dest_dir, name
         if siba_file.file_directory?(dest_dir) || siba_file.file_file?(dest_dir)
           raise Siba::Error, "Directory already exists #{dest_dir}." 
@@ -40,7 +41,7 @@ module Siba
         raise Siba::Error, "Please install GIT first" unless siba_file.shell_ok? "git help"
         scaffolds_dir = siba_file.file_expand_path "../../../scaffolds", __FILE__
         
-        logger.debug "Creating a tmp file where we will generate the project"
+        logger.debug "Creating a tmp dir"
         dest_tmp_dir = Siba::TestFiles.mkdir_in_tmp_dir "scaffold"
 
         logger.debug "Copying project files"
@@ -68,7 +69,7 @@ module Siba
         logger.debug "Setting siba gem dependency"
         replace_siba_version dest_tmp_dir
 
-        logger.debug %(Replacing "cy6" with category, and "demo" with name)
+        logger.debug "Setting gem category and name in file names and contents"
         replace_category_and_name dest_tmp_dir        
 
         gitify dest_tmp_dir
@@ -77,7 +78,7 @@ module Siba
         siba_file.file_utils_mkpath dest_dir
         siba_file.file_utils_cp_r File.join(dest_tmp_dir,"."), dest_dir
 
-        logger.info "Project created in #{dest_dir}"
+        logger.finish_success_msg = "Project created in #{dest_dir}"
       end
     rescue Exception => e 
       logger.fatal e
@@ -119,7 +120,7 @@ module Siba
     end
 
     def gitify(path_to_project)
-      logger.debug "Initialize GIT repository"
+      logger.debug "Initializing GIT repository"
       siba_file.file_utils_cd path_to_project
       siba_file.run_shell "git init", "Failed to init git repository"
       siba_file.run_shell "git add ."
