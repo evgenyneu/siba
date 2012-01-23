@@ -28,9 +28,11 @@ module Siba
         o.banner = "Usage: siba command ARGUMENTS [options...]
 
 Examples: 
-    siba b db.yml             # Run backup, reading settings from FILE
-    siba l                    # Show available plugins
-    siba s destination NAME   # Generate new destination gem
+    siba backup db.yml          Run backup, reading settings from FILE
+    siba list                   Show available plugins
+    siba scaffold source NAME   Generate new source gem
+
+    Note: single letter commands are supported, like b for backup
 
 Options:"
 
@@ -149,7 +151,9 @@ Options:"
     end
 
     def list
-      show_message Siba::Plugin.get_list
+      show_message "The list of available SIBA plugins. Installed plugins are marked with * 
+      
+#{Siba::Plugin.get_list}"
     end
   end
 end

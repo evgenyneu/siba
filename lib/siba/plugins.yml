@@ -5,5 +5,5 @@ archive:
 encryption:
   gpg: Encrypt with the popular free encryption utility
 destination:
-  dir: Store backup in a local directory
+  dir: Backup to local directory
   aws-s3: Upload backup to Amazon S3 storage
