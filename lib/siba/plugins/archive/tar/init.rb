@@ -20,7 +20,7 @@ module Siba::Archive
       end
 
       def backup(sources_dir, dest_dir, dest_file_name)
-        logger.debug "Archiving with 'tar', compression: '#{archive.compression}'"
+        logger.info "Archiving with 'tar', compression: '#{archive.compression}'"
         @archive.archive sources_dir, dest_dir, dest_file_name
       end
     end

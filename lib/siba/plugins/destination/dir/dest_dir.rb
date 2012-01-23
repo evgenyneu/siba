@@ -14,7 +14,7 @@ module Siba::Destination
 
       def copy_backup_to_dest(path_to_backup)
         siba_file.run_this "copy backup to dest" do
-          logger.debug "Copying backup to destination directory: #{dir}"
+          logger.info "Copying backup to destination directory: #{dir}"
           unless siba_file.file_file? path_to_backup
             raise Siba::Error, "Backup file '#{path_to_backup}' does not exist"
           end

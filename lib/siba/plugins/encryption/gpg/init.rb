@@ -16,7 +16,7 @@ module Siba::Encryption
       end     
 
       def backup(path_to_archive)
-        logger.debug "Encrypting with 'gpg', cipher: '#{encryption.cipher}'"
+        logger.info "Encrypting backup with 'gpg', cipher: '#{encryption.cipher}'"
         encryption.encrypt path_to_archive
       end
     end

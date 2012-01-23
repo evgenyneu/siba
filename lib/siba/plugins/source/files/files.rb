@@ -15,7 +15,7 @@ module Siba::Source
 
       def backup(dest_dir)
         siba_file.run_this "backup" do
-          logger.debug "Collecting sources:"
+          logger.info "Collecting source files"
 
           size_digits = files_to_include.size.to_s.length
           files_to_include.each_index do |i|
