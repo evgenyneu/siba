@@ -3,6 +3,8 @@
 require 'helper/require_integration'
 require 'siba-c6y-demo/init'
 
+# Integration test example
+# 'rake test:i9n' command runs integration tests
 describe Siba::C6y::Demo::Init do
   it "should run integration test" do
     # All file operations will work normally in integration tests

@@ -30,7 +30,7 @@ module Siba
 
     def run_scaffold(dest_dir)
       siba_file.run_this "scaffold" do
-        LoggerPlug.create nil, nil
+        LoggerPlug.create "Scaffolding", nil, false
         logger.debug "Scaffolding started"
         dest_dir = File.join dest_dir, name
         if siba_file.file_directory?(dest_dir) || siba_file.file_file?(dest_dir)

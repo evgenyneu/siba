@@ -4,6 +4,20 @@ require 'helper/require_unit'
 
 describe Siba::LoggerPlug do
   describe "when accessing LoggerPlug class" do
+    it "must create logger" do
+      Siba::LoggerPlug.close
+      Siba::SibaLogger.quiet = true
+      Siba::LoggerPlug.create "Log",nil
+      Siba::SibaLogger.count.must_equal 1
+    end
+
+    it "must create logger without start message" do
+      Siba::LoggerPlug.close
+      Siba::SibaLogger.quiet = true
+      Siba::LoggerPlug.create "Log", nil, false
+      Siba::SibaLogger.count.must_equal 0
+    end
+
     it "must have logger" do
       Siba::LoggerPlug.logger.wont_be_nil
     end

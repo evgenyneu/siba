@@ -15,9 +15,9 @@ module Siba
         @logger
       end    
 
-      def create(name, path_to_log_file)
+      def create(name, path_to_log_file, show_start_message = true)
         raise Siba::Error, "Log is already created" if LoggerPlug.opened?
-        @logger = SibaLogger.new name, path_to_log_file
+        @logger = SibaLogger.new name, path_to_log_file, show_start_message
       end
 
       def close

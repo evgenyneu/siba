@@ -37,7 +37,7 @@ module Siba
 
     attr_accessor :finish_success_msg
 
-    def initialize(name, path_to_log_file)
+    def initialize(name, path_to_log_file, show_start_message = true)
       @name = name
       SibaLogger.messages = []
       @loggers = []
@@ -66,7 +66,7 @@ module Siba
 ||---------------------------||
 " unless file_log.nil?
 
-      info "#{name} started" unless name.nil?
+      info "#{name} started" if show_start_message
     end
 
     def to_s

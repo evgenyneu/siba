@@ -5,11 +5,11 @@ require "siba-c6y-demo/version"
 Gem::Specification.new do |s|
   s.name        = "siba-c6y-demo"
   s.version     = Siba::C6y::Demo::VERSION
-  s.authors     = ["Write your name"]
-  s.email       = ["Write your email"]
+  s.authors     = ["TODO: Write your name"]
+  s.email       = ["TOD0: your@email.com"]
   s.homepage    = ""
-  s.summary     = %q{Write a gem summary}
-  s.description = %q{Write a gem description}
+  s.summary     = %q{TODO: Write a gem summary}
+  s.description = %q{TODO: Write a gem description}
 
   s.rubyforge_project = "siba-c6y-demo"
 
