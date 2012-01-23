@@ -1,0 +1,9 @@
+source:
+  files: Backup local files and directories
+archive:
+  tar: Archive to compressed or uncompressed file
+encryption:
+  gpg: Encrypt with the popular free encryption utility
+destination:
+  dir: Store backup in a local directory
+  aws-s3: Upload backup to Amazon S3 storage

@@ -17,13 +17,17 @@ module Siba
         end
 
         begin
-          yml_str = Siba::FileHelper.read path_to_yml
-          hash = YAML.load(ERB.new(yml_str).result)
+          hash = load_hash_from_yml path_to_yml
           raise Siba::Error, "invalid format" unless hash.is_a? Hash
           return hash
         rescue Exception => e
           raise Siba::Error, "Error loading options file #{path_to_yml}: " + e.message
         end
+      end
+
+      def load_hash_from_yml(path_to_yml)
+        yml_str = Siba::FileHelper.read path_to_yml
+        YAML.load(ERB.new(yml_str).result)
       end
     end
   end

@@ -121,4 +121,14 @@ describe Siba::Console do
       ->{@console.parse ["s", "source", "name", "needless"]}.must_raise Siba::ConsoleArgumentError
     end
   end
+
+  describe "when run list commend" do
+    it "should run l command" do
+      @console.parse ["l"]
+    end
+
+    it "should run list command" do
+      @console.parse ["list"]
+    end
+  end
 end

@@ -12,6 +12,11 @@ class OptionsLoaderTest < MiniTest::Unit::TestCase
     assert_instance_of Hash, @options
   end
 
+  def test_load_hash_from_yml
+    hash = Siba::OptionsLoader.load_hash_from_yml File.join(@yml_path, "valid.yml")
+    assert_instance_of Hash, hash
+  end
+
   def test_load_yml_check_erb
     load_options "valid"
     assert_equal 4, @options["erb"]

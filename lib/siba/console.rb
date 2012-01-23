@@ -28,12 +28,9 @@ module Siba
         o.banner = "Usage: siba command ARGUMENTS [options...]
 
 Examples: 
-    siba b db.yml             # Run backup
+    siba b db.yml             # Run backup, reading settings from FILE
+    siba l                    # Show available plugins
     siba s destination NAME   # Generate new destination gem
-
-Commands:
-    b FILE,             Run backup, reading settings from FILE
-    s CATEGORY NAME     Generates code for a plugin gem
 
 Options:"
 
@@ -93,6 +90,8 @@ Options:"
         backup argv
       when "s", "scaffold"
         scaffold argv
+      when "l", "list"
+        list
       when Siba::Console::UNUSED_COMMAND
       else
         show_error "Invalid command '#{command}'"
@@ -147,6 +146,10 @@ Options:"
       rescue Exception => ex
         show_error ex
       end
+    end
+
+    def list
+      show_message Siba::Plugin.get_list
     end
   end
 end
