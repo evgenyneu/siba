@@ -31,20 +31,26 @@ module Siba
     def run_scaffold(dest_dir)
       siba_file.run_this "scaffold" do
         LoggerPlug.create "Scaffolding", nil
+        dest_dir = File.join dest_dir, name
+        if siba_file.file_directory?(dest_dir) || siba_file.file_file?(dest_dir)
+          raise Siba::Error, "Directory already exists #{dest_dir}." 
+        end
+
+        logger.debug "Checking if GIT is installed"
         raise Siba::Error, "Please install GIT first" unless siba_file.shell_ok? "git help"
         scaffolds_dir = siba_file.file_expand_path "../../../scaffolds", __FILE__
         
-        # create a tmp file where we will generace the project
+        logger.debug "Creating a tmp file where we will generate the project"
         dest_tmp_dir = Siba::TestFiles.mkdir_in_tmp_dir "scaffold"
 
-        # Copy project files (which are the same for all plugin categories)
+        logger.debug "Copying project files"
         project_dir = File.join scaffolds_dir, "project"
         unless siba_file.file_directory? project_dir
           raise Siba::Error, "Scaffold project dir does not exist '#{project_dir}'"
         end
         siba_file.file_utils_cp_r File.join(project_dir,"."), dest_tmp_dir
         
-        # Copy init file (different for each plugin category)
+        logger.debug "Copying init file"
         init_file = File.join scaffolds_dir, "#{category}.rb"
         unless siba_file.file_file? init_file
           raise Siba::Error, "Scaffold init file does not exist '#{init_file}'"
@@ -59,17 +65,19 @@ module Siba
           raise Siba::Error, "Filed to create init file '#{init_file_dest}'"
         end
 
+        logger.debug "Setting siba gem dependency"
         replace_siba_version dest_tmp_dir
 
-        # Replace "cy6" with category, and "demo" with name
+        logger.debug %(Replacing "cy6" with category, and "demo" with name)
         replace_category_and_name dest_tmp_dir        
 
         gitify dest_tmp_dir
        
-        # Finally, copy the project to destination
-        dest_dir = File.join dest_dir, name
+        logger.debug "Copying the project to destination"
         siba_file.file_utils_mkpath dest_dir
         siba_file.file_utils_cp_r File.join(dest_tmp_dir,"."), dest_dir
+
+        logger.info "Project created in #{dest_dir}"
       end
     rescue Exception => e 
       logger.fatal e
@@ -111,6 +119,7 @@ module Siba
     end
 
     def gitify(path_to_project)
+      logger.debug "Initialize GIT repository"
       siba_file.file_utils_cd path_to_project
       siba_file.run_shell "git init", "Failed to init git repository"
       siba_file.run_shell "git add ."
