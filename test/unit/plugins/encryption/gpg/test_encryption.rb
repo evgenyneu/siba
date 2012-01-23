@@ -53,15 +53,13 @@ describe Siba::Encryption::Gpg::Encryption do
   end
     
   it "init must warn if the password is weak" do
-    must_log "warn"
     Siba::Encryption::Gpg::Encryption.new "passwordisweak"
-    verify_log
+    must_log "warn"
   end
 
   it "init must NOT warn if the password is strong" do
-    wont_log "warn"
     Siba::Encryption::Gpg::Encryption.new "A4n90!1j$Ox*"
-    verify_log
+    wont_log "warn"
   end
 
   it "must call test_encryption" do

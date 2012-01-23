@@ -12,7 +12,6 @@ describe Siba::Scaffold do
     Siba::LoggerPlug.close
     Siba::SibaLogger.quiet = true
 
-    wont_log_from "warn"
     dest_dir = mkdir_in_tmp_dir "scf-d"
     Siba::FileHelper.dir_empty?(dest_dir).must_equal true
     @obj.scaffold dest_dir
@@ -22,7 +21,7 @@ describe Siba::Scaffold do
     Siba::FileHelper.dirs_count(dest_dir).must_be :>, 1
     git_dir = File.join dest_dir, ".git"
     File.directory?(git_dir).must_equal true, "Must create git repository"
-    verify_log
+    wont_log_from "warn"
   end
 end
 

@@ -22,13 +22,12 @@ describe Siba::Backup do
         src_file: src_file,
         dest_dir: dest_dir }
 
-    wont_log_from "warn"
     log_file = File.join File.dirname(test_yml_path), "testlog.log"
     @backup.backup test_yml_path, log_file
     Siba::FileHelper.entries(dest_dir).find{|a| a =~ /\.gpg$/}.wont_be_nil
     siba_file.file_file?(log_file).must_equal true, "Must create log file"
     Siba.tmp_dir_clean?.must_equal true, "Tmp dir must be cleaned"
     Siba::LoggerPlug.opened?.must_equal false, "Logger must be closed"
-    verify_log
+    wont_log_from "warn"
   end
 end

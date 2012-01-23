@@ -18,6 +18,7 @@ module SibaTest
         Siba::SibaLogger.quiet = true
         Siba::SibaLogger.no_log = true
         Siba::LoggerPlug.create "Test", nil
+        Siba::SibaLogger.messages = []
         Siba.settings = {}
         Siba.current_dir = @current_dir 
         Siba.backup_name = "siba"

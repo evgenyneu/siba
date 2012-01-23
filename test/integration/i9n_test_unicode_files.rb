@@ -32,10 +32,9 @@ describe Siba::Backup do
         src_file: src_file,
         dest_dir: dest_dir }
 
-    wont_log_from "warn"
     log_file = File.join File.dirname(test_yml_path), "testlog.log"
     @backup.backup test_yml_path, log_file
     Siba::FileHelper.entries(dest_dir).find{|a| a =~ /\.gpg$/}.wont_be_nil
-    verify_log
+    wont_log_from "warn"
   end
 end

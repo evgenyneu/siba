@@ -3,37 +3,23 @@
 class MiniTest::Unit::TestCase
   include Siba::FilePlug 
   def must_log(level)
-    save_logger_state true, level, true
+    verify_log true, level, true
   end
 
   def wont_log(level)
-    save_logger_state false, level, true
+    verify_log false, level, true
   end
 
   def must_log_from(level)
-    save_logger_state true, level, false
+    verify_log true, level, false
   end
 
   def wont_log_from(level)
-    save_logger_state false, level, false
+    verify_log false, level, false
   end
 
-  def verify_log
-    log_count_after = Siba::SibaLogger.count log_level, log_exact_level
-
-    if log_exact_level
-      message = "'#{log_level}' log messages"
-    else
-      message = "log messages"
-    end
-
-    if log_must_change
-      message = "Expected " + message
-      raise message if log_count_before == log_count_after
-    else
-      message = "Unexpected " + message
-      raise message if log_count_before != log_count_after
-    end
+  def show_log
+    puts Siba::SibaLogger.messages.map{|a| a.msg}.join("\n")
   end
 
   def mock_file(name, retval, args=[])
@@ -44,10 +30,6 @@ class MiniTest::Unit::TestCase
 
   def new_mock_file
     Siba::FilePlug.siba_file = MiniTest::Mock.new 
-  end
-
-  def show_log
-    puts Siba::SibaLogger.messages.map{|a| a.msg}.join("\n")
   end
 
   def create_plugin(yml_file_name_or_options_hash)
@@ -104,13 +86,22 @@ class MiniTest::Unit::TestCase
 
   private 
 
-  attr_accessor :log_must_change, :log_level, :log_exact_level, :log_count_before
+  def verify_log(must_change, log_level, exact_level = true)
+    log_count = Siba::SibaLogger.count log_level, exact_level
 
-  def save_logger_state(must_change, level, exact_level = true)
-    @log_must_change = must_change
-    @log_level = level
-    @log_exact_level = exact_level
-    @log_count_before = Siba::SibaLogger.count log_level, log_exact_level
+    if exact_level
+      message = "'#{log_level}' log messages"
+    else
+      message = "log messages"
+    end
+
+    if must_change
+      message = "Expected " + message
+      raise message if log_count == 0
+    else
+      message = "Unexpected " + message
+      raise message if log_count > 0
+    end
   end
 end
 

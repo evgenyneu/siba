@@ -78,15 +78,13 @@ describe Siba::Console do
 
   describe "when run backup command" do
     it "should run b command" do
-      wont_log_from "warn"
       @console.parse ["b", @path_to_yml]
-      verify_log
+      wont_log_from "warn"
     end
 
     it "should run backup command" do
-      wont_log_from "warn"
       @console.parse ["backup", @path_to_yml]
-      verify_log
+      wont_log_from "warn"
     end
 
     it "should fail when backup options file is missing" do

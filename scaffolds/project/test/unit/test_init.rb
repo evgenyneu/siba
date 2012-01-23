@@ -9,16 +9,12 @@ describe Siba::C6y::Demo do
     @plugin_category = "c6y"     
     @plugin_type = "demo"         
 
-    # helper to load the plugin reading the setting from YAML
-    @plugin = create_plugin "valid"     
   end
 
   it "siba should load plugin" do
-    @plugin.must_be_instance_of Siba::C6y::Demo::Init
-  end
-
-  it "should run backup" do
-    @plugin.backup "/backup_file"
+    # helper to load the plugin reading the setting from YAML
+    plugin = create_plugin "valid"     
+    plugin.must_be_instance_of Siba::C6y::Demo::Init
   end
 
   it "should load settings" do
@@ -27,18 +23,9 @@ describe Siba::C6y::Demo do
   end
 
   it "should check log" do
-    must_log "info"
-    @plugin.backup "/backup_file"
-    verify_log # must have "info" messages
-
-    wont_log "warn"
-    # some code...
-    verify_log # must not have warn message
-    
-    wont_log_from "warn"
-    # some code...
-    verify_log # must not have warn, error and fatal messages
-
-    # show_log prints the entire log
+    #must_log "info"
+    #wont_log "warn"
+    #wont_log_from "warn"
+    #show_log 
   end
 end

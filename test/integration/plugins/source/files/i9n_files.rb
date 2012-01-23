@@ -91,7 +91,6 @@ describe Siba::Source::Files::Files do
   end
   
   it "backup should log error message if one of the sources is not found" do
-    must_log "error"
     src_dir = prepare_test_dir "s-f-src-dir"
     f = @files.new ["/non-existing-file", src_dir],[],true
 
@@ -103,7 +102,7 @@ describe Siba::Source::Files::Files do
     dirs_same? src_dir, backup_dir
 
     Siba::FileHelper.dirs_count(dest_dir).must_equal 1, "Only valid source must be copies"
-    verify_log
+    must_log "error"
   end
 
   it "backup should NOT copy if ignored" do
