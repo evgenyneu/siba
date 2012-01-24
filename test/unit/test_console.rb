@@ -131,4 +131,18 @@ describe Siba::Console do
       @console.parse ["list"]
     end
   end
+
+  describe "when run generate commend" do
+    it "should run g command" do
+      @console.parse ["g", "myfile"]
+    end
+
+    it "should run generate command" do
+      @console.parse ["generate", "myfile"]
+    end
+
+    it "should fail if file name is missing" do
+      ->{@console.parse ["g"]}.must_raise Siba::ConsoleArgumentError
+    end
+  end
 end

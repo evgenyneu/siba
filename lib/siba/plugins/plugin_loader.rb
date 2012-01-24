@@ -81,11 +81,11 @@ module Siba
     end
 
     def plugins_root_dir
-      File.expand_path "../#{category}/",  __FILE__
+      Siba::InstalledPlugins.category_dir category
     end
 
     def plugin_dir
-      File.join plugins_root_dir, type
+      Siba::InstalledPlugins.type_dir category, type
     end
 
     def available_types_msg
@@ -95,16 +95,7 @@ module Siba
     end
 
     def find_all_installed
-      types = Dir.glob(File.join(plugins_root_dir,"*")).select { |entry|
-        File.directory? entry
-      }.select{|dir| File.file?(File.join(dir,"init.rb")) }
-        .map{|directory| File.basename(directory)}
-
-      Gem::Specification.each do |item| 
-        gem_prefix_full = /^#{GEM_PREFIX}#{category}-/
-        types << item.name.gsub(gem_prefix_full, '') if item.name =~ /#{gem_prefix_full}.*$/
-      end
-      types
+      Siba::InstalledPlugins.all_installed[category]
     end
   end
 end

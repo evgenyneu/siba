@@ -1,5 +1,5 @@
 source:
-  files: Backup local files and directories with ignore rules
+  files: Backup local files and directories
 archive:
   tar: Archive with optional gzip or bzip2 compression
 encryption:

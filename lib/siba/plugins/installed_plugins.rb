@@ -14,6 +14,14 @@ module Siba
         @installed ||= find_installed
       end
 
+      def category_dir(category)
+        File.expand_path "../#{category}/",  __FILE__
+      end
+
+      def type_dir(category, type)
+        File.join category_dir(category), type
+      end
+
     private
 
       def find_installed
@@ -45,13 +53,6 @@ module Siba
                         end
       end
 
-      def category_dir(category)
-        File.expand_path "../#{category}/",  __FILE__
-      end
-
-      def type_dir(category, type)
-        File.join plugins_dir(category), type
-      end
     end
   end
 end

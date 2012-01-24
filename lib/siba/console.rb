@@ -2,6 +2,7 @@
 
 require 'optparse'
 require 'siba/scaffold'
+require 'siba/generator'
 
 module Siba
   class Console
@@ -28,7 +29,8 @@ module Siba
         o.banner = "Usage: siba command ARGUMENTS [options...]
 
 Examples: 
-    siba backup db.yml          Run backup, reading settings from FILE
+    siba backup db.yml          Run backup, reading options from db.yml
+    siba generate mybak         Generate mybak.yml options file                        
     siba list                   Show available plugins
     siba scaffold source NAME   Generate new source gem
 
@@ -94,6 +96,8 @@ Options:"
         scaffold argv
       when "l", "list"
         list
+      when "g", "generate"
+        generate argv
       when Siba::Console::UNUSED_COMMAND
       else
         show_error "Invalid command '#{command}'"
@@ -151,9 +155,17 @@ Options:"
     end
 
     def list
-      show_message "The list of available SIBA plugins. Installed plugins are marked with * 
+      show_message "Available SIBA plugins:
       
-#{Siba::Plugins.get_list}"
+#{Siba::Plugins.get_list} * Currently installed"
+    end
+
+    def generate(argv)
+      file = argv.shift
+      if file.nil?
+        show_error "missing file name"
+      end
+      Siba::Generator.new(file).generate
     end
   end
 end
