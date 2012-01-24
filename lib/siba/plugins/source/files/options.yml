@@ -1,0 +1,11 @@
+include:
+- /dir          
+- /dir/file     
+- ~/file        # relative to home dir  
+- file          # relative to this options file
+ignore:
+- "*.tmp"       
+- ".*"
+- file_name
+- dir_name
+inclue_subdirs: Yes

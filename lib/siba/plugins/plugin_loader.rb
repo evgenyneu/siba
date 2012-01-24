@@ -5,7 +5,6 @@ module Siba
     include Siba::LoggerPlug
     include Siba::FilePlug
 
-    GEM_PREFIX = "siba-"
     InitClassName = "Init"
 
     def self.loader
@@ -17,12 +16,12 @@ module Siba
         raise PluginLoadError, "Incorrect plugin category '#{category}'. Available plugin categories are: #{Siba::Plugins.categories_str}"
       end
 
-      raise PluginLoadError, "Options data is incorrect for #{plugin_category_and_type}." unless options.is_a? Hash
+      raise PluginLoadError, "Options data is incorrect for #{plugin_category_and_type} plugin." unless options.is_a? Hash
 
       @category=category
       @type=type
       @options = options
-      logger.debug "Loading #{plugin_category_and_type}"
+      logger.debug "Loading #{plugin_category_and_type} plugin"
       
       require_plugin
       plugin_module = get_plugin_module
@@ -39,7 +38,7 @@ module Siba
       if File.exists?(path_to_init_file)
         require path_to_init_file
       else
-        gem_name = "#{GEM_PREFIX}#{category}-#{type}"
+        gem_name = Siba::InstalledPlugins.gem_name category, type
         begin
           Gem::Specification.find_by_name(gem_name) 
         rescue Gem::LoadError
@@ -53,31 +52,31 @@ module Siba
       plugin_module_name = "#{category.capitalize}"
       Siba.const_get(plugin_module_name)
     rescue Exception
-      raise PluginLoadError, "Failed to load #{plugin_category_and_type}: module 'Siba::#{plugin_module_name}' is undefined." 
+      raise PluginLoadError, "Failed to load #{plugin_category_and_type} plugin: module 'Siba::#{plugin_module_name}' is undefined." 
     end
 
     def get_plugin_type_module(plugin_module)
       plugin_type_module_name = StringHelper.camelize type
       plugin_module.const_get(plugin_type_module_name)
     rescue
-      raise PluginLoadError, "Failed to load #{plugin_category_and_type}: module 'Siba::#{category.capitalize}::#{plugin_type_module_name}' is undefined."
+      raise PluginLoadError, "Failed to load #{plugin_category_and_type} plugin: module 'Siba::#{category.capitalize}::#{plugin_type_module_name}' is undefined."
     end
 
     def get_plugin_init_class(plugin_type_module)
       plugin_type_module.const_get InitClassName
     rescue Exception => e
-      raise PluginLoadError, "#{InitClassName} class is undefined for #{plugin_category_and_type}."
+      raise PluginLoadError, "#{InitClassName} class is undefined for #{plugin_category_and_type} plugin."
     end
 
     def init_plugin(plugin_init_class)
       plugin_init_class.new options
     rescue ArgumentError
-      logger.error "Failed to load #{plugin_category_and_type}: 'initialize' method is not defined or has wrong agruments."
+      logger.error "Failed to load #{plugin_category_and_type} plugin: 'initialize' method is not defined or has wrong agruments."
       raise
     end
 
     def plugin_category_and_type
-      "#{category}#{type.nil? ? "" : '-' + type} plugin"
+      Siba::InstalledPlugins.plugin_category_and_type category, type
     end
 
     def plugins_root_dir

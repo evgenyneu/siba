@@ -31,7 +31,7 @@ module Siba
     }
 
     TRIES_PER_SECOND = 100 * 10 ** 12 # 100 TFLOPS
-    AGE_OF_THE_UNIVERSE = 4.336 * 10 ** 17
+    AGE_OF_THE_UNIVERSE_SECONDS = 4.336 * 10 ** 17 # the best estimate on 2011
 
     class << self
       def seconds_to_crack(password)
@@ -52,7 +52,7 @@ module Siba
       #   130: 2 minutes
       #   12345: 3 hours
       def seconds_to_timespan(seconds)
-        return "forever" if seconds > AGE_OF_THE_UNIVERSE
+        return "forever" if seconds > AGE_OF_THE_UNIVERSE_SECONDS
         ticks = seconds
         AinB.each_pair do |a,b|
           ticks_next = ticks.to_f / b
