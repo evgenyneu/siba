@@ -5,7 +5,7 @@ module Siba
     include Siba::LoggerPlug
     include Siba::FilePlug
 
-    GemPrefix = "siba-"
+    GEM_PREFIX = "siba-"
     InitClassName = "Init"
 
     def self.loader
@@ -13,8 +13,8 @@ module Siba
     end
 
     def load(category, type, options)
-      unless Siba::Plugin.valid_category? category
-        raise PluginLoadError, "Incorrect plugin category '#{category}'. Available plugin categories are: #{Siba::Plugin.categories_str}"
+      unless Siba::Plugins.valid_category? category
+        raise PluginLoadError, "Incorrect plugin category '#{category}'. Available plugin categories are: #{Siba::Plugins.categories_str}"
       end
 
       raise PluginLoadError, "Options data is incorrect for #{plugin_category_and_type}." unless options.is_a? Hash
@@ -39,7 +39,7 @@ module Siba
       if File.exists?(path_to_init_file)
         require path_to_init_file
       else
-        gem_name = "#{GemPrefix}#{category}-#{type}"
+        gem_name = "#{GEM_PREFIX}#{category}-#{type}"
         begin
           Gem::Specification.find_by_name(gem_name) 
         rescue Gem::LoadError
@@ -81,7 +81,7 @@ module Siba
     end
 
     def plugins_root_dir
-      File.expand_path "../plugins/#{category}/",  __FILE__
+      File.expand_path "../#{category}/",  __FILE__
     end
 
     def plugin_dir
@@ -101,7 +101,7 @@ module Siba
         .map{|directory| File.basename(directory)}
 
       Gem::Specification.each do |item| 
-        gem_prefix_full = /^#{GemPrefix}#{category}-/
+        gem_prefix_full = /^#{GEM_PREFIX}#{category}-/
         types << item.name.gsub(gem_prefix_full, '') if item.name =~ /#{gem_prefix_full}.*$/
       end
       types

@@ -15,7 +15,7 @@ module Siba
       raise 'Options are not loaded' if options.nil?
 
       @tasks = {}
-      Siba::Plugin::CATEGORIES.each do |category|
+      Siba::Plugins::CATEGORIES.each do |category|
         @tasks[category] = SibaTask.new options, category
       end
     end

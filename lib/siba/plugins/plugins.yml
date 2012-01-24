@@ -1,7 +1,7 @@
 source:
   files: Backup local files and directories
 archive:
-  tar: Archive to compressed or uncompressed file
+  tar: Archive with optional compression
 encryption:
   gpg: Encrypt with the popular free encryption utility
 destination:

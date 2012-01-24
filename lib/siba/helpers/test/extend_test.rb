@@ -40,7 +40,7 @@ class MiniTest::Unit::TestCase
     end
     
     unless @plugin_category
-      raise Siba::Error, "Initialize '@plugin_category' variable (#{Siba::Plugin.categories_str})"
+      raise Siba::Error, "Initialize '@plugin_category' variable (#{Siba::Plugins.categories_str})"
     end
 
     unless @plugin_type

@@ -10,8 +10,8 @@ module Siba
     
     def initialize(category, name)
       @category = category
-      unless Siba::Plugin.valid_category? category
-        raise Siba::Error, "Invalid category '#{category}'. Available categories are: #{Siba::Plugin.categories_str}"
+      unless Siba::Plugins.valid_category? category
+        raise Siba::Error, "Invalid category '#{category}'. Available categories are: #{Siba::Plugins.categories_str}"
       end
 
       @name = Siba::StringHelper.str_to_alphnumeric name

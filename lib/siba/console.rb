@@ -153,7 +153,7 @@ Options:"
     def list
       show_message "The list of available SIBA plugins. Installed plugins are marked with * 
       
-#{Siba::Plugin.get_list}"
+#{Siba::Plugins.get_list}"
     end
   end
 end

@@ -2,9 +2,9 @@
 
 require 'helper/require_unit'
 
-describe Siba::Plugin do
+describe Siba::Plugins do
   before do
-    @obj = Siba::Plugin
+    @obj = Siba::Plugins
   end
 
   it "should get CATEGORIES" do

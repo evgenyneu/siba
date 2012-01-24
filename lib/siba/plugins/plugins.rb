@@ -1,16 +1,17 @@
 # encoding: UTF-8
 
-require 'siba/plugin_loader.rb'
+require 'siba/plugins/plugin_loader.rb'
+require 'siba/plugins/installed_plugins.rb'
 
 module Siba
-  class Plugin
+  class Plugins
     class << self
       def valid_category?(category)
-        Siba::Plugin::CATEGORIES.include? category
+        Siba::Plugins::CATEGORIES.include? category
       end
 
       def categories_str
-        Siba::Plugin::CATEGORIES.join(", ")
+        Siba::Plugins::CATEGORIES.join(", ")
       end
 
       def get_list
@@ -25,7 +26,8 @@ module Siba
           str << "s" if plugins.size > 1
           str << ":\n"
           plugins.each do |name, desc|
-            str << sprintf("  %-#{max_name_length}s %s\n", name, desc)
+            installed = InstalledPlugins.installed?(category, name) ? "*" : " "
+            str << sprintf("  #{installed}%-#{max_name_length}s %s\n", name, desc)
           end
           str << "\n"
         end
