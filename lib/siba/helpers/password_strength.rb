@@ -31,7 +31,7 @@ module Siba
     }
 
     TRIES_PER_SECOND = 100 * 10 ** 12 # 100 TFLOPS
-    AGE_OF_THE_UNIVERSE_SECONDS = 4.336 * 10 ** 17 # the best estimate on 2011
+    AGE_OF_THE_UNIVERSE_SECONDS = 4.336 * 10 ** 17 # the best estimate in 2011
 
     class << self
       def seconds_to_crack(password)
