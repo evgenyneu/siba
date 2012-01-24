@@ -27,7 +27,7 @@ module Siba
           str << ":\n"
           plugins.each do |name, desc|
             installed = InstalledPlugins.installed?(category, name) ? "*" : " "
-            str << sprintf("  #{installed}%-#{max_name_length}s %s\n", name, desc)
+            str << sprintf(" #{installed} %-#{max_name_length}s %s\n", name, desc)
           end
           str << "\n"
         end
