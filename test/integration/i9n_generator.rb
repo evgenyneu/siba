@@ -3,6 +3,10 @@
 require 'helper/require_integration'
 
 describe Siba::Generator do
+  before do
+    SibaTest::KernelMock.gets_return_value = "1"
+  end
+
   it "should create generator" do
     test_file = prepare_test_file "gen"
     @obj = Siba::Generator.new test_file

@@ -22,6 +22,7 @@ module SibaTest
         Siba.settings = {}
         Siba.current_dir = @current_dir 
         Siba.backup_name = "siba"
+        SibaTest::KernelMock.mock_all_methods # prevents tests from accessing Kernel methods
       end
 
       MiniTest::Unit::TestCase.add_teardown_hook do

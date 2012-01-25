@@ -17,6 +17,18 @@ module Siba
         Siba::Plugins::CATEGORIES.join(", ")
       end
 
+      def plugin_description(category, type)
+        unless Siba::InstalledPlugins.installed? category, type
+          raise Siba::Error, "Plugin is not installed: #{Siba::InstalledPlugins.plugin_category_and_type(category, type)}"
+        end
+        PLUGINS_HASH[category][type]
+      end
+
+      def plugin_type_and_description(category, type, name_column_length)
+        desc = plugin_description category, type
+        sprintf("%-#{name_column_length}s %s", type, desc)
+      end
+
       def get_list
         str = ""
         all_names = PLUGINS_HASH.values.map{|a| a.keys}.flatten
@@ -28,9 +40,9 @@ module Siba
           str << "#{category.capitalize}"
           str << "s" if plugins.size > 1
           str << ":\n"
-          plugins.each do |name, desc|
-            installed = InstalledPlugins.installed?(category, name) ? "*" : " "
-            str << sprintf(" #{installed} %-#{max_name_length}s %s\n", name, desc)
+          plugins.each do |type, desc|
+            installed = InstalledPlugins.installed?(category, type) ? "*" : " "
+            str << " #{installed} #{plugin_type_and_description(category, type, max_name_length)}\n"
           end
           str << "\n"
         end
