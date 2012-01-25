@@ -4,8 +4,8 @@ include:
 - ~/file        # relative to home dir  
 - file          # relative to this options file
 ignore:
-- "*.tmp"       
+- "*.log"
 - ".*"
 - file_name
 - dir_name
-inclue_subdirs: Yes
+include_subdirs: Yes

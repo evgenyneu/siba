@@ -41,6 +41,12 @@ module Siba
               siba_kernel.puts "Aborted"
               return
             end
+
+            unless Siba::InstalledPlugins.installed? category, type
+              siba_kernel.puts "#{type} plugin is not installed"
+              siba_kernel.puts "Run 'gem install #{Siba::InstalledPlugins.gem_name(category, type)}' to install it."
+              return
+            end
           else
             type = types.keys.first
           end
