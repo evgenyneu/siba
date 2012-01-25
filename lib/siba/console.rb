@@ -172,7 +172,7 @@ Options:"
       end      
       begin
         path_to_yaml = Siba::Generator.new(file).generate
-        show_message "Options file generated: #{path_to_yaml}"
+        show_message "Options file generated: #{path_to_yaml}" unless path_to_yaml.nil?
       rescue Exception => ex
         show_error ex
       end

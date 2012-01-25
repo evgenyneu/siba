@@ -30,7 +30,7 @@ module Siba
               a.length <=> b.length
             end.length + 5
 
-            siba_kernel.puts "Choose #{category} plugin:"
+            siba_kernel.puts "\nChoose #{category} plugin:"
             types.keys.each_index do |i|
               type = types.keys[i]
               siba_kernel.puts "  #{i+1}. #{Siba::Plugins.plugin_type_and_description(category, type, max_type_length)}"
@@ -60,7 +60,7 @@ module Siba
         dest_dir = File.dirname file_path
         siba_file.file_utils_mkpath(dest_dir) unless siba_file.file_directory?(dest_dir)
         Siba::FileHelper.write file_path, file_data
-        name
+        file_path
       end
 
     end
@@ -92,7 +92,7 @@ module Siba
       end
 
       def get_plugin_user_choice(types)
-        msg = "\nEnter plugin number from 1 to #{types.size}, or 0 to exit.\n>"
+        msg = "\nEnter plugin number from 1 to #{types.size}, or 0 to exit.\n> "
         siba_kernel.printf msg
         while true
           user_choice = siba_kernel.gets.chomp

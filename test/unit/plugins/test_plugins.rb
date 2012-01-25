@@ -35,4 +35,10 @@ describe Siba::Plugins do
   it "should call plugin_type_and_description" do
     @obj.plugin_type_and_description("destination", "dir", 20).wont_be_empty
   end
+
+  it "should call category_and_type_correct?" do
+    @obj.category_and_type_correct?("destination", "dir").must_equal true
+    @obj.category_and_type_correct?("destination", "incorrect").must_equal false
+    @obj.category_and_type_correct?("incorrect", "dir").must_equal false
+  end
 end

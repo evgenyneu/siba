@@ -67,9 +67,9 @@ class MiniTest::Unit::TestCase
     Siba::TestFiles::prepare_test_file file_name_part, tmp_dir
   end
 
-  def generate_test_file_path(file_name_part, tmp_dir = nil)
+  def generate_path(file_name_part, tmp_dir = nil)
     tmp_dir ||= SibaTest.tmp_dir
-    Siba::TestFiles::generate_test_file_path file_name_part, tmp_dir
+    Siba::TestFiles::generate_path file_name_part, tmp_dir
   end
 
   def mkdir_in_tmp_dir(prefix)

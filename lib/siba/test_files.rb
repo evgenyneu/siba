@@ -31,7 +31,7 @@ module Siba::TestFiles
       dest_file
     end
 
-    def generate_test_file_path(dest_file_name_part, tmp_dir=nil)
+    def generate_path(dest_file_name_part, tmp_dir=nil)
       tmp_dir ||= Siba.tmp_dir
       File.join(tmp_dir,"tf-#{dest_file_name_part}#{random_suffix}")
     end  

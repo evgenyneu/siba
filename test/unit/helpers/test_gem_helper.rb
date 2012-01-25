@@ -12,6 +12,6 @@ describe Siba::GemHelper do
   end
 
   it "should call gem_path" do
-    @cls.gem_path("siba").must_be_instance_of String
+    @cls.gem_path("rake").must_be_instance_of String
   end
 end

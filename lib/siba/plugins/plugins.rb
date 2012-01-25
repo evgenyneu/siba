@@ -17,9 +17,13 @@ module Siba
         Siba::Plugins::CATEGORIES.join(", ")
       end
 
+      def category_and_type_correct?(category, type)
+        PLUGINS_HASH.keys.include?(category) && PLUGINS_HASH[category].keys.include?(type)
+      end
+
       def plugin_description(category, type)
-        unless Siba::InstalledPlugins.installed? category, type
-          raise Siba::Error, "Plugin is not installed: #{Siba::InstalledPlugins.plugin_category_and_type(category, type)}"
+        unless category_and_type_correct? category, type
+          raise Siba::Error, "Incorrect category '#{category}' or type '#{type}'."
         end
         PLUGINS_HASH[category][type]
       end
