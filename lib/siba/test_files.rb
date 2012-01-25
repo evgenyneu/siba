@@ -29,7 +29,12 @@ module Siba::TestFiles
       siba_file.file_utils_mkpath tmp_dir unless siba_file.file_directory? tmp_dir
       siba_file.file_utils_cp test_file, dest_file
       dest_file
-    end    
+    end
+
+    def generate_test_file_path(dest_file_name_part, tmp_dir=nil)
+      tmp_dir ||= Siba.tmp_dir
+      File.join(tmp_dir,"tf-#{dest_file_name_part}#{random_suffix}")
+    end  
 
     def mkdir_in_tmp_dir(prefix, tmp_dir=nil)
       tmp_dir ||= Siba.tmp_dir

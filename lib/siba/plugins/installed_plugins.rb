@@ -13,6 +13,10 @@ module Siba
         types.include? type
       end
       
+      def all_installed
+        @installed ||= find_installed
+      end
+
       def plugin_path(category, type)
         unless installed? category, type
           raise Siba::Error, "Plugin #{plugin_category_and_type(category, type)} is not installed"
@@ -28,10 +32,6 @@ module Siba
           end
           path
         end
-      end
-
-      def all_installed
-        @installed ||= find_installed
       end
 
       def category_dir(category)

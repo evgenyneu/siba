@@ -1,2 +1,2 @@
-passphrase: <%= Siba::SecurityHelper.generate_password.gsub("\\","\\\\").gsub('"',"\"") %>
+passphrase: "<%= Siba::SecurityHelper.generate_password_for_yaml %>"
 cipher: AES256 # or BLOWFISH, TWOFISH, 3DES...

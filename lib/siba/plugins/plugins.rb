@@ -5,6 +5,9 @@ require 'siba/plugins/installed_plugins.rb'
 
 module Siba
   class Plugins
+    PLUGINS_HASH = Siba::OptionsLoader.load_hash_from_yml(File.expand_path "../plugins.yml", __FILE__)
+    CATEGORIES = PLUGINS_HASH.keys
+
     class << self
       def valid_category?(category)
         Siba::Plugins::CATEGORIES.include? category
@@ -34,13 +37,5 @@ module Siba
         str
       end
     end
-
-    private
-
-    PLUGINS_HASH = Siba::OptionsLoader.load_hash_from_yml(File.expand_path "../plugins.yml", __FILE__)
-
-    public
-
-    CATEGORIES = PLUGINS_HASH.keys
   end
 end

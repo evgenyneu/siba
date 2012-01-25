@@ -7,8 +7,8 @@ describe Siba::SecurityHelper do
     @sh = Siba::SecurityHelper
   end
 
-  it "should generate password" do
-    @sh.generate_password.length.must_equal 16
-    @sh.generate_password(8).length.must_equal 8
+  it "should generate password for yaml" do
+    @sh.generate_password_for_yaml.length.must_equal 16
+    @sh.generate_password_for_yaml(8).length.must_equal 8
   end
 end

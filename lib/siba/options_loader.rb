@@ -26,8 +26,12 @@ module Siba
       end
 
       def load_hash_from_yml(path_to_yml)
-        yml_str = Siba::FileHelper.read path_to_yml
-        YAML.load(ERB.new(yml_str).result)
+        YAML.load(load_erb path_to_yml)
+      end
+
+      def load_erb(path_to_file)
+        data = Siba::FileHelper.read path_to_file
+        ERB.new(data).result
       end
     end
   end

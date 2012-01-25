@@ -107,6 +107,10 @@ Options:"
     end
 
     def show_error(msg, exception = nil)
+      if msg.is_a? Exception
+        exception = msg
+        msg = msg.message
+      end
       show_message "Error: #{msg}\n\n#{parser.to_s}"
       exit_with_error
       raise (exception || Siba::ConsoleArgumentError.new(msg))
@@ -164,8 +168,11 @@ Options:"
       file = argv.shift
       if file.nil?
         show_error "missing file name"
-      end
-      Siba::Generator.new(file).generate
+      end      
+      path_to_yaml = Siba::Generator.new(file).generate
+      show_message "Options file generate: #{path_to_yaml}"
+    rescue Exception => ex
+      show_error ex
     end
   end
 end
