@@ -8,7 +8,7 @@ module Siba
 
     attr_accessor :name
     def initialize(name)
-      @name = name
+      @name = String.new name
     end
 
     # Generates yaml file and return its path
@@ -34,7 +34,7 @@ module Siba
           options_data << options
         end
         file_data = options_data.join("\n")
-        file_data = "# SIBA options file\n\n" + file_data
+        file_data = "# SIBA options file\n" + file_data
         Siba::FileHelper.write name, file_data
         name
       end

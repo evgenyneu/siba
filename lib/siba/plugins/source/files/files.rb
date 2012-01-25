@@ -71,8 +71,10 @@ module Siba::Source
             entry = File.join dir, entry
             if siba_file.file_file? entry
               copy_file entry, dest_dir 
-            elsif include_subdirs && siba_file.file_directory?(entry)
-              copy_dir entry, dest_dir, true
+            elsif  siba_file.file_directory? entry
+              copy_dir entry, dest_dir, true if include_subdirs
+            else
+              logger.error "Failed to backup: #{file}."
             end
           end 
         end
