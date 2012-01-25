@@ -22,7 +22,7 @@ module Siba
       end
 
       def plugin_description(category, type)
-        unless category_and_type_correct? category, type
+        if category_and_type_correct? category, type
           raise Siba::Error, "Incorrect category '#{category}' or type '#{type}'."
         end
         PLUGINS_HASH[category][type]
