@@ -1,5 +1,5 @@
 # encoding: UTF-8
 
-require 'helper/require'
+require 'siba/helpers/test/require'
 SibaTest.init_integration      
 
