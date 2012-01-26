@@ -29,12 +29,12 @@ module Siba
         o.banner = "Usage: siba command ARGUMENTS [options...]
 
 Examples: 
-    siba backup db.yml          Run backup, reading options from db.yml
-    siba generate mybak         Generate mybak.yml options file                        
+    siba generate mybak.yml     Generate mybak.yml options file                        
+    siba backup mybak.yml       Run backup, reading options from mybak.yml
     siba list                   Show available plugins
-    siba scaffold source NAME   Generate new source gem
+    siba scaffold source my-db  Create a new gem for a source plugin
 
-    Note: single letter commands are supported, like b for backup
+    Note: single letter commands are also supported, like b for backup
 
 Options:"
 
@@ -139,6 +139,7 @@ Options:"
         path_to_log = File.join(File.dirname(path_to_options), "#{log_name}")
       end
 
+      path_to_options += ".yml" unless path_to_options =~ /\.yml$/
       Siba::Backup.new.backup path_to_options, path_to_log
     end
 

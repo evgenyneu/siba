@@ -1,1 +1,2 @@
-dir: /destination_dir
+dir: destination_dir # relative to this options file
+# or /absolute or ~/relative_to_home
