@@ -53,15 +53,15 @@ module Siba
     attr_accessor :path_to_options_yml
 
     def source_dir
-      @source_dir ||= TestFiles::mkdir_in_tmp_dir "src"
+      @source_dir ||= TestFiles::mkdir_in_tmp_dir("src").freeze
     end
 
     def archive_dir
-      @archive_dir ||= TestFiles::mkdir_in_tmp_dir "arc"
+      @archive_dir ||= TestFiles::mkdir_in_tmp_dir("arc").freeze
     end
 
     def encryption_dir
-      @encryption_dir ||= TestFiles::mkdir_in_tmp_dir "enc"
+      @encryption_dir ||= TestFiles::mkdir_in_tmp_dir("enc").freeze
     end
 
     def save_options_backup
