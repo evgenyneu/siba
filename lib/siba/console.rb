@@ -31,6 +31,7 @@ module Siba
 Examples: 
     siba generate mybak.yml     Generate mybak.yml options file                        
     siba backup mybak.yml       Run backup, reading options from mybak.yml
+    siba restore mybak.yml      Restore the backup
     siba list                   Show available plugins
     siba scaffold source my-db  Create a new gem for a source plugin
 
@@ -98,6 +99,8 @@ Options:"
         list
       when "g", "generate"
         generate argv
+      when "r", "restore"
+        restore argv
       when Siba::Console::UNUSED_COMMAND
       else
         show_error "Invalid command '#{command}'", true
@@ -177,6 +180,14 @@ Options:"
       rescue Exception => ex
         show_error ex
       end
+    end
+
+    def restore(argv)
+      path_to_options = argv.shift
+      show_error "missing backup options file argument" if path_to_options.nil?
+      show_error "needless arguments: #{argv.join(', ')}" unless argv.empty?
+      path_to_options = siba_file.file_expand_path path_to_options
+      Siba::Restore.new.restore path_to_options
     end
   end
 end

@@ -19,6 +19,7 @@ require 'siba/plugins/plugins'
 require 'siba/tasks/siba_tasks'
 require 'siba/console'
 require 'siba/backup'
+require 'siba/restore'
 
 module Siba
   # Your code goes here...

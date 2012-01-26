@@ -48,6 +48,18 @@ module Siba::Destination
           logger.debug "Access to destination directory is verified"
         end
       end
+
+      # Returns an array of two-element arrays: [file_name, mtime]
+      def get_backups_list(backup_name)
+        siba_file.run_this do
+          Siba::FileHelper.entries(dir).select do |f|
+            f =~ /^#{backup_name}/
+          end.map do |f| 
+            mtime = siba_file.file_mtime File.join dir, f
+            [f, mtime]
+          end
+        end
+      end
     end
   end
 end 

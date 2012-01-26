@@ -41,6 +41,14 @@ module Siba
       end
     end
 
+    def restore(backup_name)
+      @tasks["destination"].restore backup_name, destination_dir
+    end
+
+    def get_backups_list
+      @tasks["destination"].plugin.get_backups_list Siba.backup_name
+    end
+
     def self.backup_name(now=nil)
       if Siba::StringHelper.nil_or_empty Siba.backup_name
         raise Siba::Error, "Backup task name is not specified" 
@@ -62,6 +70,10 @@ module Siba
 
     def encryption_dir
       @encryption_dir ||= TestFiles::mkdir_in_tmp_dir("enc").freeze
+    end
+    
+    def destination_dir
+      @destination_dir ||= TestFiles::mkdir_in_tmp_dir("dest").freeze
     end
 
     def save_options_backup

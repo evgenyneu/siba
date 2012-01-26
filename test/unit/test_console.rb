@@ -145,4 +145,22 @@ describe Siba::Console do
       ->{@console.parse ["g"]}.must_raise Siba::ConsoleArgumentError
     end
   end
+
+  describe "when run restore command" do
+    it "should run r command" do
+      @console.parse ["r", @path_to_yml]
+    end
+
+    it "should run restore command" do
+      @console.parse ["restore", @path_to_yml]
+    end
+
+    it "should fail when backup options file is missing" do
+      ->{@console.parse ["restore"]}.must_raise Siba::ConsoleArgumentError
+    end
+    
+    it "should fail when needless arguments are specified" do
+      ->{@console.parse ["restore", "one", "two"]}.must_raise Siba::ConsoleArgumentError
+    end
+  end
 end

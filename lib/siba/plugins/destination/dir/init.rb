@@ -15,6 +15,17 @@ module Siba::Destination
       def backup(path_to_backup_file)
         @dest_dir.copy_backup_to_dest path_to_backup_file
       end
+
+      # Put backup file into path_to_restore_dir
+      def restore(backup_name, path_to_restore_dir)
+        puts path_to_restore_dir
+      end
+
+      # Returns an array of two-element arrays:
+      # [backup_file_name, modification_time]
+      def get_backups_list(backup_name)
+        @dest_dir.get_backups_list backup_name
+      end
     end
   end
 end

@@ -21,4 +21,16 @@ describe Siba::Destination::Dir::Init do
     ->{create_plugin({"dir" => ""})}.must_raise Siba::CheckError
     ->{create_plugin({"dir" => " "})}.must_raise Siba::CheckError
   end
+
+  it "should call backup" do
+    create_plugin("valid").backup "backup"
+  end
+
+  it "should call restore" do
+    create_plugin("valid").restore "backup", "/dir"
+  end
+
+  it "should call get_backups_list" do
+    create_plugin("valid").get_backups_list "bak"
+  end
 end

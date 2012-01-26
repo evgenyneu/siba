@@ -22,6 +22,14 @@ module Siba
       raise
     end
 
+    def restore(*args)
+      logger.debug "Restoring #{category}/#{type}"
+      @plugin.restore *args
+    rescue Exception
+      logger.error "Failed to restore #{category}/#{type}"
+      raise
+    end
+
   private
 
     def load(options)

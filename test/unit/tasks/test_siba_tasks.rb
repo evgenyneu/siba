@@ -21,6 +21,14 @@ describe Siba::SibaTasks do
     create_tasks("valid").backup
   end
 
+  it "should call restore" do
+    create_tasks("valid").restore "backup_name"
+  end
+
+  it "should call get_backups_list" do
+    create_tasks("valid").get_backups_list
+  end
+
   it "should return correct backup name" do
     st = Siba::SibaTasks
     Siba.backup_name = "siba"
