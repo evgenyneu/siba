@@ -27,6 +27,10 @@ module Siba::Encryption
         siba_file.file_utils_mv path_to_encrypted_file, dest_file_path
         file_name
       end
+
+      # Decrypt path_to_backup to_dir
+      def restore(path_to_backup, to_dir)
+      end
     end
   end
 end

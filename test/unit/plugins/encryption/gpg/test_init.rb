@@ -39,4 +39,9 @@ describe Siba::Encryption::Gpg::Init do
     plugin = create_plugin(@options)
     plugin.backup("/path/to/archive", "/dest_dir").must_be_instance_of String
   end
+
+  it "must call restore" do
+    plugin = create_plugin(@options)
+    plugin.restore("/path/to/backup", "/dest_dir").must_be_instance_of String
+  end
 end

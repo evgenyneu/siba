@@ -24,6 +24,17 @@ module Siba::Destination
           siba_file.file_utils_cp(path_to_backup, dir) 
         end
       end
+
+      def restore_backup_to_dir(backup_name, to_dir)
+        siba_file.run_this do
+          path_to_backup = File.join dir, backup_name
+          unless siba_file.file_file? path_to_backup
+            raise Siba::Error, "Can not find backup #{path_to_backup}"
+          end
+
+          siba_file.file_utils_cp path_to_backup, to_dir
+        end
+      end
       
       def test_dir_access
         siba_file.run_this "test dir access" do

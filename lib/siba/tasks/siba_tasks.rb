@@ -42,7 +42,15 @@ module Siba
     end
 
     def restore(backup_name)
-      @tasks["destination"].restore backup_name, destination_dir
+      siba_file.run_this do
+        @tasks["destination"].restore backup_name, destination_dir
+        path_to_backup = File.join destination_dir, backup_name
+        unless siba_file.file_file? path_to_backup
+          raise Siba::Error, "Failed to get backup from destination: #{backup_name}"
+        end
+        
+        @tasks["encryption"].restore path_to_backup, encryption_dir
+      end
     end
 
     def get_backups_list

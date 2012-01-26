@@ -26,7 +26,7 @@ private
       unless file_name.nil?
         tasks.restore file_name
       else
-        logger.info "Aborted"
+        logger.finish_success_msg = "Aborted"
       end
       Siba.cleanup_tmp_dir
     rescue Exception => e 
@@ -67,7 +67,7 @@ private
     end
 
     def get_backup_user_choice(list)
-      msg = "\nEnter plugin number from 1 to #{list.size+1}, or 0 to exit.\n> "
+      msg = "\nEnter backup number from 1 to #{list.size+1}, or 0 to exit.\n> "
       siba_kernel.printf msg
       while true
         user_choice = siba_kernel.gets.chomp
