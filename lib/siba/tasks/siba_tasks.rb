@@ -31,7 +31,8 @@ module Siba
           raise Siba::Error, "Failed to create archive file: #{path_to_archive}"
         end
 
-        path_to_backup = @tasks["encryption"].backup path_to_archive
+        name_of_encrypted_file = @tasks["encryption"].backup path_to_archive, encryption_dir
+        path_to_backup = File.join encryption_dir, name_of_encrypted_file
         unless siba_file.file_file? path_to_backup
           raise Siba::Error, "Failed to encrypt backup: #{path_to_backup}" 
         end
@@ -57,6 +58,10 @@ module Siba
 
     def archive_dir
       @archive_dir ||= TestFiles::mkdir_in_tmp_dir "arc"
+    end
+
+    def encryption_dir
+      @encryption_dir ||= TestFiles::mkdir_in_tmp_dir "enc"
     end
 
     def save_options_backup
