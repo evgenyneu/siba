@@ -12,6 +12,7 @@ module Siba::Archive
         check_installed
       end
 
+      # Returns the archive name
       def archive(sources_dir, dest_dir, dest_file_name)
         Siba::Archive::Tar::Archive.check_compression_type compression
 
@@ -30,7 +31,7 @@ module Siba::Archive
           siba_file.run_shell command_text, "Failed to archive: #{command_text}"
           raise Siba::Error, "Failed to create archive: #{command_text}" unless siba_file.file_file?(archive_path)
         end
-        archive_path
+        archive_name
       end
 
       def extract(archive_path, destination_dir)

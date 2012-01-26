@@ -21,15 +21,15 @@ describe Siba::Archive::Tar::Init do
 
     Siba::Archive::Tar::Archive.new("none")
       .archive("",dest_dir,file_name)
-      .must_match /#{dest_dir}\/#{file_name}\.tar$/
+      .must_match /^#{file_name}\.tar$/
 
     Siba::Archive::Tar::Archive.new("gzip")
       .archive("",dest_dir,file_name)
-      .must_match /#{dest_dir}\/#{file_name}\.tar.gz$/
+      .must_match /^#{file_name}\.tar.gz$/
         
     Siba::Archive::Tar::Archive.new("bzip2")
       .archive("",dest_dir,file_name)
-      .must_match /#{dest_dir}\/#{file_name}\.tar.bz2$/
+      .must_match /^#{file_name}\.tar.bz2$/
   end
 
   it "backup should fail" do

@@ -26,11 +26,16 @@ module Siba
         raise Siba::Error, "There are no files to backup" if Siba::FileHelper.dir_empty? source_dir
         save_options_backup
 
-        path_to_archive = @tasks["archive"].backup source_dir, archive_dir, SibaTasks.backup_name
-        raise Siba::Error, "Failed to create archive file: #{path_to_archive}" unless siba_file.file_file? path_to_archive
+        archive_file_name = @tasks["archive"].backup source_dir, archive_dir, SibaTasks.backup_name
+        path_to_archive = File.join archive_dir, archive_file_name
+        unless siba_file.file_file? path_to_archive
+          raise Siba::Error, "Failed to create archive file: #{path_to_archive}"
+        end
 
         path_to_backup = @tasks["encryption"].backup path_to_archive
-        raise Siba::Error, "Failed to encrypt backup: #{path_to_backup}" unless siba_file.file_file? path_to_backup
+        unless siba_file.file_file? path_to_backup
+          raise Siba::Error, "Failed to encrypt backup: #{path_to_backup}" 
+        end
 
         @tasks["destination"].backup path_to_backup
       end
