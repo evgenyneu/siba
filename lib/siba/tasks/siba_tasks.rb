@@ -5,12 +5,11 @@ require 'siba/tasks/siba_task'
 module Siba
   class SibaTasks
     include Siba::FilePlug
-    attr_accessor :options, :tasks, :path_to_options_yml
+    attr_accessor :tasks
 
     OPTIONS_BACKUP_FILE_NAME = ".siba_options_backup.yml"
 
     def initialize(options, path_to_options_yml)
-      @options = options
       @path_to_options_yml = path_to_options_yml
       raise 'Options are not loaded' if options.nil?
 
@@ -48,11 +47,17 @@ module Siba
       "#{Siba.backup_name}-#{SibaTasks.backup_name_suffix(now)}"
     end
 
-    def source_dir
-      mkdir_if_missing(File.join Siba.tmp_dir, "source")
-    end
 
   private
+    attr_accessor :path_to_options_yml
+
+    def source_dir
+      @source_dir ||= TestFiles::mkdir_in_tmp_dir "src"
+    end
+
+    def archive_dir
+      @archive_dir ||= TestFiles::mkdir_in_tmp_dir "arc"
+    end
 
     def save_options_backup
       options_backup_path = File.join source_dir, SibaTasks::OPTIONS_BACKUP_FILE_NAME
@@ -73,15 +78,6 @@ module Siba
       # Daily backup
       # "day-2-mon" through "day-7-sat"
       "day-#{now.wday+1}-#{now.strftime("%a").downcase}"  
-    end
-
-    def archive_dir
-      mkdir_if_missing(File.join Siba.tmp_dir, "archive")
-    end
-
-    def mkdir_if_missing(dir)
-      siba_file.file_utils_mkpath dir unless siba_file.file_directory?(dir)
-      dir
     end
   end
 end

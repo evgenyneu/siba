@@ -58,11 +58,6 @@ describe Siba::SibaTasks do
     ->{st.backup_name(Time.new 2012, 1, 9)}.must_raise Siba::Error
   end
 
-  it "should access path_to_options_yml" do
-    st = create_tasks("valid")
-    st.path_to_options_yml.must_equal File.join(@yml_path, "valid.yml")
-  end
-
   private
 
   def create_tasks(yml_file_name)

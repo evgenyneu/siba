@@ -22,8 +22,5 @@ describe Siba::SibaTasks do
 
     tasks = Siba::SibaTasks.new options, path_to_test_yml
     tasks.backup 
-    options_backup = File.join(tasks.source_dir, Siba::SibaTasks::OPTIONS_BACKUP_FILE_NAME)
-    File.file?(options_backup).must_equal true, "Must save options backup"
-    siba_file.file_utils_compare_file(options_backup, path_to_test_yml).must_equal true
   end
 end
