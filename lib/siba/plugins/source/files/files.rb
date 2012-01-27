@@ -15,8 +15,6 @@ module Siba::Source
 
       def backup(dest_dir)
         siba_file.run_this "backup" do
-          logger.info "Collecting source files"
-
           size_digits = files_to_include.size.to_s.length
           files_to_include.each_index do |i|
             file = files_to_include[i]
@@ -42,13 +40,15 @@ module Siba::Source
         end
       end
 
-      def self.sub_dir_name(num, size_digits, is_file, src_file, dest_dir)
-        basename = File.basename src_file
-        basename = "root" if basename.empty? || basename == "/"
-        sub_dir_name = "%0#{size_digits}d" % num
-        sub_dir_name += is_file ? "-file" : "-dir"
-        sub_dir_name += "-#{basename}"
-        File.join dest_dir, sub_dir_name
+      def restore(from_dir)
+        original_sources = get_original_sources from_dir  
+      end
+
+      def get_original_sources(from_dir)
+        path_to_options_backup = File.join from_dir, Siba::SibaTasks::OPTIONS_BACKUP_FILE_NAME
+        unless siba_file.file_file? path_to_options_backup
+          raise Siba::Error, "Options backup YAML is not find: #{path_to_options_backup}"
+        end
       end
 
       def copy_file(file, dest_dir)
@@ -91,13 +91,24 @@ module Siba::Source
         false
       end
 
-      def self.path_match?(pattern, file)
-        file.strip!
-        pattern.strip!
-        basename = File.basename(file)
-        
-        return File.fnmatch(pattern, basename, File::FNM_CASEFOLD) || # match basename against pattern
-          File.fnmatch(pattern, file, File::FNM_CASEFOLD) # match whole path against pattern
+      class << self
+        def path_match?(pattern, file)
+          file.strip!
+          pattern.strip!
+          basename = File.basename(file)
+          
+          return File.fnmatch(pattern, basename, File::FNM_CASEFOLD) || # match basename against pattern
+            File.fnmatch(pattern, file, File::FNM_CASEFOLD) # match whole path against pattern
+        end
+
+        def sub_dir_name(num, size_digits, is_file, src_file, dest_dir)
+          basename = File.basename src_file
+          basename = "root" if basename.empty? || basename == "/"
+          sub_dir_name = "%0#{size_digits}d" % num
+          sub_dir_name += is_file ? "-file" : "-dir"
+          sub_dir_name += "-#{basename}"
+          File.join dest_dir, sub_dir_name
+        end
       end
     end
   end

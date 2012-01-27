@@ -113,4 +113,14 @@ describe Siba::Source::Files::Files do
     f.backup dest_dir
     Siba::FileHelper.dir_empty?(dest_dir).must_equal true
   end
+
+  it "should get original source" do
+    yml_file = File.expand_path "../yml/sources.yml", __FILE__
+    source_dir = mkdir_in_tmp_dir "gos"
+    options_backup = File.join source_dir, Siba::SibaTasks::OPTIONS_BACKUP_FILE_NAME
+    FileUtils.cp yml_file, options_backup
+    @obj = @files.new [],[],true
+    @obj.get_original_sources source_dir
+
+  end
 end

@@ -41,4 +41,8 @@ describe Siba::Source::Files::Init do
   it "backup should copy file" do
     create_plugin("valid").backup "dir"
   end
+
+  it "should call restore" do
+    create_plugin("valid").restore "/from_dir"
+  end
 end

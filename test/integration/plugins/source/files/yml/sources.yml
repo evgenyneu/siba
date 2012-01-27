@@ -1,0 +1,18 @@
+source:
+  type: files
+  include:
+    - /one
+    - two
+    - one
+    - two
+
+archive:
+  type: tar
+
+encryption:
+  type: gpg
+  passphrase: "this is a password"
+
+destination:
+  type: dir
+  dir: /dir

@@ -59,6 +59,8 @@ module Siba
         if Siba::FileHelper.dir_empty? source_dir
           raise Siba::Error, "Failed to extract archive: #{path_to_archive}"
         end
+      
+        @tasks["source"].restore source_dir
       end
     end
 

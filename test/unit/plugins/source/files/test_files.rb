@@ -37,4 +37,8 @@ describe Siba::Source::Files::Files do
     @f.sub_dir_name(5,  3, true, "/dir1/dir2/file","/root").must_equal "/root/005-file-file"
     @f.sub_dir_name(3,  2, false, "/","/root").must_equal "/root/03-dir-root"
   end
+
+  it "should call restore" do
+    @f.new([], [], true).restore "/from-dir"
+  end
 end
