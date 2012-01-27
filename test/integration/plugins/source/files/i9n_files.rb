@@ -116,11 +116,17 @@ describe Siba::Source::Files::Files do
 
   it "should get original source" do
     yml_file = File.expand_path "../yml/sources.yml", __FILE__
+    yml_file = prepare_yml yml_file, { current_dir: "cur_dir" }
     source_dir = mkdir_in_tmp_dir "gos"
     options_backup = File.join source_dir, Siba::SibaTasks::OPTIONS_BACKUP_FILE_NAME
     FileUtils.cp yml_file, options_backup
     @obj = @files.new [],[],true
-    @obj.get_original_sources source_dir
+    sources, current_dir = @obj.get_original_sources source_dir
+    sources.size.must_equal 4
+    current_dir.must_equal "cur_dir"
+  end
 
+  it "should restore" do
+    @obj = @files.new [],[],true
   end
 end

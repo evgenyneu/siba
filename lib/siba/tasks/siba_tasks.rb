@@ -97,7 +97,9 @@ module Siba
 
     def save_options_backup
       options_backup_path = File.join source_dir, SibaTasks::OPTIONS_BACKUP_FILE_NAME
-      siba_file.file_utils_cp path_to_options_yml, options_backup_path
+      data = Siba::FileHelper.read path_to_options_yml
+      data << "\n\ncurrent_dir: \"#{Siba.current_dir}\""
+      Siba::FileHelper.write options_backup_path, data
     end
 
     def self.backup_name_suffix(now=nil)

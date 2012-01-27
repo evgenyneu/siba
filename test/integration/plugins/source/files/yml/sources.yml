@@ -1,8 +1,8 @@
 source:
   type: files
   include:
-    - /one
-    - two
+    - want
+    - to
     - one
     - two
 
@@ -16,3 +16,5 @@ encryption:
 destination:
   type: dir
   dir: /dir
+
+current_dir: #_replace_current_dir
