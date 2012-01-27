@@ -18,6 +18,7 @@ require 'siba/options_loader'
 require 'siba/plugins/plugins'
 require 'siba/tasks/siba_tasks'
 require 'siba/console'
+require 'siba/options_backup'
 require 'siba/backup'
 require 'siba/restore'
 

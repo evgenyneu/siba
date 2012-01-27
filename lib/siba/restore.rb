@@ -21,7 +21,7 @@ private
       Siba.settings = options["settings"] || {}
       Siba.backup_name = File.basename path_to_options_yml, ".yml"
       TmpDir.test_access 
-      tasks = SibaTasks.new options, path_to_options_yml
+      tasks = SibaTasks.new options, path_to_options_yml, true
       file_name = get_backup_choice tasks 
       unless file_name.nil?
         tasks.restore file_name

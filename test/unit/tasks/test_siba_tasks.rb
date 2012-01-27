@@ -66,10 +66,19 @@ describe Siba::SibaTasks do
     ->{st.backup_name(Time.new 2012, 1, 9)}.must_raise Siba::Error
   end
 
+  it "should init tasks but skip source" do
+    options = load_options "valid"
+    tasks = Siba::SibaTasks.new options, File.join(@yml_path, "valid.yml"), false
+    tasks.tasks["source"].wont_be_nil
+
+    tasks = Siba::SibaTasks.new options, File.join(@yml_path, "valid.yml"), true
+    tasks.tasks["source"].must_be_nil
+  end
+
   private
 
   def create_tasks(yml_file_name)
     options = load_options yml_file_name
-    Siba::SibaTasks.new options, File.join(@yml_path, "#{yml_file_name}.yml")
+    Siba::SibaTasks.new options, File.join(@yml_path, "#{yml_file_name}.yml"), false
   end
 end

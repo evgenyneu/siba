@@ -41,20 +41,6 @@ module Siba::Source
       end
 
       def restore(from_dir)
-        sources, current_dir = get_original_sources from_dir  
-      end
-
-      # Returns original sources from options backup yaml
-      def get_original_sources(from_dir)
-        path_to_options_backup = File.join from_dir, Siba::SibaTasks::OPTIONS_BACKUP_FILE_NAME
-        unless siba_file.file_file? path_to_options_backup
-          raise Siba::Error, "Options backup YAML is not find: #{path_to_options_backup}"
-        end
-        options = Siba::OptionsLoader.load_yml path_to_options_backup
-        source = Siba::SibaCheck.options_hash options, "source"    
-        include_files = Siba::SibaCheck.options_string_array source, "include"
-        current_dir = Siba::SibaCheck.options_string options, "current_dir"
-        return include_files, current_dir
       end
 
       def copy_file(file, dest_dir)

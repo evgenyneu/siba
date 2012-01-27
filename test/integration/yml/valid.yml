@@ -9,7 +9,7 @@ archive:
 
 encryption:
   type: gpg
-  passphrase: "this is a пароль"
+  passphrase: "this is a password"
 
 destination:
   type: dir

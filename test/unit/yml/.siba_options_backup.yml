@@ -1,0 +1,20 @@
+source:
+  type: files
+  include:
+    - dir1
+    - dir2/subdir2
+    - file1
+    - /folder
+
+archive:
+  type: tar
+
+encryption:
+  type: gpg
+  passphrase: "this is a passphrase"
+
+destination:
+  type: dir
+  dir: /dest-dir
+
+current_dir: /tmp/dir

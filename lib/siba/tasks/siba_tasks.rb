@@ -7,14 +7,13 @@ module Siba
     include Siba::FilePlug
     attr_accessor :tasks
 
-    OPTIONS_BACKUP_FILE_NAME = ".siba_options_backup.yml"
-
-    def initialize(options, path_to_options_yml)
+    def initialize(options, path_to_options_yml, skip_source_task)
       @path_to_options_yml = path_to_options_yml
       raise 'Options are not loaded' if options.nil?
 
       @tasks = {}
       Siba::Plugins::CATEGORIES.each do |category|
+        next if category == "source" && skip_source_task
         @tasks[category] = SibaTask.new options, category
       end
     end
@@ -23,7 +22,7 @@ module Siba
       siba_file.run_this "backup" do
         @tasks["source"].backup source_dir
         raise Siba::Error, "There are no files to backup" if Siba::FileHelper.dir_empty? source_dir
-        save_options_backup
+        OptionsBackup.save_options_backup path_to_options_yml, source_dir
 
         archive_file_name = @tasks["archive"].backup source_dir, archive_dir, SibaTasks.backup_name
         path_to_archive = File.join archive_dir, archive_file_name
@@ -60,6 +59,7 @@ module Siba
           raise Siba::Error, "Failed to extract archive: #{path_to_archive}"
         end
       
+        @tasks["source"] = OptionsBackup.load_source_from_backup source_dir
         @tasks["source"].restore source_dir
       end
     end
@@ -93,13 +93,6 @@ module Siba
     
     def destination_dir
       @destination_dir ||= TestFiles::mkdir_in_tmp_dir("dest").freeze
-    end
-
-    def save_options_backup
-      options_backup_path = File.join source_dir, SibaTasks::OPTIONS_BACKUP_FILE_NAME
-      data = Siba::FileHelper.read path_to_options_yml
-      data << "\n\ncurrent_dir: \"#{Siba.current_dir}\""
-      Siba::FileHelper.write options_backup_path, data
     end
 
     def self.backup_name_suffix(now=nil)

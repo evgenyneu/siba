@@ -54,7 +54,8 @@ class MiniTest::Unit::TestCase
     unless @yml_path
       raise Siba::Error, "Initialize '@yml_path' variable with the dir to test YAML files."
     end
-    @options = SibaTest.load_options File.join(@yml_path, "#{yml_name}.yml")
+    yml_name = yml_name + ".yml" unless yml_name =~ /\.yml$/
+    @options = SibaTest.load_options File.join(@yml_path, yml_name)
   end
 
   def prepare_test_dir(dir_name_part, tmp_dir = nil)

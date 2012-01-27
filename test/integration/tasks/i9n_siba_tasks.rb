@@ -20,10 +20,11 @@ describe Siba::SibaTasks do
 
     options = SibaTest.load_options path_to_test_yml
 
-    tasks = Siba::SibaTasks.new options, path_to_test_yml
+    tasks = Siba::SibaTasks.new options, path_to_test_yml, false
     tasks.backup 
 
     backup_file_name = Siba::FileHelper.entries(dest_dir)[0]
+    tasks = Siba::SibaTasks.new options, path_to_test_yml, true
     tasks.restore backup_file_name
   end
 end

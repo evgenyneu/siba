@@ -21,7 +21,7 @@ private
       Siba.backup_name = File.basename path_to_options_yml, ".yml"
 
       TmpDir.test_access 
-      SibaTasks.new(options, path_to_options_yml).backup
+      SibaTasks.new(options, path_to_options_yml, false).backup
       Siba.cleanup_tmp_dir
     rescue Exception => e 
       logger.fatal e
