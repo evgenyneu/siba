@@ -49,6 +49,8 @@ module Siba::Source
         unless siba_file.file_file? path_to_options_backup
           raise Siba::Error, "Options backup YAML is not find: #{path_to_options_backup}"
         end
+        options = Siba::OptionsLoader.load_yml path_to_options_backup
+
       end
 
       def copy_file(file, dest_dir)
