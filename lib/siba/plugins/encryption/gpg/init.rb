@@ -30,6 +30,12 @@ module Siba::Encryption
 
       # Decrypt path_to_backup to_dir
       def restore(path_to_backup, to_dir)
+        logger.info "Decrypting backup with 'gpg', cipher: '#{encryption.cipher}'"
+        decrypted_file_name = File.basename path_to_backup
+        decrypted_file_name.gsub! /\.gpg$/, ""
+        path_to_decrypted_file = File.join to_dir, decrypted_file_name
+        encryption.decrypt path_to_backup, path_to_decrypted_file
+        decrypted_file_name
       end
     end
   end

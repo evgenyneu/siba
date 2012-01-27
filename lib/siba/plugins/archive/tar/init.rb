@@ -24,6 +24,12 @@ module Siba::Archive
         logger.info "Archiving with 'tar', compression: '#{archive.compression}'"
         @archive.archive sources_dir, dest_dir, dest_file_name
       end
+
+      # Extract path_to_archive to_dir
+      def restore(path_to_archive, to_dir)
+        logger.info "Extracting 'tar' archive, compression: '#{archive.compression}'"
+        @archive.extract path_to_archive, to_dir 
+      end
     end
   end
 end

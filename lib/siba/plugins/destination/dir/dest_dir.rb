@@ -27,6 +27,7 @@ module Siba::Destination
 
       def restore_backup_to_dir(backup_name, to_dir)
         siba_file.run_this do
+          logger.info "Copying backup from destination directory: #{dir}"
           path_to_backup = File.join dir, backup_name
           unless siba_file.file_file? path_to_backup
             raise Siba::Error, "Can not find backup #{path_to_backup}"

@@ -28,4 +28,9 @@ describe Siba::Archive::Tar::Init do
     archive = create_plugin("valid")
     archive.backup("/src-dir", "/dst-dir", "file_name").must_be_instance_of String
   end
+  
+  it "should run restore" do
+    archive = create_plugin("valid")
+    archive.restore "/path-to-archive", "/to_dir"
+  end
 end

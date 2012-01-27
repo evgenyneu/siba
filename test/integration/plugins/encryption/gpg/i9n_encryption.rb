@@ -31,7 +31,10 @@ describe Siba::Encryption::Gpg::Encryption do
     path_to_decrypted_file.must_equal path_to_output_file
     siba_file.file_utils_compare_file(path_to_source_file, path_to_decrypted_file).must_equal true
 
+   
     # decrypt without output file parameter
+    ->{encryption.decrypt path_to_encrypted_file}.must_raise Siba::Error, "Should fail to decrypt if file already exists"
+    FileUtils.mv path_to_source_file, path_to_source_file + "new"
     path_to_decrypted_file = encryption.decrypt path_to_encrypted_file
     path_to_decrypted_file.must_equal path_to_source_file
 

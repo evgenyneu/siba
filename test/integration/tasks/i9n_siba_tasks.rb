@@ -8,7 +8,7 @@ describe Siba::SibaTasks do
     @path_to_src_yml = File.join @yml_path, "valid.yml"
   end
 
-  it "should backup tasks" do
+  it "should backup and testore tasks" do
     src_dir = prepare_test_dir "b-src-dir" 
     src_file = prepare_test_file "b-src-file"
     dest_dir = mkdir_in_tmp_dir "b-dest-dir"
@@ -22,5 +22,8 @@ describe Siba::SibaTasks do
 
     tasks = Siba::SibaTasks.new options, path_to_test_yml
     tasks.backup 
+
+    backup_file_name = Siba::FileHelper.entries(dest_dir)[0]
+    tasks.restore backup_file_name
   end
 end

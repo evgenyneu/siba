@@ -43,7 +43,11 @@ module Siba::Archive
         # Using -C 'change directory' option to make it work on Windows
         # because Windows will not understand absolute path to tar: "tar xf c:\dir\file.tar"
 
-        raise Siba::Error, "Failed to extract archive: #{command_text}" unless siba_file.shell_ok?(command_text)
+        siba_file.run_this do
+          unless siba_file.shell_ok? command_text
+            raise Siba::Error, "Failed to extract archive: #{command_text}"
+          end
+        end
       end
 
       # Making sure tar is installed and works: tars and un-tars a test file

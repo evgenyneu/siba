@@ -36,8 +36,11 @@ module Siba::Encryption
       end
 
       def decrypt(path_to_encrypted_file, path_to_decrypted_file=nil)
-        path_to_decrypted_file = path_to_encrypted_file.gsub /.gpg$/, "" if path_to_decrypted_file.nil?
+        path_to_decrypted_file = path_to_encrypted_file.gsub /\.gpg$/, "" if path_to_decrypted_file.nil?
         siba_file.run_this("decrypt") do
+          if siba_file.file_file? path_to_decrypted_file
+            raise Siba::Error, "Decrypted file #{path_to_decrypted_file} already exists" 
+          end
           passphare_for_command = passphrase.gsub('"','\\"')
           gpg_homedir = Siba::TestFiles.mkdir_in_tmp_dir "gpg-homedir"
           command_without_password = %(gpg -d -q --batch --homedir="#{gpg_homedir}" --no-options --passphrase="****" -o "#{path_to_decrypted_file}" --no-use-agent "#{path_to_encrypted_file}")

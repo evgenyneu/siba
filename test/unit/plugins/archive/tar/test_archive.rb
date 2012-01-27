@@ -15,7 +15,6 @@ describe Siba::Archive::Tar::Init do
   end
 
   it "should run archive" do
-    archive = Siba::Archive::Tar::Archive.new "gzip"
     file_name = "file"
     dest_dir = "/dir"
 
@@ -30,6 +29,10 @@ describe Siba::Archive::Tar::Init do
     Siba::Archive::Tar::Archive.new("bzip2")
       .archive("",dest_dir,file_name)
       .must_match /^#{file_name}\.tar.bz2$/
+  end
+
+  it "should run extract" do
+    Siba::Archive::Tar::Archive.new("gzip").extract("/path_to_archive","/dest_dir")
   end
 
   it "backup should fail" do
