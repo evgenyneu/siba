@@ -24,9 +24,12 @@ private
       tasks = SibaTasks.new options, path_to_options_yml, true
       file_name = get_backup_choice tasks 
       unless file_name.nil?
-        tasks.restore file_name
-      else
-        logger.finish_success_msg = "Aborted"
+        if user_wants_to_proceed?
+          tasks.restore file_name
+        else
+          logger.show_finish_message = false
+          logger.info "Cancelled by user"
+        end
       end
       Siba.cleanup_tmp_dir
     rescue Exception => e 
@@ -38,18 +41,34 @@ private
       list = tasks.get_backups_list
 
       siba_file.run_this do
-        list.sort_by!{|a| a[1]}
-        siba_kernel.puts "Choose a backup to restore:"
-        show_backups list
-        get_backup_user_choice list
+        if list.empty?
+          logger.show_finish_message = false
+          logger.info "No backups named '#{Siba.backup_name}' found"
+          return
+        end
+
+        if list.size == 1
+          return list[0][0]
+        else
+          list.sort_by!{|a| a[1]}
+          siba_kernel.puts "\nAvailable '#{Siba.backup_name}' backups:\n"
+          show_backups list
+          file_name = get_backup_user_choice list
+
+          if file_name.nil?
+            logger.show_finish_message = false
+            logger.info "Cancelled by user"
+          end
+          return file_name
+        end
       end
     end
 
     def show_backups(list)
-      list.map! {|a| a << format_time(a[1])}
+      list.map! {|a| a << Siba::StringHelper.format_time(a[1])}
       max_date_length = list.max do |a,b|
         a[2].length <=> b[2].length
-      end[2].length + 9
+      end[2].length + 5
 
       rows = list.size / 2 + list.size % 2
       1.upto(rows) do |i|
@@ -66,13 +85,22 @@ private
       end
     end
 
+    def user_wants_to_proceed?
+      siba_kernel.printf "\nWarning: backup will be restored into your original source location.
+Your current source data will be overwritten and WILL BE LOST.
+Type 'yes' if you want to proceed:
+(yes/n) > "
+      user_choice = siba_kernel.gets.chomp.strip
+      return user_choice.downcase == "yes"
+    end
+
     def get_backup_user_choice(list)
-      msg = "\nEnter backup number from 1 to #{list.size}, or 0 to exit.\n> "
+      msg = "\nChoose a backup to restore.\nEnter backup number from 1 to #{list.size}, or 0 to exit.\n> "
       siba_kernel.printf msg
       while true
-        user_choice = siba_kernel.gets.chomp
+        user_choice = siba_kernel.gets.chomp.strip
         number = Integer(user_choice) rescue -1
-        if number >= 0 && number <= (list.size + 1)
+        if number >= 0 && number <= list.size
           return if number == 0
           return list[number-1][0]
         else
@@ -81,8 +109,5 @@ private
       end
     end
 
-    def format_time(time)
-      time.strftime("%x")
-    end
   end
 end

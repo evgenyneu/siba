@@ -30,10 +30,24 @@ describe Siba::Backup do
     Siba.tmp_dir_clean?.must_equal true, "Tmp dir must be cleaned"
     Siba::LoggerPlug.opened?.must_equal false, "Logger must be closed"
 
+
     # Test restore
+    sources_copy_dir = mkdir_in_tmp_dir "source-copy"
+    FileUtils.mv src_dir, sources_copy_dir
+    path_to_dir_copy = File.join sources_copy_dir, File.basename(src_dir)
+    FileUtils.mv src_file, sources_copy_dir
+    path_to_file_copy = File.join sources_copy_dir, File.basename(src_file)
+    File.directory?(src_dir).must_equal false
+    File.file?(src_file).must_equal false
+
     Siba::SibaLogger.quiet = true
-    SibaTest::KernelMock.gets_return_value = "1"
+    SibaTest::KernelMock.gets_return_value = "yes"
     Siba::Restore.new.restore test_yml_path
+    
+    File.directory?(src_dir).must_equal true
+    File.file?(src_file).must_equal true
+    dirs_same? src_dir, path_to_dir_copy
+    FileUtils.compare_file(src_file, path_to_file_copy).must_equal true
     wont_log_from "warn"
   end
 end

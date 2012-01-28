@@ -28,4 +28,8 @@ describe Siba::StringHelper do
     reloaded = YAML.load("key: \"#{value}\"")
     reloaded["key"].must_equal str
   end
+
+  it "should call format_time" do
+    @sh.format_time(Time.now).must_be_instance_of String
+  end
 end

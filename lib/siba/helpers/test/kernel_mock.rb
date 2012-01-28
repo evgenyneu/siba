@@ -32,7 +32,7 @@ module SibaTest
     end
 
     def gets(*args)
-      SibaTest::KernelMock.gets_return_value 
+      SibaTest::KernelMock.gets_return_value
     end
 
     private

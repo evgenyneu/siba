@@ -38,7 +38,7 @@ module Siba
 
             type = Siba::Generator.get_plugin_user_choice types.keys
             if type.nil?
-              siba_kernel.puts "Aborted"
+              siba_kernel.puts "Cancelled by user"
               return
             end
 
@@ -68,7 +68,6 @@ module Siba
         Siba::FileHelper.write file_path, file_data
         file_path
       end
-
     end
 
     class << self
@@ -101,9 +100,9 @@ module Siba
         msg = "\nEnter plugin number from 1 to #{types.size}, or 0 to exit.\n> "
         siba_kernel.printf msg
         while true
-          user_choice = siba_kernel.gets.chomp
+          user_choice = siba_kernel.gets.chomp.strip
           number = Integer(user_choice) rescue -1
-          if number >= 0 && number <= (types.size + 1)
+          if number >= 0 && number <= types.size
             return if number == 0
             return types[number-1]
           else

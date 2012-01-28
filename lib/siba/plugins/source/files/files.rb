@@ -99,7 +99,7 @@ module Siba::Source
         path_to_source_dir = File.dirname path_to_source
         siba_file.file_utils_mkpath path_to_source_dir
         siba_file.file_utils_cp path_to_backup_file, path_to_source_dir
-        logger.info "File: \n#{path_to_source}"
+        logger.info "File: #{path_to_source}"
       end
 
       def copy_file(file, dest_dir)

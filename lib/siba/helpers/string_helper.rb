@@ -23,6 +23,10 @@ module Siba
       def escape_for_yaml(str)
         str.gsub("\\","\\\\\\").gsub("\"","\\\"")
       end
+
+      def format_time(time)
+        time.strftime("%B %e, %Y")
+      end
     end
   end
 end
