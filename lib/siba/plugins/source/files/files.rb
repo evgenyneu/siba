@@ -69,7 +69,7 @@ module Siba::Source
             if is_dir
               siba_file.file_utils_mkpath path_to_source
               siba_file.file_utils_cp_r File.join(path_to_backup_dir, "."), path_to_source
-              logger.info "Restored directory: #{path_to_source}"
+              logger.info "Dir: #{path_to_source}"
             else
               restore_file path_to_backup_dir, entry_name_to_restore, path_to_source
             end
@@ -99,7 +99,7 @@ module Siba::Source
         path_to_source_dir = File.dirname path_to_source
         siba_file.file_utils_mkpath path_to_source_dir
         siba_file.file_utils_cp path_to_backup_file, path_to_source_dir
-        logger.info "Restored file: #{path_to_source}"
+        logger.info "File: \n#{path_to_source}"
       end
 
       def copy_file(file, dest_dir)

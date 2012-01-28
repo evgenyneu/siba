@@ -67,7 +67,7 @@ private
     end
 
     def get_backup_user_choice(list)
-      msg = "\nEnter backup number from 1 to #{list.size+1}, or 0 to exit.\n> "
+      msg = "\nEnter backup number from 1 to #{list.size}, or 0 to exit.\n> "
       siba_kernel.printf msg
       while true
         user_choice = siba_kernel.gets.chomp

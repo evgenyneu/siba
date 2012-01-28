@@ -2,7 +2,7 @@
 
 module Siba
   class OptionsBackup
-    OPTIONS_BACKUP_FILE_NAME = ".siba_options_backup.yml"
+    OPTIONS_BACKUP_FILE_NAME = "siba_options_backup.yml"
 
     class << self
       include Siba::FilePlug

@@ -17,13 +17,13 @@ module Siba::Source
 
       # Collect sources and put them into dest_dir
       def backup(dest_dir)
-        logger.info "Collecting source files"
+        logger.info "Collecting files"
         @files.backup dest_dir
       end
 
       # Restore source files and dirs from_dir 
       def restore(from_dir)
-        logger.info "Restoring source files"
+        logger.info "Restoring files"
         @files.restore from_dir
       end
     end
