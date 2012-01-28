@@ -60,7 +60,7 @@ class MiniTest::Unit::TestCase
 
   def prepare_test_dir(dir_name_part, tmp_dir = nil)
     tmp_dir ||= SibaTest.tmp_dir
-    Siba::TestFiles::prepare_test_dir dir_name_part, SibaTest.tmp_dir
+    Siba::TestFiles::prepare_test_dir dir_name_part, tmp_dir
   end
   
   def prepare_test_file(file_name_part, tmp_dir = nil)
@@ -73,8 +73,9 @@ class MiniTest::Unit::TestCase
     Siba::TestFiles::generate_path file_name_part, tmp_dir
   end
 
-  def mkdir_in_tmp_dir(prefix)
-    Siba::TestFiles::mkdir_in_tmp_dir prefix, SibaTest.tmp_dir
+  def mkdir_in_tmp_dir(prefix, tmp_dir = nil)
+    tmp_dir ||= SibaTest.tmp_dir
+    Siba::TestFiles::mkdir_in_tmp_dir prefix, tmp_dir
   end
 
   def dirs_same?(a,b)

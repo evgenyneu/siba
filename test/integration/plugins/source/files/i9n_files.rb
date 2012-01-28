@@ -114,8 +114,33 @@ describe Siba::Source::Files::Files do
     Siba::FileHelper.dir_empty?(dest_dir).must_equal true
   end
 
-
   it "should restore" do
-    @obj = @files.new [],[],true
+    backup_root = mkdir_in_tmp_dir "restore-backup"
+
+    sub_dir1_name = File.basename @files.sub_dir_name(1,1,false,"backup",backup_root)
+    backup_dir1 = prepare_test_dir sub_dir1_name, backup_root
+
+    sub_dir2_name = File.basename @files.sub_dir_name(2,1,true,"backup-dir",backup_root)
+    backup_dir2 = mkdir_in_tmp_dir sub_dir2_name, backup_root
+    backup_file = prepare_test_file "backup-file", backup_dir2
+    backup_file_name = File.basename backup_file
+
+    backup_source_dir = mkdir_in_tmp_dir "restore-bk-source"
+    restore_dir1 = mkdir_in_tmp_dir "restore-dir", backup_source_dir
+    restore_file = File.join(backup_source_dir, backup_file_name)
+
+    @obj = @files.new [restore_dir1, restore_file],[],true
+    @obj.restore(backup_root)
+
+    Siba::FileHelper.entries(backup_source_dir).size.must_equal 2
+
+    # Compare dirs
+    restore_dir1.wont_equal backup_dir1
+    dirs_same? restore_dir1, backup_dir1 
+
+    # Compare file
+    restore_file.wont_equal backup_file
+    FileUtils.compare_file(restore_file, backup_file).must_equal true
+    wont_log_from "warn"
   end
 end

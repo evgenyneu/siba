@@ -41,6 +41,65 @@ module Siba::Source
       end
 
       def restore(from_dir)
+        siba_file.run_this do
+          backup_dirs = Siba::FileHelper.entries(from_dir).select do |e|
+            siba_file.file_directory? File.join(from_dir, e)
+          end.sort
+
+          if backup_dirs.size != files_to_include.size
+            raise Siba::Error, "Number of source files does not equal the number of files that are in the backup"
+          end
+
+          backup_dirs.each_index do |i|
+            backup_dir = backup_dirs[i]
+            splitted = backup_dir.split "-"
+            if splitted.size < 3
+              logger.error "Failed to parse backup dir #{backup_dir}"
+              next
+            end
+            dir_or_file = splitted[1]
+            if dir_or_file != "dir" && dir_or_file != "file"
+              logger.error "Failed to parse backup dir #{backup_dir}"
+              next
+            end
+            is_dir = dir_or_file == "dir"
+            path_to_backup_dir = File.join from_dir, backup_dir
+            entry_name_to_restore = files_to_include[i]
+            path_to_source = siba_file.file_expand_path entry_name_to_restore
+            if is_dir
+              siba_file.file_utils_mkpath path_to_source
+              siba_file.file_utils_cp_r File.join(path_to_backup_dir, "."), path_to_source
+              logger.info "Restored directory: #{path_to_source}"
+            else
+              restore_file path_to_backup_dir, entry_name_to_restore, path_to_source
+            end
+          end
+        end
+      end
+
+      def restore_file(path_to_backup_dir, entry_name_to_restore, path_to_source)
+        backup_dir_entries = Siba::FileHelper.entries path_to_backup_dir
+        if backup_dir_entries.size != 1 
+          logger.error "Failed to restore file: #{entry_name_to_restore}"
+          return
+        end
+
+
+        backup_file_name = backup_dir_entries[0]
+        path_to_backup_file = File.join path_to_backup_dir, backup_file_name
+        unless siba_file.file_file? path_to_backup_file
+          logger.error "Failed to restore file: #{path_to_backup_file}"
+          return
+        end
+        source_file_name = File.basename path_to_source
+        unless source_file_name == backup_file_name
+          logger.error "Failed to restore file, source file name '#{source_file_name}' is not the same as backup file name #{backup_file_name}"
+          return
+        end
+        path_to_source_dir = File.dirname path_to_source
+        siba_file.file_utils_mkpath path_to_source_dir
+        siba_file.file_utils_cp path_to_backup_file, path_to_source_dir
+        logger.info "Restored file: #{path_to_source}"
       end
 
       def copy_file(file, dest_dir)

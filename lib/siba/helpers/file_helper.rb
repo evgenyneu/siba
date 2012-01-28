@@ -27,7 +27,7 @@ module Siba
       # Write to file in UTF-8 encoding
       def write(file, data)
         siba_file.file_utils_remove_entry_secure file if siba_file.file_file? file
-        File.open(file, "w:utf-8") do |file|
+        siba_file.file_open(file, "w:utf-8") do |file|
           file << data
         end
       end

@@ -19,6 +19,10 @@ module Siba
         str = str.capitalize
         str.gsub(/(?:_|-)([a-z\d]*)/i) { "#{$1.capitalize}" }
       end
+
+      def escape_for_yaml(str)
+        str.gsub("\\","\\\\\\").gsub("\"","\\\"")
+      end
     end
   end
 end

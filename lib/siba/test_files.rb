@@ -38,7 +38,7 @@ module Siba::TestFiles
 
     def mkdir_in_tmp_dir(prefix, tmp_dir=nil)
       tmp_dir ||= Siba.tmp_dir
-      dir = "test-#{prefix}#{random_suffix}"
+      dir = "#{prefix}#{random_suffix}"
       dir_path = File.join(tmp_dir, dir)
       siba_file.file_utils_mkpath dir_path
       dir_path
@@ -70,7 +70,7 @@ module Siba::TestFiles
     end
 
     def random_suffix
-      "-#{rand(1000000)}-#{rand(1000000)}"
+      "-#{Siba::SecurityHelper.alphanumeric_password(8,true)}"
     end
   end
 end

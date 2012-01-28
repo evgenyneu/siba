@@ -54,7 +54,7 @@ settings:
           tmp_path = siba_file.dir_mktmpdir TmpDirPrefix 
         else
           tmp_path = File.join(siba_file.file_expand_path(tmp_dir_from_settings),
-                                  "#{TmpDirPrefix}#{Time.now.to_i}_#{rand(10000000)}")
+                                  "#{TmpDirPrefix}#{Siba::TestFiles.random_suffix}")
           siba_file.file_utils_mkpath tmp_path
         end
         tmp_path

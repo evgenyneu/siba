@@ -21,4 +21,11 @@ describe Siba::StringHelper do
     @sh.camelize("another_test_str").must_equal "AnotherTestStr"
     @sh.camelize("another-test-str").must_equal "AnotherTestStr"
   end
+
+  it "should call escape_for_yaml" do
+    str = 'test\one"two'
+    value = @sh.escape_for_yaml(str)
+    reloaded = YAML.load("key: \"#{value}\"")
+    reloaded["key"].must_equal str
+  end
 end
