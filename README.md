@@ -6,7 +6,7 @@ SIBA is a simple backup and restore utility. It implements daily backup rotation
 ## Main features
 
 * **Easy to use.** Configure, backup and restore with a single command.
-* **Secure.** All backups are encrypted on your computer before reaching backup destination.
+* **Secure.** All backups are encrypted on your computer before reaching destination.
 * **Cross platform.** Runs on any computer with Ruby 1.9 or later.
 * **Easy to extend.** Developers can easily add new backup sources, archivers, encryptions and destinations.
 * **Free and open source.** Use SIBA for any purpose without restrictions.
