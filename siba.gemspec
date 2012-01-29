@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Evgeny Neumerzhitskiy"]
   s.email       = ["sausageskin@gmail.com"]
   s.homepage    = ""
-  s.summary     = %q{Simple backup solution}
-  s.description = %q{Siba is backup solution that implements a simple backup rotation scheme. It retains a one year history of backups by keeping up to 23 files: 6 daily, 5 weekly and 12 monthly backups. Backups are compressed and encrypted. Various backup sources and destinations can be added through extension gems.}
+  s.summary     = %q{Simple backup and restore utility.}
+  s.description = %q{This is a backup and restore utility. SIBA implements backup rotation scheme. It retains a one year history of backups by keeping up to 23 files: 6 daily, 5 weekly and 12 monthly backups. Backups are compressed and encrypted. Various backup sources and destinations can be added through extension gems.}
 
   s.rubyforge_project = "siba"
 

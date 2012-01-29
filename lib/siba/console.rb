@@ -29,11 +29,12 @@ module Siba
         o.banner = "Usage: siba command ARGUMENTS [options...]
 
 Examples: 
-    siba generate mybak.yml     Generate mybak.yml options file                        
-    siba backup mybak.yml       Run backup, reading options from mybak.yml
-    siba restore mybak.yml      Restore the backup
+    siba generate mybak         Generate mybak.yml options file                        
+    siba backup mybak           Run backup, reading options from mybak.yml
+    siba restore mybak          Restore the backup
     siba list                   Show available plugins
     siba scaffold source my-db  Create a new gem for a source plugin
+                                (or archive, encryption or destination)
 
     Note: single letter commands are also supported, like b for backup
 
@@ -176,7 +177,8 @@ Options:"
       end      
       begin
         path_to_yaml = Siba::Generator.new(file).generate
-        show_message "Options file generated: #{path_to_yaml}" unless path_to_yaml.nil?
+        show_message "Options file generated: #{path_to_yaml}
+Edit it and run backup command" unless path_to_yaml.nil?
       rescue Exception => ex
         show_error ex
       end

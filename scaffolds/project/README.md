@@ -24,7 +24,7 @@ Publish your plugin gem. If you want your plugin to be shown to users by `siba l
 
 ## Testing
 
-The project contains test files with examples. Two types of tests are used: unit and integration. In unit test file system and shell commands are not exectuted.
+The project contains test files with examples. Two types of tests are used: unit and integration. In unit tests file system, shell and other time consuming operations are not performed.
 
 To run unit tests:
         rake
