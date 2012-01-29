@@ -1,5 +1,6 @@
 # Overview
 
+
 SIBA is a simple backup and restore utility. It implements daily backup rotation scheme. It is most suitable in sutuations when you need to have a history of backups and not just the last one. If run daily, SIBA retains full year history of backups by keeping only 23 files: 6 daily, 5 weekly and 12 monthly full backups.
 
 ## Main features
@@ -28,15 +29,15 @@ SIBA is a simple backup and restore utility. It implements daily backup rotation
 
 3. Restore
 
-	$ siba restore mybak
+        $ siba restore mybak
 
 4. Show available plugins
 
-	$ siba list
+        $ siba list
 
 5. Create a gem project for a new destination plugin (or for a source, archive, encryption plugin).
 
-	$ siba scaffold destination my-cloud
+        $ siba scaffold destination my-cloud
 
 6. Show other commands and options
 
