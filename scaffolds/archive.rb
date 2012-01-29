@@ -20,8 +20,6 @@ module Siba::C6y
       # Extract contents of archive file (path_to_archive) to_dir
       # No return value is expected.
       def restore(path_to_archive, to_dir)
-        logger.info "Extracting 'tar' archive, compression: '#{archive.compression}'"
-        @archive.extract path_to_archive, to_dir 
       end
     end
   end

@@ -81,7 +81,9 @@ module Siba
         siba_file.file_utils_mkpath dest_dir
         siba_file.file_utils_cp_r File.join(dest_tmp_dir,"."), dest_dir
 
+        
         logger.info "Project created in #{dest_dir}"
+        logger.info "There is a README file with instructions there"
         logger.show_finish_message = false
       end
     rescue Exception => e 

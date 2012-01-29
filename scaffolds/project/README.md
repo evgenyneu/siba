@@ -21,3 +21,13 @@ Add your plugin options to `options.yml`. It is located in the same directory as
 ## 4. Publish
 
 Publish your plugin gem. If you want your plugin to be shown to user in `siba list` and `siba generate` commands, please add its description to /lib/siba/plugins/plugins.yml file in SIBA project on github and issue a pull request.
+
+## Testing
+
+The project contains test files with examples. Two types of tests are used: unit and integration. In unit test file system and shell commands are not exectuted.
+
+To run unit tests:
+        rake
+
+To run integration tests
+        rake test:i9n
