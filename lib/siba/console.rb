@@ -62,9 +62,12 @@ Options:"
         end
 
         o.on("--version", "Show version") do
-          show_message "SIBA (SImple BAckup) #{Siba::VERSION}"
+          show_message "SIBA #{Siba::VERSION}"
           return
         end
+
+        o.separator ""
+        o.separator "Homepage: https://github.com/evgenyneu/siba"
       end
 
       if argv.empty? 
