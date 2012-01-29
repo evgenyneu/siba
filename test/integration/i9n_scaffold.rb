@@ -15,6 +15,7 @@ describe Siba::Scaffold do
     dest_dir = mkdir_in_tmp_dir "scf-d"
     Siba::FileHelper.dir_empty?(dest_dir).must_equal true
     @obj.scaffold dest_dir
+    show_log
     Siba::FileHelper.dir_empty?(dest_dir).must_equal false
     dest_dir = File.join dest_dir, @gem_name
     File.directory?(dest_dir).must_equal true

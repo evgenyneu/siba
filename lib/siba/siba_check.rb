@@ -45,14 +45,15 @@ module Siba
         obj
       end
       
-    private
-
+      # Tries to conver value to string
       def try_to_s(value, key_name)
-        raise Siba::CheckError if [Array, Hash].any?{|a| value.is_a?(a)}
+        raise Siba::CheckError, "'#{key_name}' option should be string" if [Array, Hash].any?{|a| value.is_a?(a)}
         value = value.to_s.strip
-        raise Siba::CheckError if value.empty?
+        raise Siba::CheckError, "'#{key_name}' option should not be empty" if value.empty?
         value
       end
+
+    private
 
       def check_options(options, key_name, item_type, is_optional = false, default_value = nil)
         value = options[key_name]

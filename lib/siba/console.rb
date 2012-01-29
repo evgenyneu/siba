@@ -187,6 +187,7 @@ Options:"
       show_error "missing backup options file argument" if path_to_options.nil?
       show_error "needless arguments: #{argv.join(', ')}" unless argv.empty?
       path_to_options = siba_file.file_expand_path path_to_options
+      path_to_options += ".yml" unless path_to_options =~ /\.yml$/
       Siba::Restore.new.restore path_to_options
     end
   end

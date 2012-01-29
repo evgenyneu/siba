@@ -66,6 +66,9 @@ module Siba
           raise Siba::Error, "Filed to create init file '#{init_file_dest}'"
         end
 
+        logger.debug "Writing examples to init.rb"
+        replace_init_examples scaffolds_dir, init_file_dest
+
         logger.debug "Setting siba gem dependency"
         replace_siba_version dest_tmp_dir
 
@@ -134,6 +137,27 @@ module Siba
       Siba::FileHelper.change_file(path_to_gemspec) do |file_text|
         version = Siba::VERSION.split('.')[0..-2].join('.')
         file_text.gsub "siba_version", version 
+      end
+    end
+
+    def replace_init_examples(scaffolds_dir, init_file_dest)
+      replace_init_example scaffolds_dir, init_file_dest, "init_example.rb"
+      replace_init_example scaffolds_dir, init_file_dest, "examples.rb"
+    end
+
+    def replace_init_example(scaffolds_dir, init_file_dest, example_file_name)
+      shared_dir = siba_file.file_expand_path File.join(scaffolds_dir, "shared")
+      init_example_file = File.join shared_dir, example_file_name
+      unless siba_file.file_file? init_example_file
+        raise Siba::Error, "Can not find init example file: '#{init_example_file}'"
+      end
+      init_example = Siba::FileHelper.read init_example_file
+      Siba::FileHelper.change_file(init_file_dest) do |f|
+        replace_text = "## #{example_file_name} ##"
+        unless f.include? replace_text
+          raise Siba::Error, "Can not replacement text: #{replace_text}"
+        end
+        f.gsub! replace_text, init_example
       end
     end
   end
