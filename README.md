@@ -44,4 +44,4 @@ SIBA is a simple backup and restore utility. It implements daily backup rotation
 
 ## Scheduling backups
 
-It is recommended to run `siba backup` command daily or hourly. Use your favourite scheduler: Cron, Scheduled Tasks, iCal etc.
+It is recommended to run `siba backup` command daily or hourly. Use your favourite scheduler to automate the process: Cron, Scheduled Tasks, iCal etc.
