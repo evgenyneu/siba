@@ -31,7 +31,7 @@ SIBA is a simple backup and restore utility. It implements daily backup rotation
 
         $ siba restore mybak
 
-4. Show available plugins for backup sources, archives, encryptions and destinations
+4. Show available plugins
 
         $ siba list
 
