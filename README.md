@@ -31,13 +31,15 @@ SIBA is a simple backup and restore utility. It implements daily backup rotation
 
         $ siba restore mybak
 
-4. Show available plugins
+4. Show available plugins for backup sources, archives, encryptions and destinations
 
         $ siba list
 
-5. Create a gem project for a new destination plugin (or for a source, archive, encryption plugin).
+5. Create a gem project for a new destination plugin 
 
         $ siba scaffold destination my-cloud
+
+Note: to create other plugin types, replace `destination` with `source`, `archive` or `encryption`.
 
 6. Show other commands and options
 
@@ -46,3 +48,22 @@ SIBA is a simple backup and restore utility. It implements daily backup rotation
 ## Scheduling backups
 
 It is recommended to run `siba backup` command daily or hourly. Use your favourite scheduler to automate the process: Cron, Scheduled Tasks, iCal etc.
+
+## Supported plugins
+
+### Source
+
+* **files:** Backup local files and directories
+
+### Archive
+  
+* **tar:** Archive with optional gzip or bzip2 compression
+
+### Encryption
+  
+* **gpg:** Encrypt with AES256, Blowfish, Twofish, 3DES and other ciphers
+
+### Destination
+  
+* **dir:** Backup to local directory
+* **aws-s3:** Upload backup to Amazon S3 storage
