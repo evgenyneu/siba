@@ -1,5 +1,6 @@
 # Developing a SIBA plugin
 
+
 Follow four simple steps to develop a SIBA extension plugin.
 
 ## 1. Generate project skeleton
@@ -20,7 +21,8 @@ Add your plugin options to `options.yml`. It is located in the same directory as
 
 ## 4. Publish
 
-Publish your plugin gem. If you want your plugin to be shown to users by `siba list` and `siba generate` commands, please add its description to /lib/siba/plugins/plugins.yml file in SIBA project on github and issue a pull request.
+Publish your plugin gem. If you want your plugin to be shown to users by `siba list` and `siba generate` commands, add its description to /lib/siba/plugins/plugins.yml file in [siba github project](https://github.com/evgenyneu/siba) and send a pull request:
+
 
 ## Testing
 
