@@ -3,6 +3,8 @@
 
 SIBA is a simple backup and restore utility. It implements daily backup rotation scheme. It is most suitable in sutuations when you need to have a history of backups and not just the last one. If run daily, SIBA retains full year history of backups by keeping only 23 files: 6 daily, 5 weekly and 12 monthly full backups.
 
+<img src="http://webdevelopercv.com/images/works/siba.png" width="326" height="326">
+
 ## Main features
 
 * **Easy to use.** Configure, backup and restore with a single command.
