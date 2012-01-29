@@ -25,12 +25,18 @@ module Siba
         OptionsBackup.save_options_backup path_to_options_yml, source_dir
 
         archive_file_name = @tasks["archive"].backup source_dir, archive_dir, SibaTasks.backup_name
+        unless archive_file_name =~ /^#{SibaTasks.backup_name}/
+          raise Siba::Error, "Archive file name must begin with: #{SibaTasks.backup_name}"
+        end
         path_to_archive = File.join archive_dir, archive_file_name
         unless siba_file.file_file? path_to_archive
           raise Siba::Error, "Failed to create archive file: #{path_to_archive}"
         end
 
         name_of_encrypted_file = @tasks["encryption"].backup path_to_archive, encryption_dir
+        unless name_of_encrypted_file =~ /^#{archive_file_name}/
+          raise Siba::Error, "File name of encrypted file must begin with: #{archive_file_name}"
+        end
         path_to_backup = File.join encryption_dir, name_of_encrypted_file
         unless siba_file.file_file? path_to_backup
           raise Siba::Error, "Failed to encrypt backup: #{path_to_backup}" 

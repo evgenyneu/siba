@@ -16,7 +16,9 @@ module Siba::Encryption
         @encryption = Siba::Encryption::Gpg::Encryption.new passphrase, cipher
       end     
 
-      # Returns the name of encrypted file
+      # Encrypt backup archive file (path_to_archive) and put it to dest_dir.
+      # Return the name of encrypted file. It must begin with archive name
+      # and its ending must always be the same.
       def backup(path_to_archive, dest_dir)
         logger.info "Encrypting backup with 'gpg', cipher: '#{encryption.cipher}'"
         path_to_encrypted_file = encryption.encrypt path_to_archive
@@ -28,7 +30,8 @@ module Siba::Encryption
         file_name
       end
 
-      # Decrypt path_to_backup to_dir
+      # Decrypt backup file (path_to_backup) to_dir.
+      # Return the name of decrypted file.
       def restore(path_to_backup, to_dir)
         logger.info "Decrypting backup with 'gpg', cipher: '#{encryption.cipher}'"
         decrypted_file_name = File.basename path_to_backup

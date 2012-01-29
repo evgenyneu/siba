@@ -16,12 +16,14 @@ module Siba::Source
       end
 
       # Collect sources and put them into dest_dir
+      # No return value is expected
       def backup(dest_dir)
         logger.info "Collecting files"
         @files.backup dest_dir
       end
 
       # Restore source files and dirs from_dir 
+      # No return value is expected
       def restore(from_dir)
         logger.info "Restoring files"
         @files.restore from_dir

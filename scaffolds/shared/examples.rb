@@ -45,4 +45,3 @@
         my_file = File.join tmp_dir, "myfile"
         Siba::FileHelper.write my_file, "Write UTF-8 text"
         Siba::FileHelper.read my_file
-      end

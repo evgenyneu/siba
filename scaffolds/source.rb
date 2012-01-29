@@ -10,10 +10,15 @@ module Siba::C6y
 ## init_example.rb ##
       end                      
 
-      # Put backup file (path_to_backup_file) to destination
+      # Collect source files and put them into dest_dir
       # No return value is expected
-      def backup(path_to_backup_file) 
+      def backup(dest_dir)
 ## examples.rb ##
+      end
+
+      # Restore source files from_dir 
+      # No return value is expected
+      def restore(from_dir)
       end
     end
   end
