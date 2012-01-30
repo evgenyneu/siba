@@ -36,11 +36,11 @@ SIBA is a simple backup and restore utility. It implements daily backup rotation
 
         $ siba list
 
-5. Show other commands and options
+5. Show other commands and options:
 
         $ siba
 
-6. Create a skeleton project for a new destination plugin gem:
+6. Create a gem skeleton for a new destination plugin:
 
         $ siba scaffold destination my-cloud
 
