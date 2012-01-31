@@ -22,6 +22,28 @@ describe Siba::FileHelper do
     entries.wont_be_empty
     entries.must_equal entries_to_compare
   end
+  
+  it "should call dirs" do
+    test_dir = prepare_test_dir "dir-not-empty"
+    entries = @obj.dirs test_dir
+    entries.wont_be_empty
+    dirs_to_compare = @obj.entries(test_dir).select {|a| File.directory?(File.join(test_dir, a))}
+    entries.size.must_equal dirs_to_compare.size
+    entries.each do |a|
+      dirs_to_compare.must_include a
+    end
+  end
+
+  it "should call files" do
+    test_dir = prepare_test_dir "dir-not-empty"
+    entries = @obj.files test_dir
+    entries.wont_be_empty
+    files_to_compare = @obj.entries(test_dir).select {|a| File.file?(File.join(test_dir, a))}
+    entries.size.must_equal files_to_compare.size
+    entries.each do |a|
+      files_to_compare.must_include a
+    end
+  end
 
   it "should call dirs_count" do
     test_dir = prepare_test_dir "dir-not-empty"

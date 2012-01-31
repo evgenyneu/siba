@@ -48,6 +48,20 @@ module Siba
         siba_file.dir_entries(dir) - %w{ . .. }
       end
 
+      # Retuns an array containing names of sub-directories located in the dir 
+      def dirs(dir)
+        entries(dir).select do |entry|
+          siba_file.file_directory?(File.join(dir,entry))
+        end
+      end
+
+      # Retuns an array containing names of files located in the dir 
+      def files(dir)
+        entries(dir).select do |entry|
+          siba_file.file_file?(File.join(dir,entry))
+        end
+      end
+
       # Raises error if dirs are not identical 
       def dirs_same?(dir1, dir2)
         dir1_entries = siba_file.dir_entries dir1
