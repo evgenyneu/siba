@@ -10,9 +10,7 @@ module Siba
       end
 
       def dirs_count(dir)
-        entries(dir).count do |a| 
-          siba_file.file_directory? File.join(dir, a)
-        end
+        dirs(dir).size
       end
 
       # Reads a file in UTF-8 encoding
