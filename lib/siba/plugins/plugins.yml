@@ -1,5 +1,6 @@
 source:
   files: Backup local files and directories
+  mongo-db: Backup and restore MongoDB
 archive:
   tar: Archive with optional gzip or bzip2 compression
 encryption:
