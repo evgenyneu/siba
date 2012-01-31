@@ -57,7 +57,8 @@ It is recommended to run `siba backup` command daily or hourly. Use your favouri
 
 ### Source
 
-* **Files:** backup local files and directories.
+* **Files:** backup  local files and directories.
+* **Mongo-db:** backup and restore MongoDB
 
 ### Archive
   
