@@ -57,18 +57,19 @@ It is recommended to run `siba backup` command daily or hourly. Use your favouri
 
 ### Source
 
-* **Files:** backup  local files and directories.
-* **Mongo-db:** backup and restore MongoDB
+* **files:** backup  local files and directories.
+* **mongo-db:** backup and restore MongoDB
 
 ### Archive
   
-* **Tar:** archive with optional gzip or bzip2 compression.
+* **tar:** archive with optional gzip or bzip2 compression.
 
 ### Encryption
   
-* **Gpg:** encrypt with AES256, Blowfish, Twofish, 3DES and other ciphers.
+* **gpg:** encrypt with AES256, Blowfish, Twofish, 3DES and other ciphers.
 
 ### Destination
   
-* **Dir:** backup to local directory.
-* **Aws-s3:** upload backup to Amazon S3 storage.
+* **dir:** backup to local directory.
+* **aws-s3:** upload backup to Amazon S3 storage.
+* **ftp:** store backups on FTP server.

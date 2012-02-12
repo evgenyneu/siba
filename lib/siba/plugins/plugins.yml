@@ -8,3 +8,4 @@ encryption:
 destination:
   dir: Backup to local directory
   aws-s3: Upload backup to Amazon S3 storage
+  ftp: Store backups on FTP server
