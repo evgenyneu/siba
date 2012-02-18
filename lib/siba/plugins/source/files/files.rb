@@ -125,7 +125,7 @@ module Siba::Source
             elsif  siba_file.file_directory? entry
               copy_dir entry, dest_dir, true if include_subdirs
             else
-              logger.error "Failed to backup: #{file}."
+              logger.error "Failed to backup: #{entry}."
             end
           end 
         end
