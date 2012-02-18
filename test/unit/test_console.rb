@@ -54,6 +54,12 @@ describe Siba::Console do
     @console.parse [@unused, "--no-log"]
     Siba::SibaLogger.no_log.must_equal true
   end
+
+  it "should accept cur switch" do
+    @console.options["cur"].must_be_nil
+    @console.parse [@unused, "--current-source"]
+    @console.options["cur"].must_equal true
+  end
   
   it "should fail when using both log and no-log" do
     Siba::SibaLogger.no_log = false

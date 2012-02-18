@@ -65,7 +65,7 @@ module Siba
           raise Siba::Error, "Failed to extract archive: #{path_to_archive}"
         end
       
-        @tasks["source"] = OptionsBackup.load_source_from_backup source_dir
+        @tasks["source"] = OptionsBackup.load_source_from_backup source_dir if @tasks["source"].nil?
         @tasks["source"].restore source_dir
       end
     end

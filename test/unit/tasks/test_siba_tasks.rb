@@ -11,7 +11,6 @@ describe Siba::SibaTasks do
     create_tasks "valid"
   end
 
-
   it "should get tasks" do
     siba_tasks = create_tasks "valid"
     siba_tasks.tasks["source"].must_be_instance_of Siba::SibaTask

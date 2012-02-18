@@ -34,7 +34,7 @@ Examples:
     siba restore mybak          Restore the backup
     siba list                   Show available plugins
     siba scaffold source my-db  Create a new gem for a source plugin
-                                (or archive, encryption or destination)
+                                 (or archive, encryption or destination)
 
     Note: single letter commands are also supported, like b for backup
 
@@ -46,6 +46,10 @@ Options:"
         
         o.on("--no-log", "Work without logging") do 
           SibaLogger.no_log = true
+        end
+
+        o.on("--current-source", "Used with 'restore' command. Restores into the source location which is specified in the CURRENT options file instead of the ORIGINAL source location") do 
+          options['cur'] = true
         end
 
         o.on("-q", "--quiet", "No output to console") do
@@ -193,7 +197,7 @@ Edit it and run backup command" unless path_to_yaml.nil?
       show_error "needless arguments: #{argv.join(', ')}" unless argv.empty?
       path_to_options = siba_file.file_expand_path path_to_options
       path_to_options += ".yml" unless path_to_options =~ /\.yml$/
-      Siba::Restore.new.restore path_to_options
+      Siba::Restore.new.restore path_to_options, options["cur"] == true
     end
   end
 end

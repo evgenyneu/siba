@@ -6,7 +6,10 @@ module Siba
     include Siba::FilePlug
     include Siba::KernelPlug
 
-    def restore(path_to_options_yml)
+    attr_accessor :current_source
+
+    def restore(path_to_options_yml, current_source)
+      @current_source = current_source
       run_restore path_to_options_yml
     ensure
       Siba.cleanup
@@ -21,7 +24,7 @@ private
       Siba.settings = options["settings"] || {}
       Siba.backup_name = File.basename path_to_options_yml, ".yml"
       TmpDir.test_access 
-      tasks = SibaTasks.new options, path_to_options_yml, true
+      tasks = SibaTasks.new options, path_to_options_yml, !current_source
       file_name = get_backup_choice tasks 
       unless file_name.nil?
         if user_wants_to_proceed?
@@ -86,8 +89,14 @@ private
     end
 
     def user_wants_to_proceed?
-      siba_kernel.printf "\nWarning: backup will be restored into your original source location.
-Your current source data will be overwritten and WILL BE LOST.
+      if current_source
+        source_msg = "CURRENT"
+      else
+        source_msg = "ORIGINAL"
+      end
+
+      siba_kernel.printf "\nWarning: backup will be restored into the #{source_msg} source location.
+Your source data will be overwritten and WILL BE LOST.
 Type 'yes' if you want to proceed:
 (yes/n) > "
       user_choice = siba_kernel.gets.chomp.strip

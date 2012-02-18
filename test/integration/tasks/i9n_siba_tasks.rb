@@ -23,8 +23,19 @@ describe Siba::SibaTasks do
     tasks = Siba::SibaTasks.new options, path_to_test_yml, false
     tasks.backup 
 
+    # restore into original source
     backup_file_name = Siba::FileHelper.entries(dest_dir)[0]
     tasks = Siba::SibaTasks.new options, path_to_test_yml, true
+    tasks.tasks["source"].must_be_nil # should not load source before restore
     tasks.restore backup_file_name
+    tasks.tasks["source"].wont_be_nil # source should be loaded on restore
+
+    # restore into curret source
+    backup_file_name = Siba::FileHelper.entries(dest_dir)[0]
+    tasks = Siba::SibaTasks.new options, path_to_test_yml, false
+    tasks.tasks["source"].wont_be_nil # should load current source on tasks init
+    source = tasks.tasks["source"]
+    tasks.restore backup_file_name
+    tasks.tasks["source"].must_equal source # should use current source during restore
   end
 end

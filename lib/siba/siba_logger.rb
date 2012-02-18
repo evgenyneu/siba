@@ -33,6 +33,27 @@ module Siba
           end
         end
       end
+
+      # returns the number of log messages that contain given msg text
+      def count_messages(msg, severity=nil, exact_level=true)
+        return 0 if SibaLogger.messages.nil?
+        severity_i = SibaLogger.level_to_i severity unless severity.nil?
+        SibaLogger.messages.count do |i| 
+          match_level = true
+          if severity_i
+            if exact_level 
+              match_level = i.level == severity_i
+            else 
+              match_level = i.level >= severity_i
+            end
+          end 
+          if match_level
+            !((i.msg =~ /#{msg}/).nil?)
+          else
+            false
+          end
+        end
+      end
     end
 
     attr_accessor :show_finish_message

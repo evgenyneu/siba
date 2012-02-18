@@ -18,6 +18,14 @@ class MiniTest::Unit::TestCase
     verify_log false, level, false
   end
 
+  def must_log_msg(msg, level)
+    verify_log_msg msg, true, level
+  end
+
+  def wont_log_msg(msg, level)
+    verify_log_msg msg, false, level
+  end
+
   def show_log
     puts Siba::SibaLogger.messages.map{|a| a.msg}.join("\n")
   end
@@ -101,6 +109,19 @@ class MiniTest::Unit::TestCase
     else
       message = "log messages"
     end
+
+    if must_change
+      message = "Expected " + message
+      raise message if log_count == 0
+    else
+      message = "Unexpected " + message
+      raise message if log_count > 0
+    end
+  end
+
+  def verify_log_msg(msg, must_change, log_level)
+    log_count = Siba::SibaLogger.count_messages msg, log_level
+    message = "'#{log_level}' log messages with text '#{msg}'"
 
     if must_change
       message = "Expected " + message

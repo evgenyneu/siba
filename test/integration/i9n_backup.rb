@@ -42,7 +42,7 @@ describe Siba::Backup do
 
     Siba::SibaLogger.quiet = true
     SibaTest::KernelMock.gets_return_value = "yes"
-    Siba::Restore.new.restore test_yml_path
+    Siba::Restore.new.restore test_yml_path, false
     
     File.directory?(src_dir).must_equal true
     File.file?(src_file).must_equal true
