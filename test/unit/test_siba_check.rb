@@ -40,6 +40,7 @@ describe Siba::SibaCheck do
     ->{@cls.options_string_array({"name"=>" "}, "name", false)}.must_raise Siba::CheckError
     ->{@cls.options_string_array({"name"=>nil}, "name", false)}.must_raise Siba::CheckError
     ->{@cls.options_string_array({"name"=>["1", " "]}, "name", false)}.must_raise Siba::CheckError
+    ->{@cls.options_string_array({"name"=>["1", ""]}, "name", false)}.must_raise Siba::CheckError
     ->{@cls.options_string_array({"name"=>["1", nil]}, "name", false)}.must_raise Siba::CheckError
   end
 
