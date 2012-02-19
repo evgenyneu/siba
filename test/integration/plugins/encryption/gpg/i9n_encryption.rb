@@ -5,7 +5,7 @@ require 'siba/plugins/encryption/gpg/init'
 
 describe Siba::Encryption::Gpg::Encryption do
   before do
-    @passphrase = %(my pass "Word$)
+    @passphrase = Siba::SecurityHelper.generate_password_for_yaml
   end
 
   it "init should fail if cipher is not supported" do
