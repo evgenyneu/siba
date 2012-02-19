@@ -2,15 +2,16 @@
 
 SIBA is a simple backup and restore utility. It implements daily backup rotation scheme. It is most suitable in sutuations when you need to have a history of backups. When run daily, SIBA retains full year history of backups by keeping 23 files in total: for the last 6 days, 5 weeks and 12 months.
 
-<img src="http://webdevelopercv.com/images/works/siba.png" width="326" height="326">
-
 ## Main features
 
 * **Easy to use:** configure, backup and restore with a single command.
+* **Feature-rich:** backup/restore files, MySQL, MongoDB databases to/from local or remote locations.
 * **Secure:** all backups are encrypted before moving to destination.
 * **Cross platform:** runs on any computer with Ruby 1.9 or later.
 * **Easy to extend:** developers can easily add new backup sources, archivers, encryptions and destinations.
 * **Free and open source:** use SIBA for any purpose without restrictions.
+
+<img src="http://webdevelopercv.com/images/works/siba.png" width="326" height="326">
 
 ## Installation
 
@@ -58,8 +59,8 @@ It is recommended to run `siba backup` command daily or hourly. Use your favouri
 ### Source
 
 * **files:** backup  local files and directories.
-* **mongo-db:** backup and restore MongoDB
-* **mysql**: backup and restore MySQL database
+* **mongo-db:** backup and restore MongoDB ([homepage](https://github.com/evgenyneu/siba-source-mongo-db)).
+* **mysql**: backup and restore MySQL database ([homepage](https://github.com/evgenyneu/siba-source-mysql)).
 
 ### Archive
   
@@ -72,5 +73,5 @@ It is recommended to run `siba backup` command daily or hourly. Use your favouri
 ### Destination
   
 * **dir:** backup to local directory.
-* **aws-s3:** upload backup to Amazon S3 storage.
-* **ftp:** store backups on FTP server.
+* **aws-s3:** upload backup to Amazon S3 storage ([homepage](https://github.com/evgenyneu/siba-destination-aws-s3)).
+* **ftp:** store backups on FTP server ([homepage](https://github.com/evgenyneu/siba-destination-ftp)).
