@@ -30,7 +30,9 @@ describe Siba::Backup do
     test_yml_path = prepare_yml @path_to_src_yml, 
       { src_dir: src_dir,
         src_file: src_file,
-        dest_dir: dest_dir }
+        dest_dir: dest_dir,
+        password: %("#{Siba::SecurityHelper.generate_password_for_yaml}")  }
+
 
     log_file = File.join File.dirname(test_yml_path), "testlog.log"
     @backup.backup test_yml_path, log_file

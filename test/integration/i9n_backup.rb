@@ -19,7 +19,8 @@ describe Siba::Backup do
     test_yml_path = prepare_yml @path_to_src_yml, 
       { src_dir: src_dir,
         src_file: src_file,
-        dest_dir: dest_dir }
+        dest_dir: dest_dir,
+        password: %("#{Siba::SecurityHelper.generate_password_for_yaml}")  }
 
     log_file = File.join File.dirname(test_yml_path), "testlog.log"
 
@@ -29,7 +30,6 @@ describe Siba::Backup do
     siba_file.file_file?(log_file).must_equal true, "Must create log file"
     Siba.tmp_dir_clean?.must_equal true, "Tmp dir must be cleaned"
     Siba::LoggerPlug.opened?.must_equal false, "Logger must be closed"
-
 
     # Test restore
     sources_copy_dir = mkdir_in_tmp_dir "source-copy"
@@ -43,7 +43,6 @@ describe Siba::Backup do
     Siba::SibaLogger.quiet = true
     SibaTest::KernelMock.gets_return_value = "yes"
     Siba::Restore.new.restore test_yml_path, false
-    
     File.directory?(src_dir).must_equal true
     File.file?(src_file).must_equal true
     dirs_same? src_dir, path_to_dir_copy

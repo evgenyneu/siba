@@ -16,7 +16,8 @@ describe Siba::SibaTasks do
     path_to_test_yml = prepare_yml @path_to_src_yml,
       { src_dir: src_dir,
         src_file: src_file,
-        dest_dir: dest_dir }
+        dest_dir: dest_dir,
+        password: %("#{Siba::SecurityHelper.generate_password_for_yaml}")  }
 
     options = SibaTest.load_options path_to_test_yml
 
