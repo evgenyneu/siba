@@ -11,7 +11,7 @@ SIBA is a simple backup and restore utility. It implements daily backup rotation
 * **Easy to extend:** developers can easily add new backup sources, archivers, encryptions and destinations.
 * **Free and open source:** use SIBA for any purpose without restrictions.
 
-
+---
 <img src="http://webdevelopercv.com/images/works/siba.png" width="326" height="326">
 
 ## Installation
