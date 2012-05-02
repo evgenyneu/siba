@@ -53,7 +53,7 @@ private
         if list.size == 1
           return list[0][0]
         else
-          list.sort_by!{|a| a[1]}
+          list.sort!{|a,b| b[1] <=> a[1]}
           siba_kernel.puts "\nAvailable '#{Siba.backup_name}' backups:\n"
           show_backups list
           file_name = get_backup_user_choice list

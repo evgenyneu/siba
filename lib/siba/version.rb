@@ -1,5 +1,5 @@
 # encoding: UTF-8
 
 module Siba
-  VERSION = "0.5.5"
+  VERSION = "0.5.6"
 end
