@@ -1,10 +1,10 @@
 # encoding: UTF-8
 
 module Siba
-  # Password strength calculator based on: 
+  # Password strength calculator based on:
   #   http://snippets.dzone.com/posts/show/4698
   #   https://www.grc.com/haystack.htm
-  class PasswordStrength 
+  class PasswordStrength
     PASSWORD_SETS = {
       /[a-z]/ => 26,
       /[A-Z]/ => 26,
@@ -48,7 +48,7 @@ module Siba
       end
 
       # Convert the number of seconds human-friendly timespan string
-      # Example: 
+      # Example:
       #   130: 2 minutes
       #   12345: 3 hours
       def seconds_to_timespan(seconds)
@@ -82,8 +82,8 @@ module Siba
         illion_unit = ""
         Illions.each_pair do |a,b|
           ticks_next = ticks.to_f / b
-          break if ticks_next < 1 
-          illion_unit = a 
+          break if ticks_next < 1
+          illion_unit = a
           ticks = ticks_next
         end
 

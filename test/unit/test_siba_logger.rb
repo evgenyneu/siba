@@ -11,26 +11,26 @@ describe Siba::SibaLogger do
   describe "when access class" do
     it "must access quiet" do
       @cls.quiet = true
-      @cls.quiet.must_equal true 
+      @cls.quiet.must_equal true
     end
-    
+
     it "must access verbose" do
       @cls.verbose = true
-      @cls.verbose.must_equal true 
+      @cls.verbose.must_equal true
     end
-    
+
     it "must access no_log" do
       @cls.no_log = true
-      @cls.no_log.must_equal true 
+      @cls.no_log.must_equal true
     end
 
     it "must contain LogLevels" do
-      @cls::LogLevels.must_include "debug"  
-      @cls::LogLevels.must_include "info"  
-      @cls::LogLevels.must_include "warn"  
-      @cls::LogLevels.must_include "error"  
-      @cls::LogLevels.must_include "fatal"  
-      @cls::LogLevels.must_include "unknown"  
+      @cls::LogLevels.must_include "debug"
+      @cls::LogLevels.must_include "info"
+      @cls::LogLevels.must_include "warn"
+      @cls::LogLevels.must_include "error"
+      @cls::LogLevels.must_include "fatal"
+      @cls::LogLevels.must_include "unknown"
     end
 
     it "must check given log level" do
@@ -43,7 +43,7 @@ describe Siba::SibaLogger do
     end
 
     it "check_log_level must raise for unsupported level" do
-      -> { @cls::check_log_level("weird") }.must_raise RuntimeError 
+      -> { @cls::check_log_level("weird") }.must_raise RuntimeError
     end
 
     it "must return log level integer" do
@@ -95,11 +95,11 @@ describe Siba::SibaLogger do
       @cls.messages[1].must_be_instance_of Siba::LogMessage
       @cls.messages[1].msg.must_equal "msg1"
       @cls.messages[1].level.must_equal @cls.level_to_i("debug")
-      @cls.messages[1].time.must_be_instance_of Time 
+      @cls.messages[1].time.must_be_instance_of Time
       @cls.messages[3].msg.must_equal "msg3"
       @cls.messages[3].level.must_equal @cls.level_to_i("warn")
     end
-    
+
     it "should raise when called missing method" do
       ->{ @logger.this_is_a_missing_method("msg") }.must_raise NoMethodError
     end
@@ -107,7 +107,7 @@ describe Siba::SibaLogger do
     it "should log on different levels" do
       @cls::LogLevels.each do |level|
         @cls.count(level, true).must_equal (level == "info" ? 1 : 0)
-      end 
+      end
 
       @cls::LogLevels.each do |level|
         @logger.send(level,"#{level} message")
@@ -115,7 +115,7 @@ describe Siba::SibaLogger do
 
       @cls::LogLevels.each do |level|
         @cls.count(level, true).must_equal (level == "info" ? 2 : 1)
-      end 
+      end
     end
 
     it "count must return correct number of message for severity lever" do
@@ -152,7 +152,7 @@ describe Siba::SibaLogger do
       @logger.error "err1"
       @logger.error "err2"
       @logger.error "err3"
-      
+
       @cls.count_messages("debug1").must_equal 1
       @cls.count_messages("debug1", "debug").must_equal 1
       @cls.count_messages("debug", "debug").must_equal 1
@@ -166,7 +166,7 @@ describe Siba::SibaLogger do
       @cls.count_messages("info", "debug", false).must_equal 2
       @cls.count_messages("info", "info").must_equal 2
       @cls.count_messages("info", "warn").must_equal 0
-      
+
       @cls.count_messages("err").must_equal 3
       @cls.count_messages("err", "error").must_equal 3
       @cls.count_messages("err1", "error").must_equal 1

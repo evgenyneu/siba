@@ -4,7 +4,7 @@ require 'helper/require_unit'
 require 'siba/plugins/source/files/init'
 
 describe Siba::Source::Files do
-  before do    
+  before do
     @yml_path = File.expand_path('../yml', __FILE__)
     @plugin_category="source"
     @plugin_type="files"
@@ -13,7 +13,7 @@ describe Siba::Source::Files do
   it "should call path_match?" do
     Siba::Source::Files::Files.path_match? "file", "include"
   end
-  
+
   it "must match path" do
     match_list = [
       # ----------------------
@@ -102,7 +102,7 @@ describe Siba::Source::Files do
       # ----------------------
       # match basenames against pattern
       ["name*",   "/somename"],
-      
+
       # ----------------------
       # match whole path against pattern
       [".*",      "/.hidden/file"],
@@ -111,9 +111,9 @@ describe Siba::Source::Files do
       ["dir",     "/dir1/dir/file"],
       ["dir",     "/dir/name/file"],
       ["dir/name",  "/name"],
-      ["dir/name",  "/root/dir/name"],      
-      ["/file*",    "/root/file"],      
-      ["/file/*",   "/file"],      
+      ["dir/name",  "/root/dir/name"],
+      ["/file*",    "/root/file"],
+      ["/file/*",   "/file"],
     ]
 
     must_not_match_list.each do |item|

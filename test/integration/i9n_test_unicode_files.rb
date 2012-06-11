@@ -27,7 +27,7 @@ describe Siba::Backup do
     src_file = prepare_test_file "bf-src-file-#{SibaTest::UNICODE_FILE_NAME}"
     dest_dir = mkdir_in_tmp_dir "bf-dest-dir-#{SibaTest::UNICODE_FILE_NAME}"
 
-    test_yml_path = prepare_yml @path_to_src_yml, 
+    test_yml_path = prepare_yml @path_to_src_yml,
       { src_dir: src_dir,
         src_file: src_file,
         dest_dir: dest_dir,

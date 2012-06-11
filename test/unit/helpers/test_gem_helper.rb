@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-require 'helper/require_unit' 
+require 'helper/require_unit'
 
 describe Siba::GemHelper do
   before do

@@ -8,7 +8,7 @@ module Siba
     InitClassName = "Init"
 
     def self.loader
-      @loader ||= PluginLoader.new 
+      @loader ||= PluginLoader.new
     end
 
     def load(category, type, options)
@@ -22,7 +22,7 @@ module Siba
       @type=type
       @options = options
       logger.debug "Loading #{plugin_category_and_type} plugin"
-      
+
       require_plugin
       plugin_module = get_plugin_module
       plugin_type_module = get_plugin_type_module plugin_module
@@ -40,7 +40,7 @@ module Siba
       else
         gem_name = Siba::InstalledPlugins.gem_name category, type
         begin
-          Gem::Specification.find_by_name(gem_name) 
+          Gem::Specification.find_by_name(gem_name)
         rescue Gem::LoadError
           raise PluginLoadError, "Unknown type '#{type}' for '#{category}' plugin. #{available_types_msg}"
         end
@@ -52,7 +52,7 @@ module Siba
       plugin_module_name = "#{category.capitalize}"
       Siba.const_get(plugin_module_name)
     rescue Exception
-      raise PluginLoadError, "Failed to load #{plugin_category_and_type} plugin: module 'Siba::#{plugin_module_name}' is undefined." 
+      raise PluginLoadError, "Failed to load #{plugin_category_and_type} plugin: module 'Siba::#{plugin_module_name}' is undefined."
     end
 
     def get_plugin_type_module(plugin_module)

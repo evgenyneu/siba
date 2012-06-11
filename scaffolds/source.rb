@@ -1,14 +1,14 @@
 # encoding: UTF-8
 
 module Siba::C6y
-  module Demo                 
-    class Init                 
+  module Demo
+    class Init
       include Siba::FilePlug
       include Siba::LoggerPlug
 
       def initialize(options)
 ## init_example.rb ##
-      end                      
+      end
 
       # Collect source files and put them into dest_dir
       # No return value is expected
@@ -16,7 +16,7 @@ module Siba::C6y
 ## examples.rb ##
       end
 
-      # Restore source files from_dir 
+      # Restore source files from_dir
       # No return value is expected
       def restore(from_dir)
       end

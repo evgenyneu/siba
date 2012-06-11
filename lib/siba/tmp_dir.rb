@@ -30,8 +30,8 @@ module Siba
             raise unless siba_file.file_directory? test_dir
             tmp_dir_obj.cleanup
           rescue Exception
-            logger.error %q{Can not create temporary directory. 
-Please make sure you have write permissions to the system temporary folder. 
+            logger.error %q{Can not create temporary directory.
+Please make sure you have write permissions to the system temporary folder.
 You can also specify the alternative location for temporary folder in options:
 
 settings:
@@ -51,7 +51,7 @@ settings:
         tmp_dir_from_settings = Siba.settings && Siba.settings["tmp_dir"]
         tmp_path = nil
         if tmp_dir_from_settings.nil?
-          tmp_path = siba_file.dir_mktmpdir TmpDirPrefix 
+          tmp_path = siba_file.dir_mktmpdir TmpDirPrefix
         else
           tmp_path = File.join(siba_file.file_expand_path(tmp_dir_from_settings),
                                   "#{TmpDirPrefix}#{Siba::TestFiles.random_suffix}")
@@ -61,7 +61,7 @@ settings:
       end
     end
   end
-  
+
   module TmpDirPlug
     include Siba::FilePlug
     include Siba::LoggerPlug

@@ -9,11 +9,11 @@ module Siba::TestFiles
 
     def test_file
       File.join test_files_dir, "a_file"
-    end    
+    end
 
     def test_dir
       File.join test_files_dir, "files_and_dirs"
-    end    
+    end
 
     def prepare_test_dir(dest_dir_name_part, tmp_dir=nil)
       tmp_dir ||= Siba.tmp_dir
@@ -22,7 +22,7 @@ module Siba::TestFiles
       siba_file.file_utils_cp_r test_dir, dest_dir
       dest_dir
     end
-    
+
     def prepare_test_file(dest_file_name_part, tmp_dir=nil)
       tmp_dir ||= Siba.tmp_dir
       dest_file = File.join(tmp_dir,"#{dest_file_name_part}#{random_suffix}")
@@ -34,7 +34,7 @@ module Siba::TestFiles
     def generate_path(dest_file_name_part, tmp_dir=nil)
       tmp_dir ||= Siba.tmp_dir
       File.join(tmp_dir,"#{dest_file_name_part}#{random_suffix}")
-    end  
+    end
 
     def mkdir_in_tmp_dir(prefix, tmp_dir=nil)
       tmp_dir ||= Siba.tmp_dir

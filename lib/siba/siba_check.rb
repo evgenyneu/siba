@@ -44,7 +44,7 @@ module Siba
         raise Siba::CheckError, "'#{name}' option should be of [Hash] type" unless obj.is_a? Hash
         obj
       end
-      
+
       # Tries to conver value to string
       def try_to_s(value, key_name)
         raise Siba::CheckError, "'#{key_name}' option should be string" if [Array, Hash].any?{|a| value.is_a?(a)}
@@ -65,8 +65,8 @@ module Siba
         if item_type == String
           value = try_to_s value, key_name
         else
-          item_type = [item_type] unless item_type.is_a?(Array) 
-          raise Siba::CheckError, "'#{key_name}' option should be of #{item_type.to_s} type" if item_type.none? {|i| value.is_a? i } 
+          item_type = [item_type] unless item_type.is_a?(Array)
+          raise Siba::CheckError, "'#{key_name}' option should be of #{item_type.to_s} type" if item_type.none? {|i| value.is_a? i }
         end
         value
       end

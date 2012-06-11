@@ -5,7 +5,7 @@ require 'helper/require_integration'
 describe Siba::Scaffold do
   before do
     @gem_name = "myname"
-    @obj = Siba::Scaffold.new "destination", @gem_name 
+    @obj = Siba::Scaffold.new "destination", @gem_name
   end
 
   it "should run scaffold" do

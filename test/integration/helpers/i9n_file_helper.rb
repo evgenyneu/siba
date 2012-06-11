@@ -22,7 +22,7 @@ describe Siba::FileHelper do
     entries.wont_be_empty
     entries.must_equal entries_to_compare
   end
-  
+
   it "should call dirs" do
     test_dir = prepare_test_dir "dir-not-empty"
     entries = @obj.dirs test_dir

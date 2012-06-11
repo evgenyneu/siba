@@ -17,7 +17,7 @@ describe Siba::LogMessage do
     @message.time = time
     @message.time.must_equal time
   end
-  
+
   it "should contain msg" do
     msg = "hey"
     @message.msg = msg

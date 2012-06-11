@@ -4,7 +4,7 @@ require 'helper/require_unit'
 require 'siba/plugins/destination/dir/init'
 
 describe Siba::Destination::Dir::DestDir do
-  before do    
+  before do
     @dir = "/some-dir"
     @cls = Siba::Destination::Dir::DestDir
   end

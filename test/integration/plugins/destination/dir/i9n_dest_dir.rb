@@ -4,7 +4,7 @@ require 'helper/require_integration'
 require 'siba/plugins/destination/dir/init'
 
 describe Siba::Destination::Dir::DestDir do
-  before do    
+  before do
     @cls = Siba::Destination::Dir::DestDir
   end
 

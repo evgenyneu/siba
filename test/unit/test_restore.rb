@@ -1,12 +1,12 @@
 # encoding: UTF-8
 
-require 'helper/require_unit' 
+require 'helper/require_unit'
 
 describe Siba::Restore do
   before do
     @yml_path = File.expand_path('../yml', __FILE__)
   end
-  
+
   it "should call restore without loading source plugin" do
     Siba::LoggerPlug.close
     Siba::SibaLogger.quiet = true

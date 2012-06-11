@@ -6,7 +6,7 @@ require 'siba/generator'
 
 module Siba
   class Console
-    include Siba::FilePlug 
+    include Siba::FilePlug
 
     UNUSED_COMMAND = "unused" # unused command for testing command line options
     attr_accessor :test_mode, :parser, :options
@@ -28,8 +28,8 @@ module Siba
       parser = OptionParser.new do |o|
         o.banner = "Usage: siba command ARGUMENTS [options...]
 
-Examples: 
-    siba generate mybak         Generate mybak.yml options file                        
+Examples:
+    siba generate mybak         Generate mybak.yml options file
     siba backup mybak           Run backup, reading options from mybak.yml
     siba restore mybak          Restore the backup
     siba list                   Show available plugins
@@ -43,12 +43,12 @@ Options:"
         o.on("--log FILE", "Set path to log FILE") do |log|
           options['log'] = log
         end
-        
-        o.on("--no-log", "Work without logging") do 
+
+        o.on("--no-log", "Work without logging") do
           SibaLogger.no_log = true
         end
 
-        o.on("--current-source", "Used with 'restore' command. Restores into the source location which is specified in the CURRENT options file instead of the ORIGINAL source location") do 
+        o.on("--current-source", "Used with 'restore' command. Restores into the source location which is specified in the CURRENT options file instead of the ORIGINAL source location") do
           options['cur'] = true
         end
 
@@ -74,12 +74,12 @@ Options:"
         o.separator "Homepage: https://github.com/evgenyneu/siba"
       end
 
-      if argv.empty? 
+      if argv.empty?
         show_message parser.to_s
         return
       end
-      
-      begin      
+
+      begin
         parser.parse! argv
       rescue Exception => e
         @parser = parser
@@ -90,14 +90,14 @@ Options:"
         show_error "ambiguous usage of both --log and --no-log switches"
         return
       end
-      
+
       parser
     end
 
     def parse_command(argv)
       command = argv.shift
       show_error "missing a command", true if command.nil?
-      
+
       case command.downcase
       when "b", "backup"
         backup argv
@@ -173,7 +173,7 @@ Options:"
 
     def list
       show_message "Available SIBA plugins:
-      
+
 #{Siba::Plugins.get_list} * Currently installed"
     end
 
@@ -181,7 +181,7 @@ Options:"
       file = argv.shift
       if file.nil?
         show_error "missing file name"
-      end      
+      end
       begin
         path_to_yaml = Siba::Generator.new(file).generate
         show_message "Options file generated: #{path_to_yaml}

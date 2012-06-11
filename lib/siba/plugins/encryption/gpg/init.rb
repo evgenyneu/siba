@@ -14,7 +14,7 @@ module Siba::Encryption
         passphrase = Siba::SibaCheck.options_string(options, "passphrase")
         cipher = Siba::SibaCheck.options_string(options, "cipher", true)
         @encryption = Siba::Encryption::Gpg::Encryption.new passphrase, cipher
-      end     
+      end
 
       # Encrypt backup archive file (path_to_archive) and put it to dest_dir.
       # Return the name of encrypted file. It must begin with archive name

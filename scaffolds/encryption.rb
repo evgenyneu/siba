@@ -1,14 +1,14 @@
 # encoding: UTF-8
 
 module Siba::C6y
-  module Demo                 
-    class Init                 
+  module Demo
+    class Init
       include Siba::FilePlug
       include Siba::LoggerPlug
 
       def initialize(options)
 ## init_example.rb ##
-      end                      
+      end
 
       # Encrypt backup archive file (path_to_archive) and put it to dest_dir.
       # Return the name of encrypted file. It must begin with archive name

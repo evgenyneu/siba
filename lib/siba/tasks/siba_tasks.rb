@@ -39,7 +39,7 @@ module Siba
         end
         path_to_backup = File.join encryption_dir, name_of_encrypted_file
         unless siba_file.file_file? path_to_backup
-          raise Siba::Error, "Failed to encrypt backup: #{path_to_backup}" 
+          raise Siba::Error, "Failed to encrypt backup: #{path_to_backup}"
         end
 
         @tasks["destination"].backup path_to_backup
@@ -53,7 +53,7 @@ module Siba
         unless siba_file.file_file? path_to_backup
           raise Siba::Error, "Failed to get backup from destination: #{backup_file_name}"
         end
-        
+
         archive_file_name = @tasks["encryption"].restore path_to_backup, encryption_dir
         path_to_archive = File.join encryption_dir, archive_file_name
         unless siba_file.file_file? path_to_archive
@@ -64,7 +64,7 @@ module Siba
         if Siba::FileHelper.dir_empty? source_dir
           raise Siba::Error, "Failed to extract archive: #{path_to_archive}"
         end
-      
+
         @tasks["source"] = OptionsBackup.load_source_from_backup source_dir if @tasks["source"].nil?
         @tasks["source"].restore source_dir
       end
@@ -76,7 +76,7 @@ module Siba
 
     def self.backup_name(now=nil)
       if Siba::StringHelper.nil_or_empty Siba.backup_name
-        raise Siba::Error, "Backup task name is not specified" 
+        raise Siba::Error, "Backup task name is not specified"
       end
       "#{Siba.backup_name}-#{SibaTasks.backup_name_suffix(now)}"
     end
@@ -96,7 +96,7 @@ module Siba
     def encryption_dir
       @encryption_dir ||= TestFiles::mkdir_in_tmp_dir("enc").freeze
     end
-    
+
     def destination_dir
       @destination_dir ||= TestFiles::mkdir_in_tmp_dir("dest").freeze
     end
@@ -106,7 +106,7 @@ module Siba
 
       # Monthly backup on the 1st day of each month
       # "month-01" through "month-12"
-      return "month-#{"%02d" % now.month}" if now.day == 1 
+      return "month-#{"%02d" % now.month}" if now.day == 1
 
       # Weekly backup on Sunday
       # "week-1-sun" through "week-5-sun"
@@ -114,7 +114,7 @@ module Siba
 
       # Daily backup
       # "day-2-mon" through "day-7-sat"
-      "day-#{now.wday+1}-#{now.strftime("%a").downcase}"  
+      "day-#{now.wday+1}-#{now.strftime("%a").downcase}"
     end
   end
 end

@@ -46,21 +46,21 @@ module Siba
         siba_file.dir_entries(dir) - %w{ . .. }
       end
 
-      # Retuns an array containing names of sub-directories located in the dir 
+      # Retuns an array containing names of sub-directories located in the dir
       def dirs(dir)
         entries(dir).select do |entry|
           siba_file.file_directory?(File.join(dir,entry))
         end
       end
 
-      # Retuns an array containing names of files located in the dir 
+      # Retuns an array containing names of files located in the dir
       def files(dir)
         entries(dir).select do |entry|
           siba_file.file_file?(File.join(dir,entry))
         end
       end
 
-      # Raises error if dirs are not identical 
+      # Raises error if dirs are not identical
       def dirs_same?(dir1, dir2)
         dir1_entries = siba_file.dir_entries dir1
         dir2_entries = siba_file.dir_entries dir2
@@ -80,13 +80,13 @@ module Siba
           if siba_file.file_file? sub_dir1_entry
             raise "#{msg}'#{sub_dir2_entry}' is not a file" unless siba_file.file_file? sub_dir2_entry
             unless siba_file.file_utils_compare_file sub_dir1_entry, sub_dir2_entry
-              raise Siba::Error, "#{msg}'#{sub_dir1_entry}' and '#{sub_dir2_entry}' files are different." 
+              raise Siba::Error, "#{msg}'#{sub_dir1_entry}' and '#{sub_dir2_entry}' files are different."
             end
           end
-          
+
           # compare permissions
           if (siba_file.file_stat(sub_dir1_entry).mode % 01000) != (siba_file.file_stat(sub_dir2_entry).mode % 01000)
-            raise Siba::Error, "#{msg}'#{sub_dir1_entry}' and '#{sub_dir2_entry}' entries have different permissions." 
+            raise Siba::Error, "#{msg}'#{sub_dir1_entry}' and '#{sub_dir2_entry}' entries have different permissions."
           end
 
           # compare sub-dirs

@@ -14,7 +14,7 @@ describe Siba::TmpDir do
   it "should get tmp dir" do
     siba_file.file_directory?(@tmp_dir.get).must_equal true
   end
-  
+
   it "should get the same tmp on second call" do
     dir1 = @tmp_dir.get
     dir2 = @tmp_dir.get
@@ -22,7 +22,7 @@ describe Siba::TmpDir do
   end
 
   it "should use dir specified in settings" do
-    test_dir = prepare_test_dir "tmp-dir"    
+    test_dir = prepare_test_dir "tmp-dir"
     Siba.settings = {"tmp_dir"=>test_dir}
     dir1 = @tmp_dir.get
     dir1.must_match /^#{test_dir}/

@@ -9,7 +9,7 @@ describe Siba::SibaTasks do
   end
 
   it "should backup and testore tasks" do
-    src_dir = prepare_test_dir "b-src-dir" 
+    src_dir = prepare_test_dir "b-src-dir"
     src_file = prepare_test_file "b-src-file"
     dest_dir = mkdir_in_tmp_dir "b-dest-dir"
 
@@ -22,7 +22,7 @@ describe Siba::SibaTasks do
     options = SibaTest.load_options path_to_test_yml
 
     tasks = Siba::SibaTasks.new options, path_to_test_yml, false
-    tasks.backup 
+    tasks.backup
 
     # restore into original source
     backup_file_name = Siba::FileHelper.entries(dest_dir)[0]

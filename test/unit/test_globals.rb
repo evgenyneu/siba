@@ -6,7 +6,7 @@ describe Siba do
   it "should access settings" do
     Siba.settings
   end
-  
+
   it "should get tmp_dir" do
     Siba.tmp_dir.must_equal SibaTest::TmpDirMocked
   end

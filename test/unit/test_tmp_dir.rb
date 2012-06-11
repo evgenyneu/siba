@@ -8,7 +8,7 @@ describe Siba::TmpDir do
   end
 
   it "should call get" do
-    @tmp_dir_obj.get 
+    @tmp_dir_obj.get
   end
 
   it "should  call test_access" do

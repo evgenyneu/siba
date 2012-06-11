@@ -11,18 +11,18 @@ describe Siba::PasswordStrength do
   it "should run seconds_to_crack" do
     Siba::PasswordStrength.seconds_to_crack("Pass123$").round(2).must_equal 67.05
   end
-  
+
   it "runs seconds_to_crack with a very long password" do
-    Siba::PasswordStrength.seconds_to_crack("very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd 
-very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd 
-very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd 
-very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd 
-very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd 
-very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd 
-very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd 
-very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd 
-very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd 
-very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd 
+    Siba::PasswordStrength.seconds_to_crack("very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd
+very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd
+very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd
+very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd
+very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd
+very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd
+very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd
+very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd
+very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd
+very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd
 very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd").must_equal Float::INFINITY
   end
 
@@ -36,10 +36,10 @@ very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd very lonG p@asswoRd 
 
   it "should run seconds_to_timespan" do
     two_cents = 200 * 365 * 86400
-    thousand = 1000 
+    thousand = 1000
     million = 1000 * 1000
-    billion = 1000 * 1000 * 1000 
-    
+    billion = 1000 * 1000 * 1000
+
     valid_strings = [
       [0.2, "less than a second"],
       [0.5, "less than a second"],

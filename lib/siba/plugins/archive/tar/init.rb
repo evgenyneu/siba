@@ -7,10 +7,10 @@ module Siba::Archive
     DefaultCompression = "gzip"
     CompressionTypes = ["gzip", "bzip2", "none"]
 
-    class Init 
+    class Init
       include Siba::LoggerPlug
 
-      attr_accessor :archive 
+      attr_accessor :archive
 
       def initialize(options)
         options = options
@@ -31,7 +31,7 @@ module Siba::Archive
       # No return value is expected.
       def restore(path_to_archive, to_dir)
         logger.info "Extracting 'tar' archive, compression: '#{archive.compression}'"
-        @archive.extract path_to_archive, to_dir 
+        @archive.extract path_to_archive, to_dir
       end
     end
   end

@@ -30,7 +30,7 @@ describe Siba::Console do
     @console.parse [@unused, "--quiet"]
     Siba::SibaLogger.quiet.must_equal true
   end
-  
+
   it "should accept verbose mode with v" do
     Siba::SibaLogger.verbose = false
     @console.parse [@unused, "-v"]
@@ -60,7 +60,7 @@ describe Siba::Console do
     @console.parse [@unused, "--current-source"]
     @console.options["cur"].must_equal true
   end
-  
+
   it "should fail when using both log and no-log" do
     Siba::SibaLogger.no_log = false
     ->{@console.parse [@unused, "--no-log", "--log=test"]}.must_raise Siba::ConsoleArgumentError
@@ -96,7 +96,7 @@ describe Siba::Console do
     it "should fail when backup options file is missing" do
       ->{@console.parse ["backup"]}.must_raise Siba::ConsoleArgumentError
     end
-    
+
     it "should fail when needless arguments are specified" do
       ->{@console.parse ["backup", "one", "two"]}.must_raise Siba::ConsoleArgumentError
     end
@@ -122,7 +122,7 @@ describe Siba::Console do
     it "scaffold should fail when name is missing" do
       ->{@console.parse ["s", "destination"]}.must_raise Siba::ConsoleArgumentError
     end
-    
+
     it "should fail when needless arguments are specified" do
       ->{@console.parse ["s", "source", "name", "needless"]}.must_raise Siba::ConsoleArgumentError
     end
@@ -164,7 +164,7 @@ describe Siba::Console do
     it "should fail when backup options file is missing" do
       ->{@console.parse ["restore"]}.must_raise Siba::ConsoleArgumentError
     end
-    
+
     it "should fail when needless arguments are specified" do
       ->{@console.parse ["restore", "one", "two"]}.must_raise Siba::ConsoleArgumentError
     end

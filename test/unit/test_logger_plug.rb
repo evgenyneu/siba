@@ -23,7 +23,7 @@ describe Siba::LoggerPlug do
     end
 
     it "must have logger of type SibaLogger" do
-      Siba::LoggerPlug.logger.must_be_instance_of Siba::SibaLogger 
+      Siba::LoggerPlug.logger.must_be_instance_of Siba::SibaLogger
     end
 
     it "must include logger instance method" do

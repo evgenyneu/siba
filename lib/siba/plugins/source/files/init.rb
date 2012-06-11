@@ -4,7 +4,7 @@ require 'siba/plugins/source/files/files'
 
 module Siba::Source
   module Files
-    class Init 
+    class Init
       include Siba::LoggerPlug
       attr_accessor :files
 
@@ -22,7 +22,7 @@ module Siba::Source
         @files.backup dest_dir
       end
 
-      # Restore source files and dirs from_dir 
+      # Restore source files and dirs from_dir
       # No return value is expected
       def restore(from_dir)
         logger.info "Restoring files"

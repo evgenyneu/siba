@@ -20,10 +20,10 @@ private
       Siba.settings = options["settings"] || {}
       Siba.backup_name = File.basename path_to_options_yml, ".yml"
 
-      TmpDir.test_access 
+      TmpDir.test_access
       SibaTasks.new(options, path_to_options_yml, false).backup
       Siba.cleanup_tmp_dir
-    rescue Exception => e 
+    rescue Exception => e
       logger.fatal e
       logger.log_exception e, true
     end

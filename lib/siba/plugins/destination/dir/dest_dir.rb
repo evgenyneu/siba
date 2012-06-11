@@ -1,7 +1,7 @@
 # encoding: UTF-8
 
 module Siba::Destination
-  module Dir 
+  module Dir
     class DestDir
       include Siba::FilePlug
       include Siba::LoggerPlug
@@ -19,9 +19,9 @@ module Siba::Destination
             raise Siba::Error, "Backup file '#{path_to_backup}' does not exist"
           end
           unless siba_file.file_directory? dir
-            raise Siba::Error, "Destination directory '#{dir}' does not exist" 
+            raise Siba::Error, "Destination directory '#{dir}' does not exist"
           end
-          siba_file.file_utils_cp(path_to_backup, dir) 
+          siba_file.file_utils_cp(path_to_backup, dir)
         end
       end
 
@@ -36,7 +36,7 @@ module Siba::Destination
           siba_file.file_utils_cp path_to_backup, to_dir
         end
       end
-      
+
       def test_dir_access
         siba_file.run_this "test dir access" do
           # create dest dir
@@ -48,7 +48,7 @@ module Siba::Destination
           end
 
           # copy a test file to dest dir
-          begin          
+          begin
             test_file = Siba::TestFiles.prepare_test_file "destination_dir", dir
             raise "Can not find the test file." unless siba_file.file_file? test_file
             siba_file.file_utils_remove_entry_secure test_file
@@ -66,7 +66,7 @@ module Siba::Destination
         siba_file.run_this do
           Siba::FileHelper.entries(dir).select do |f|
             f =~ /^#{backup_name}/
-          end.map do |f| 
+          end.map do |f|
             mtime = siba_file.file_mtime File.join dir, f
             [f, mtime]
           end
@@ -74,4 +74,4 @@ module Siba::Destination
       end
     end
   end
-end 
+end

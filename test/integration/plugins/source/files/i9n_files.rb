@@ -47,7 +47,7 @@ describe Siba::Source::Files::Files do
     dest_sub_dir = File.join dest_dir, File.basename(src_dir)
     Siba::FileHelper.entries(src_dir).each do |entry|
       entry_path = File.join src_dir, entry
-      siba_file.file_utils_remove_entry_secure entry_path if siba_file.file_directory?(entry_path) 
+      siba_file.file_utils_remove_entry_secure entry_path if siba_file.file_directory?(entry_path)
     end
     siba_file.file_directory?(dest_sub_dir).must_equal true
     dirs_same? src_dir, dest_sub_dir
@@ -77,8 +77,8 @@ describe Siba::Source::Files::Files do
 
     dest_dir = mkdir_in_tmp_dir "s-f-dest-dir"
     f.backup dest_dir
-   
-    # compare dir 
+
+    # compare dir
     backup_dir = @files.sub_dir_name 1, 1, false, File.basename(src_dir), dest_dir
     dirs_same? src_dir, backup_dir
 
@@ -89,7 +89,7 @@ describe Siba::Source::Files::Files do
 
     Siba::FileHelper.dirs_count(dest_dir).must_equal 2, "Should create two folders for each source"
   end
-  
+
   it "backup should log error message if one of the sources is not found" do
     src_dir = prepare_test_dir "s-f-src-dir"
     f = @files.new ["/non-existing-file", src_dir],[],true
@@ -97,7 +97,7 @@ describe Siba::Source::Files::Files do
     dest_dir = mkdir_in_tmp_dir "s-f-dest-dir"
     f.backup dest_dir
 
-    # The existing dir must be copied 
+    # The existing dir must be copied
     backup_dir = @files.sub_dir_name 2, 1, false, File.basename(src_dir), dest_dir
     dirs_same? src_dir, backup_dir
 
@@ -136,7 +136,7 @@ describe Siba::Source::Files::Files do
 
     # Compare dirs
     restore_dir1.wont_equal backup_dir1
-    dirs_same? restore_dir1, backup_dir1 
+    dirs_same? restore_dir1, backup_dir1
 
     # Compare file
     restore_file.wont_equal backup_file

@@ -23,9 +23,9 @@ private
       Siba.current_dir = File.dirname path_to_options_yml
       Siba.settings = options["settings"] || {}
       Siba.backup_name = File.basename path_to_options_yml, ".yml"
-      TmpDir.test_access 
+      TmpDir.test_access
       tasks = SibaTasks.new options, path_to_options_yml, !current_source
-      file_name = get_backup_choice tasks 
+      file_name = get_backup_choice tasks
       unless file_name.nil?
         if user_wants_to_proceed?
           tasks.restore file_name
@@ -35,7 +35,7 @@ private
         end
       end
       Siba.cleanup_tmp_dir
-    rescue Exception => e 
+    rescue Exception => e
       logger.fatal e
       logger.log_exception e, true
     end
@@ -81,7 +81,7 @@ private
 
         if (i+rows) <= list.size
           num2 = "#{(i+rows).to_s.rjust(2)}."
-          str2 = list[i+rows-1][2] 
+          str2 = list[i+rows-1][2]
           column2 = "#{num2} #{str2}"
         end
         siba_kernel.puts " #{column1}#{column2}"
@@ -114,7 +114,7 @@ Type 'yes' if you want to proceed:
           return list[number-1][0]
         else
           siba_kernel.printf msg
-        end 
+        end
       end
     end
 

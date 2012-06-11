@@ -14,7 +14,7 @@ describe Siba::Generator do
   it "should call get_plugin_yaml_path" do
     Siba::Generator.get_plugin_yaml_path "source", "files"
   end
-  
+
   it "should call load_plugin_yaml_content" do
     Siba::Generator.load_plugin_yaml_content "source", "files"
   end

@@ -15,8 +15,8 @@ describe Siba::Encryption::Gpg::Init do
     plugin.encryption.wont_be_nil
     plugin.encryption.passphrase.wont_be_nil
     plugin.encryption.cipher.wont_be_nil
-    plugin.encryption.passphrase.must_equal @options["passphrase"] 
-    plugin.encryption.cipher.must_equal @options["cipher"] 
+    plugin.encryption.passphrase.must_equal @options["passphrase"]
+    plugin.encryption.cipher.must_equal @options["cipher"]
   end
 
   it "must init with missing" do
@@ -34,7 +34,7 @@ describe Siba::Encryption::Gpg::Init do
     ->{create_plugin({'passphrase' => ""})}.must_raise Siba::CheckError
     ->{create_plugin({'passphrase' => " "})}.must_raise Siba::CheckError
   end
-  
+
   it "must call backup" do
     plugin = create_plugin(@options)
     plugin.backup("/path/to/archive", "/dest_dir").must_be_instance_of String

@@ -24,11 +24,11 @@ module Siba
         return File, meth.to_s.gsub(FILE_REGEXP, "")
       end
     end
-    
+
     def method_missing(meth, *args, &block)
       file_class, class_meth = SibaFile.get_file_class meth
       if file_class
-        file_class.send(class_meth, *args, &block)  
+        file_class.send(class_meth, *args, &block)
       else
         super
       end
@@ -56,10 +56,10 @@ module Siba
     rescue Exception => ex
       fail_message ||= "Failed to run the command: #{command}"
       raise Siba::Error, "#{fail_message}
-#{ex.message}" 
+#{ex.message}"
     end
 
-    # Runs the shell command. 
+    # Runs the shell command.
     # Works the same way as Kernel.system method but without showing the output.
     # Returns true if it was successfull.
     def shell_ok?(command)
@@ -70,7 +70,7 @@ module Siba
       return false
     end
   end
-  
+
   # Used to inject "siba_file" to classes that include this module
   module FilePlug
     def siba_file
@@ -78,7 +78,7 @@ module Siba
     end
 
     def self.siba_file
-      @siba_file ||= SibaFile.new 
+      @siba_file ||= SibaFile.new
     end
 
     # It is used in test to insert mock SibaFile object

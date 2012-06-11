@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-require 'helper/require_unit' 
+require 'helper/require_unit'
 
 describe Siba::SibaTask do
   before do
@@ -11,7 +11,7 @@ describe Siba::SibaTask do
     task_category = "archive"
     options = load_options "valid"
     new_task = Siba::SibaTask.new options, task_category
-    new_task.wont_be_nil 
+    new_task.wont_be_nil
     new_task.plugin.wont_be_nil
     new_task.category.must_equal task_category
     new_task.type.must_equal "tar"

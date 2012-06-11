@@ -35,7 +35,7 @@ module Siba
     def load(options)
       @options = options
       @type = Siba::SibaCheck.options_string(@options, "type")
-      @type.downcase! 
+      @type.downcase!
       @plugin = Siba::PluginLoader.loader.load(category, type, options)
     end
   end

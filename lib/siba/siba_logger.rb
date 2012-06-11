@@ -25,10 +25,10 @@ module Siba
         return 0 if SibaLogger.messages.nil?
         return SibaLogger.messages.size if severity.nil?
         severity_i = SibaLogger.level_to_i severity
-        SibaLogger.messages.count do |i| 
-          if exact_level 
-            i.level == severity_i 
-          else 
+        SibaLogger.messages.count do |i|
+          if exact_level
+            i.level == severity_i
+          else
             i.level >= severity_i
           end
         end
@@ -38,15 +38,15 @@ module Siba
       def count_messages(msg, severity=nil, exact_level=true)
         return 0 if SibaLogger.messages.nil?
         severity_i = SibaLogger.level_to_i severity unless severity.nil?
-        SibaLogger.messages.count do |i| 
+        SibaLogger.messages.count do |i|
           match_level = true
           if severity_i
-            if exact_level 
+            if exact_level
               match_level = i.level == severity_i
-            else 
+            else
               match_level = i.level >= severity_i
             end
-          end 
+          end
           if match_level
             !((i.msg =~ /#{msg}/).nil?)
           else
@@ -68,13 +68,13 @@ module Siba
       @loggers << Logger.new(@strlog)
 
       unless SibaLogger.quiet
-        @stdout_log = Logger.new(STDOUT) 
+        @stdout_log = Logger.new(STDOUT)
         @loggers << stdout_log
       end
 
       unless path_to_log_file.nil? || SibaLogger.no_log
         @file = File.open(path_to_log_file, "a:utf-8")
-        @file_log = Logger.new(file) 
+        @file_log = Logger.new(file)
         @loggers << file_log
       end
 
@@ -127,7 +127,7 @@ module Siba
     def log_exception(exception, log_only_backtrace=false)
       log('debug',exception.message) unless log_only_backtrace
       unless exception.backtrace.nil?
-        log('debug',"\n--- stack trace ---\n#{exception.backtrace.join("\n")}\n--- stack trace ---") 
+        log('debug',"\n--- stack trace ---\n#{exception.backtrace.join("\n")}\n--- stack trace ---")
       end
     end
 

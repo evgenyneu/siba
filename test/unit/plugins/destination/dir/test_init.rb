@@ -4,7 +4,7 @@ require 'helper/require_unit'
 require 'siba/plugins/destination/dir/init'
 
 describe Siba::Destination::Dir::Init do
-  before do    
+  before do
     @yml_path = File.expand_path('../yml/init', __FILE__)
     @plugin_category="destination"
     @plugin_type="dir"

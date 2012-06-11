@@ -13,7 +13,7 @@ describe Siba::Encryption::Gpg::Encryption do
     Siba::Encryption::Gpg::Encryption.new(@passphrase)
     fmock.verify
   end
-  
+
   it "init should call check_cipher" do
     fmock = mock_file :run_this, nil, ["check_cipher"]
     Siba::Encryption::Gpg::Encryption.new(@passphrase)
@@ -33,7 +33,7 @@ describe Siba::Encryption::Gpg::Encryption do
     path_to_decrypted_file = encryption.decrypt(path + ".gpg")
     path_to_decrypted_file.must_equal path
   end
-  
+
   it "must call decrypt with output file parameter" do
     encryption = Siba::Encryption::Gpg::Encryption.new(@passphrase)
     path = "/path/to/archive.tar.gz.gz"
@@ -51,7 +51,7 @@ describe Siba::Encryption::Gpg::Encryption do
       Siba::Encryption::Gpg::Encryption.parse_cipher_names(a[0]).must_equal a[1]
     end
   end
-    
+
   it "init must warn if the password is weak" do
     Siba::Encryption::Gpg::Encryption.new "passwordisweak"
     must_log "warn"

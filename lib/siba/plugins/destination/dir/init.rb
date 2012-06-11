@@ -3,8 +3,8 @@
 require 'siba/plugins/destination/dir/dest_dir'
 
 module Siba::Destination
-  module Dir 
-    class Init 
+  module Dir
+    class Init
       attr_accessor :dest_dir
 
       def initialize(options)

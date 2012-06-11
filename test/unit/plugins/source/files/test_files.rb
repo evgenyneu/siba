@@ -9,12 +9,12 @@ describe Siba::Source::Files::Files do
   end
   it "ignored? must NOT log if no files are excluded" do
     @f.new([], [], true).ignored?("/.hidden")
-    wont_log "info" 
+    wont_log "info"
   end
 
   it "ignored? must log if files are excluded" do
     @f.new([], ["*"], true).ignored?("/.hidden")
-    must_log "info" 
+    must_log "info"
   end
 
   it "should call backup" do

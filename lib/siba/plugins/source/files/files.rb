@@ -20,7 +20,7 @@ module Siba::Source
             file = files_to_include[i]
             file = siba_file.file_expand_path file
             next if ignored? file
-            
+
             is_file = siba_file.file_file? file
             unless is_file || siba_file.file_directory?(file)
               logger.error "Source file or directory does not exist: #{file}"
@@ -28,7 +28,7 @@ module Siba::Source
             end
 
             path_to_subdir = Files.sub_dir_name i+1, size_digits, is_file, file, dest_dir
-            siba_file.file_utils_mkpath path_to_subdir 
+            siba_file.file_utils_mkpath path_to_subdir
 
             logger.debug file
             if is_file
@@ -79,7 +79,7 @@ module Siba::Source
 
       def restore_file(path_to_backup_dir, entry_name_to_restore, path_to_source)
         backup_dir_entries = Siba::FileHelper.entries path_to_backup_dir
-        if backup_dir_entries.size != 1 
+        if backup_dir_entries.size != 1
           logger.error "Failed to restore file: #{entry_name_to_restore}"
           return
         end
@@ -105,7 +105,7 @@ module Siba::Source
       def copy_file(file, dest_dir)
         siba_file.run_this "copy file" do
           return if ignored? file
-          siba_file.file_utils_cp(file, dest_dir) 
+          siba_file.file_utils_cp(file, dest_dir)
         end
       end
 
@@ -121,13 +121,13 @@ module Siba::Source
           Siba::FileHelper.entries(dir).each do |entry|
             entry = File.join dir, entry
             if siba_file.file_file? entry
-              copy_file entry, dest_dir 
+              copy_file entry, dest_dir
             elsif  siba_file.file_directory? entry
               copy_dir entry, dest_dir, true if include_subdirs
             else
               logger.error "Failed to backup: #{entry}."
             end
-          end 
+          end
         end
       end
 
@@ -147,7 +147,7 @@ module Siba::Source
           file.strip!
           pattern.strip!
           basename = File.basename(file)
-          
+
           return File.fnmatch(pattern, basename, File::FNM_CASEFOLD) || # match basename against pattern
             File.fnmatch(pattern, file, File::FNM_CASEFOLD) # match whole path against pattern
         end

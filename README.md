@@ -64,15 +64,15 @@ It is recommended to run `siba backup` command daily or hourly. Use your favouri
 * **mysql**: backup and restore MySQL database ([homepage](https://github.com/evgenyneu/siba-source-mysql)).
 
 ### Archive
-  
+
 * **tar:** archive with optional gzip or bzip2 compression.
 
 ### Encryption
-  
+
 * **gpg:** encrypt with AES256, Blowfish, Twofish, 3DES and other ciphers.
 
 ### Destination
-  
+
 * **dir:** backup to local directory.
 * **aws-s3:** upload backup to Amazon S3 storage ([homepage](https://github.com/evgenyneu/siba-destination-aws-s3)).
 * **ftp:** store backups on FTP server ([homepage](https://github.com/evgenyneu/siba-destination-ftp)).

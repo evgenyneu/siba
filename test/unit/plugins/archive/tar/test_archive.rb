@@ -4,7 +4,7 @@ require 'helper/require_unit'
 require 'siba/plugins/archive/tar/init'
 
 describe Siba::Archive::Tar::Init do
-  before do    
+  before do
     @yml_path = File.expand_path('../yml/archive', __FILE__)
   end
 
@@ -25,7 +25,7 @@ describe Siba::Archive::Tar::Init do
     Siba::Archive::Tar::Archive.new("gzip")
       .archive("",dest_dir,file_name)
       .must_match /^#{file_name}\.tar.gz$/
-        
+
     Siba::Archive::Tar::Archive.new("bzip2")
       .archive("",dest_dir,file_name)
       .must_match /^#{file_name}\.tar.bz2$/

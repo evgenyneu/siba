@@ -5,7 +5,7 @@ module Siba::Archive
     class Archive
       include Siba::FilePlug
       include Siba::LoggerPlug
-      attr_accessor :compression 
+      attr_accessor :compression
 
       def initialize(compression)
         @compression = compression
@@ -22,7 +22,7 @@ module Siba::Archive
         archive_name = "#{dest_file_name}.tar#{extension}"
         archive_path = File.join(dest_dir, archive_name)
         siba_file.run_this do
-          raise Siba::Error, "Archive file already exists: #{archive_path}" if siba_file.file_file?(archive_path) || siba_file.file_directory?(archive_path)  
+          raise Siba::Error, "Archive file already exists: #{archive_path}" if siba_file.file_file?(archive_path) || siba_file.file_directory?(archive_path)
 
           siba_file.file_utils_cd dest_dir
           command_text = %(tar c#{options}f #{archive_name} -C "#{sources_dir}" .)
@@ -38,7 +38,7 @@ module Siba::Archive
         options = get_tar_option
         archive_name = File.basename archive_path
         archive_dir = File.dirname archive_path
-        siba_file.file_utils_cd archive_dir 
+        siba_file.file_utils_cd archive_dir
         command_text = %(tar x#{options}f #{archive_name} -C "#{destination_dir}")
         # Using -C 'change directory' option to make it work on Windows
         # because Windows will not understand absolute path to tar: "tar xf c:\dir\file.tar"
@@ -65,7 +65,7 @@ module Siba::Archive
         end
       end
 
-      def test_archive_and_extract        
+      def test_archive_and_extract
         # archive
         src_dir = Siba::TestFiles.prepare_test_dir "tar-archive-src"
         dest_dir = Siba::TestFiles.mkdir_in_tmp_dir "tar-archive-dest"
@@ -89,27 +89,27 @@ module Siba::Archive
     protected
       def self.get_tar_extension(compression)
         case compression
-        when "none" 
+        when "none"
           ""
         when "gzip"
           ".gz"
         when "bzip2"
           ".bz2"
         else
-          raise 
+          raise
         end
       end
 
       def get_tar_option
         case compression
-        when "none" 
+        when "none"
           ""
         when "gzip"
           "z"
         when "bzip2"
           "j"
         else
-          raise 
+          raise
         end
       end
     end

@@ -4,7 +4,7 @@ require 'helper/require_unit'
 require 'siba/plugins/archive/tar/init'
 
 describe Siba::Archive::Tar::Init do
-  before do    
+  before do
     @yml_path = File.expand_path('../yml/init', __FILE__)
     @plugin_category="archive"
     @plugin_type="tar"
@@ -28,7 +28,7 @@ describe Siba::Archive::Tar::Init do
     archive = create_plugin("valid")
     archive.backup("/src-dir", "/dst-dir", "file_name").must_be_instance_of String
   end
-  
+
   it "should run restore" do
     archive = create_plugin("valid")
     archive.restore "/path-to-archive", "/to_dir"

@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-require 'helper/require_unit' 
+require 'helper/require_unit'
 
 describe Siba::SibaTasks do
   before do
@@ -42,7 +42,7 @@ describe Siba::SibaTasks do
     st.backup_name(Time.new 2012, 1, 22).must_equal "siba-week-4-sun"
     st.backup_name(Time.new 2012, 1, 29).must_equal "siba-week-5-sun"
     st.backup_name(Time.new 2012, 2,  5).must_equal "siba-week-1-sun"
-    
+
     # Daily backup
     st.backup_name(Time.new 2012, 1, 2).must_equal "siba-day-2-mon"
     st.backup_name(Time.new 2012, 1, 3).must_equal "siba-day-3-tue"
@@ -55,7 +55,7 @@ describe Siba::SibaTasks do
     Siba.backup_name = "cuba"
     st.backup_name(Time.new 2012, 1, 9).must_equal "cuba-day-2-mon"
   end
-  
+
   it "backup name should raise error is Siba.backup_name is not set" do
     st = Siba::SibaTasks
     Siba.backup_name = nil

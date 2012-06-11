@@ -13,7 +13,7 @@ module Siba
       def logger
         raise Siba::Error, "Log is not created" unless LoggerPlug.opened?
         @logger
-      end    
+      end
 
       def create(name, path_to_log_file, show_start_message = true)
         raise Siba::Error, "Log is already created" if LoggerPlug.opened?

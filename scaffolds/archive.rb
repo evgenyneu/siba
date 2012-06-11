@@ -1,14 +1,14 @@
 # encoding: UTF-8
 
 module Siba::C6y
-  module Demo                 
-    class Init                 
+  module Demo
+    class Init
       include Siba::FilePlug
       include Siba::LoggerPlug
 
       def initialize(options)
 ## init_example.rb ##
-      end                      
+      end
 
       # Archive the contents of sources_dir and put it to dest_dir.
       # Return the archive file name. It must start with dest_file_name

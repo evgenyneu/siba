@@ -51,7 +51,7 @@ module Siba
             type = types.keys.first
           end
 
-          options = Siba::Generator.load_plugin_yaml_content category, type 
+          options = Siba::Generator.load_plugin_yaml_content category, type
           unless options =~ /^\s*type:/
             options = "type: #{type}\n" + options
           end
@@ -83,7 +83,7 @@ module Siba
             raise "Failed to load options for #{InstalledPlugins.plugin_category_and_type(category, type)} plugin from file: #{path}. Error: #{ex.message}"
           end
         end
-      end 
+      end
 
       def get_plugin_yaml_path(category, type)
         siba_file.run_this do
@@ -107,7 +107,7 @@ module Siba
             return types[number-1]
           else
             siba_kernel.printf msg
-          end 
+          end
         end
       end
     end

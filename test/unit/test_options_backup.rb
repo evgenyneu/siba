@@ -11,7 +11,7 @@ describe Siba::OptionsBackup do
   it "should call save_options_backup" do
     @cls.save_options_backup File.join(@yml_path, "valid.yml"), "/dir"
   end
-  
+
   it "should call load_source_from_backup" do
     options = load_options Siba::OptionsBackup::OPTIONS_BACKUP_FILE_NAME
     new_task = @cls.load_source_from_backup @yml_path

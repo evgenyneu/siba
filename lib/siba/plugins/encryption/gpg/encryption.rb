@@ -2,11 +2,11 @@
 
 module Siba::Encryption
   module Gpg
-    class Encryption 
+    class Encryption
       include Siba::LoggerPlug
       include Siba::FilePlug
 
-      DEFAULT_CIPHER = "AES256"      
+      DEFAULT_CIPHER = "AES256"
 
       attr_accessor :passphrase, :cipher
 
@@ -21,7 +21,7 @@ module Siba::Encryption
         path_to_encrypted_backup = "#{path_to_archive}.gpg"
         siba_file.run_this("encrypt") do
           if siba_file.file_file? path_to_encrypted_backup
-            raise Siba::Error, "Encrypted file #{path_to_encrypted_backup} already exists" 
+            raise Siba::Error, "Encrypted file #{path_to_encrypted_backup} already exists"
           end
           passphare_for_command = passphrase.gsub('"','\\"')
           gpg_homedir = Siba::TestFiles.mkdir_in_tmp_dir "gpg-homedir"
@@ -29,17 +29,17 @@ module Siba::Encryption
           command = command_without_password.gsub "****", passphare_for_command
           siba_file.run_shell command, "failed to encrypt: #{command_without_password}"
           unless siba_file.file_file? path_to_encrypted_backup
-            raise siba::error, "failed to find encrypted backup file: #{command_without_password}" 
+            raise siba::error, "failed to find encrypted backup file: #{command_without_password}"
           end
         end
-        path_to_encrypted_backup 
+        path_to_encrypted_backup
       end
 
       def decrypt(path_to_encrypted_file, path_to_decrypted_file=nil)
         path_to_decrypted_file = path_to_encrypted_file.gsub /\.gpg$/, "" if path_to_decrypted_file.nil?
         siba_file.run_this("decrypt") do
           if siba_file.file_file? path_to_decrypted_file
-            raise Siba::Error, "Decrypted file #{path_to_decrypted_file} already exists" 
+            raise Siba::Error, "Decrypted file #{path_to_decrypted_file} already exists"
           end
           passphare_for_command = passphrase.gsub('"','\\"')
           gpg_homedir = Siba::TestFiles.mkdir_in_tmp_dir "gpg-homedir"
@@ -47,7 +47,7 @@ module Siba::Encryption
           command = command_without_password.gsub "****", passphare_for_command
           siba_file.run_shell command, "failed to decrypt: #{command_without_password}"
           unless siba_file.file_file? path_to_decrypted_file
-            raise siba::error, "failed to find decrypted backup file: #{command_without_password}" 
+            raise siba::error, "failed to find decrypted backup file: #{command_without_password}"
           end
         end
         path_to_decrypted_file
@@ -99,14 +99,14 @@ module Siba::Encryption
             else
               cipher.upcase!
             end
-            
+
             raise Siba::CheckError, "'#{cipher}' cipher is not supported.
 #{supported_ciphers_msg}" unless supported_ciphers.include?(cipher)
           end
           cipher
         end
 
-        def get_cipher_names          
+        def get_cipher_names
           output = siba_file.run_shell "gpg --version"
           cipher_names = parse_cipher_names output
           raise Siba::Error, "Failed to get the list of supported ciphers" if cipher_names.empty?
@@ -117,7 +117,7 @@ module Siba::Encryption
           scan = version.scan /Cipher:(.*?)\n\w+:/m
           scan = version.scan /Cipher:(.*)/m if scan.size == 0
           if scan.size == 0 || !scan[0].is_a?(Array) || scan[0].size == 0 || !scan[0][0].is_a?(String)
-            raise "Failed to parse gpg version information" 
+            raise "Failed to parse gpg version information"
           end
           scan = scan[0][0]
           scan.gsub!(/ |\n/, "")

@@ -10,7 +10,7 @@
 
         # -- File operations --
         # "siba_file" object is available after including Siba::FilePlug
-        # You can use it for file operations 
+        # You can use it for file operations
         # instead of calling Dir, File, FileUtils directly.
         # It mocks all methods of these classes in unit tests
         # but runs them normally and in integration tests.
@@ -35,11 +35,11 @@
         tmp_dir = Siba.tmp_dir
 
         # Create a sub-dir with a random name in the temp dir
-        path_to_tmp_dir = Siba::TestFiles.mkdir_in_tmp_dir "you_dir_prefix" 
+        path_to_tmp_dir = Siba::TestFiles.mkdir_in_tmp_dir "you_dir_prefix"
 
-        # Note: Siba.tmp_dir will be removed automatically, 
+        # Note: Siba.tmp_dir will be removed automatically,
         # so there is no need to clean anything.
-        
+
         # Some Siba::FileHelper methods
         files_and_dirs = Siba::FileHelper.entries current_dir
         my_file = File.join tmp_dir, "myfile"
