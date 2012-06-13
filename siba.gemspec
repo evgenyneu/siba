@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = '~>1.8'
 
-  s.add_development_dependency 'minitest', '~>2.10'
+  s.add_development_dependency 'minitest', '~>3.0'
   s.add_development_dependency 'rake', '~>0.9'
   s.add_development_dependency 'guard-minitest', '~>0.4'
 
