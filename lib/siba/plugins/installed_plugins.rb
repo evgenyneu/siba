@@ -51,7 +51,7 @@ module Siba
       end
 
       def install_gem_message(category, type)
-        "'#{type}' plugin is not installed.\n Run 'gem install #{gem_name(category, type)}' to install it and try again."
+        "'#{type}' plugin is not installed.\nRun 'gem install #{gem_name(category, type)}' to install it and try again."
       end
 
     private
