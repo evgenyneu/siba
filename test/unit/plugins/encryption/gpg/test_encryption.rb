@@ -8,18 +8,6 @@ describe Siba::Encryption::Gpg::Encryption do
     @passphrase = "aj(dJ6Hja2Jj$kjask"
   end
 
-  it "init should call test_encryption" do
-    fmock = mock_file :run_this, nil, ["test_encryption"]
-    Siba::Encryption::Gpg::Encryption.new(@passphrase)
-    fmock.verify
-  end
-
-  it "init should call check_cipher" do
-    fmock = mock_file :run_this, nil, ["check_cipher"]
-    Siba::Encryption::Gpg::Encryption.new(@passphrase)
-    fmock.verify
-  end
-
   it "must call encrypt" do
     encryption = Siba::Encryption::Gpg::Encryption.new(@passphrase)
     path_to_archive = "/path/to/archive.tar.gz"

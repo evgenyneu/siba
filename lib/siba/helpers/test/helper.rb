@@ -20,7 +20,7 @@ module SibaTest
         Siba::LoggerPlug.create "Test", nil
         Siba::SibaLogger.messages = []
         Siba.settings = {}
-        Siba.current_dir = @current_dir 
+        Siba.current_dir = @current_dir
         Siba.backup_name = "siba"
         SibaTest::KernelMock.mock_all_methods # prevents tests from accessing Kernel methods
       end
@@ -33,7 +33,7 @@ module SibaTest
     def init_unit
       init
       MiniTest::Unit::TestCase.add_setup_hook do
-        SibaTest::FileMock.mock_all_methods # prevents tests from doing file operations 
+        SibaTest::FileMock.mock_all_methods # prevents tests from doing file operations
         Siba.class_eval {@tmp_dir = SibaTest::TmpDirMocked}
       end
     end
@@ -42,7 +42,7 @@ module SibaTest
       init
       MiniTest::Unit::TestCase.add_teardown_hook do
         # cleanup after each integration test
-        Siba.current_dir = @current_dir 
+        Siba.current_dir = @current_dir
         Siba.cleanup_tmp_dir
         SibaTest.cleanup_tmp_dir
       end

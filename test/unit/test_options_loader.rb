@@ -2,71 +2,59 @@
 
 require 'helper/require_unit'
 
-class OptionsLoaderTest < MiniTest::Unit::TestCase
-  def setup
+describe Siba::OptionsLoader do
+  before do
     @yml_path = File.expand_path('../yml/options_loader', __FILE__)
   end
 
-  def test_load_yml
+  it 'should load yml' do
     load_options "valid"
-    assert_instance_of Hash, @options
+    @options.must_be_instance_of Hash
   end
 
-  def test_load_hash_from_yml
+  it 'should load hash from yml' do
     hash = Siba::OptionsLoader.load_hash_from_yml File.join(@yml_path, "valid.yml")
-    assert_instance_of Hash, hash
+    hash.must_be_instance_of Hash
   end
 
-  def test_load_erb
+  it 'should load erb' do
     data = Siba::OptionsLoader.load_erb File.join(@yml_path, "valid.yml")
-    assert_instance_of String, data
-    refute_empty data
+    data.must_be_instance_of String
+    data.wont_be_empty
   end
 
-  def test_load_yml_check_erb
+  it 'should render erb template' do
     load_options "valid"
-    assert_equal 4, @options["erb"]
+    @options["erb"].must_equal 4
   end
 
-  def test_should_fail_if_options_file_does_not_have_yml_extension
+  it 'should fail if options file does not have yml extension' do
     path = File.join @yml_path, "file_without_yml_extension"
-    assert_raises(Siba::Error) do
-      Siba::OptionsLoader.load_yml(path)
-    end
+    -> { Siba::OptionsLoader.load_yml(path) }.must_raise Siba::Error
   end
 
-  def test_load_file_missing
-    assert_raises(Siba::Error) do
-      load_options "missing"
-    end
+  it 'should fail to load missing file' do
+    -> { load_options "missing" }.must_raise Siba::Error
   end
 
-  def test_load_invalid_yml
-    assert_raises(Siba::Error) do
-      load_options "invalid"
-    end
+  it 'should fail to load invalid yml' do
+    -> { load_options "invalid" }.must_raise Siba::Error
   end
 
-  def test_should_not_load_empty_yml
-    assert_raises(Siba::Error) do
-      load_options "empty"
-    end
+  it 'should fail to load empty yml' do
+    -> { load_options "empty" }.must_raise Siba::Error
   end
 
-  def test_should_not_load_yml_with_string
-    assert_raises(Siba::Error) do
-      load_options "string"
-    end
+  it 'should fail to to yml with a string' do
+    -> { load_options "string" }.must_raise Siba::Error
   end
 
-  def test_should_not_load_yml_with_array
-    assert_raises(Siba::Error) do
-      load_options "array"
-    end
+  it 'should fail to load yml with array' do
+    -> { load_options "array" }.must_raise Siba::Error
   end
 
-  def test_load_yml_with_bom
+  it 'should load yml with bom' do
     options = load_options("utf8_with_bom")
-    assert_equal options["key"], "value"
+    options["key"].must_equal "value"
   end
 end

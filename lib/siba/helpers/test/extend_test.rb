@@ -1,7 +1,7 @@
 # encoding: UTF-8
 
 class MiniTest::Unit::TestCase
-  include Siba::FilePlug 
+  include Siba::FilePlug
   def must_log(level)
     verify_log true, level, true
   end
@@ -32,12 +32,12 @@ class MiniTest::Unit::TestCase
 
   def mock_file(name, retval, args=[])
     mock = new_mock_file
-    mock.expect name, retval, args 
+    mock.expect name, retval, args
     mock
   end
 
   def new_mock_file
-    Siba::FilePlug.siba_file = MiniTest::Mock.new 
+    Siba::FilePlug.siba_file = MiniTest::Mock.new
   end
 
   def create_plugin(yml_file_name_or_options_hash)
@@ -46,7 +46,7 @@ class MiniTest::Unit::TestCase
     else
       @options = yml_file_name_or_options_hash
     end
-    
+
     unless @plugin_category
       raise Siba::Error, "Initialize '@plugin_category' variable (#{Siba::Plugins.categories_str})"
     end
@@ -70,7 +70,7 @@ class MiniTest::Unit::TestCase
     tmp_dir ||= SibaTest.tmp_dir
     Siba::TestFiles::prepare_test_dir dir_name_part, tmp_dir
   end
-  
+
   def prepare_test_file(file_name_part, tmp_dir = nil)
     tmp_dir ||= SibaTest.tmp_dir
     Siba::TestFiles::prepare_test_file file_name_part, tmp_dir
@@ -93,13 +93,13 @@ class MiniTest::Unit::TestCase
   def prepare_options(src_yml_path, replace_data)
     Siba::TestFiles::prepare_options(src_yml_path, replace_data)
   end
-  
+
   def prepare_yml(src_yml_path, replace_data, tmp_dir=nil)
     tmp_dir ||= SibaTest.tmp_dir
     Siba::TestFiles::prepare_yml src_yml_path, replace_data, tmp_dir
   end
 
-  private 
+  private
 
   def verify_log(must_change, log_level, exact_level = true)
     log_count = Siba::SibaLogger.count log_level, exact_level
