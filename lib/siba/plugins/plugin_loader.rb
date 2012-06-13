@@ -42,7 +42,13 @@ module Siba
         begin
           Gem::Specification.find_by_name(gem_name)
         rescue Gem::LoadError
-          raise PluginLoadError, "Unknown type '#{type}' for '#{category}' plugin. #{available_types_msg}"
+          if Siba::Plugins.category_and_type_correct? category, type
+            error_msg = Siba::InstalledPlugins.install_gem_message(category, type)
+          else
+            error_msg = "Unknown type '#{type}' for '#{category}' plugin.\n#{available_types_msg}"
+          end
+
+          raise PluginLoadError, error_msg
         end
         require gem_name
       end

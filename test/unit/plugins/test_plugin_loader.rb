@@ -13,8 +13,30 @@ describe Siba::LogMessage do
   end
 
   it "should fail when plugin name is incorrect" do
-    ->{@loader.load "incorrect", "tar", @options}.must_raise Siba::PluginLoadError
+    begin
+      @loader.load "source", "incorrect", @options
+    rescue Siba::PluginLoadError => e
+      e.message.must_match /\AUnknown type 'incorrect'/
+    end
+  end
 
+  it "should fail when plugin name is not installed" do
+    old_plugins_hash = Siba::Plugins::PLUGINS_HASH
+    SibaTest::RemovableConstants.redef_without_warning Siba::Plugins,
+      "PLUGINS_HASH", { "missing" => { "gem" => "description" } }
+
+    old_categories = Siba::Plugins::CATEGORIES
+    SibaTest::RemovableConstants.redef_without_warning Siba::Plugins,
+      "CATEGORIES", ["missing"]
+
+    begin
+      @loader.load "missing", "gem", @options
+    rescue Siba::PluginLoadError => e
+      e.message.must_match /\A'gem' plugin is not installed/
+    end
+
+    SibaTest::RemovableConstants.redef_without_warning Siba::Plugins, "PLUGINS_HASH", old_plugins_hash
+    SibaTest::RemovableConstants.redef_without_warning Siba::Plugins, "CATEGORIES", old_categories
   end
 
   it "should fail when plugin type is unknown" do

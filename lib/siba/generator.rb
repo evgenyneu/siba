@@ -43,8 +43,7 @@ module Siba
             end
 
             unless Siba::InstalledPlugins.installed? category, type
-              siba_kernel.puts "#{type} plugin is not installed."
-              siba_kernel.puts "Run 'gem install #{Siba::InstalledPlugins.gem_name(category, type)}' to install it and try again."
+              siba_kernel.puts Siba::InstalledPlugins.install_gem_message(category, type)
               return
             end
           else

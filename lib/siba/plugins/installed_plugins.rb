@@ -50,6 +50,10 @@ module Siba
         "#{category}#{type.nil? ? "" : '-' + type}"
       end
 
+      def install_gem_message(category, type)
+        "'#{type}' plugin is not installed.\n Run 'gem install #{gem_name(category, type)}' to install it and try again."
+      end
+
     private
 
       def find_installed

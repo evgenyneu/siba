@@ -29,4 +29,8 @@ describe Siba::InstalledPlugins do
     @cls.gem_name("source", "files").must_be_instance_of String
   end
 
+  it "should call install_gem_message" do
+    @cls.install_gem_message("source", "files").must_be_instance_of String
+  end
+
 end
