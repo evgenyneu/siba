@@ -22,9 +22,11 @@ describe Siba::Backup do
     three.must_equal File.expand_path(dirname), "Should show absolute path"
     @siba_file.file_expand_path("~/#{dirname}").must_equal File.expand_path("~/#{dirname}"), "Path relative to home folder"
     tmp_dir = mkdir_in_tmp_dir "f-e-p"
+    FileUtils.cd tmp_dir
+    tmp_dir = File.expand_path('')
     Siba.current_dir = tmp_dir
     tmp_dir2 = mkdir_in_tmp_dir "f-e-p2"
     siba_file.file_utils_cd tmp_dir2
-    @siba_file.file_expand_path("#{dirname}").must_equal File.join(tmp_dir,dirname), "Path relative to Siba.current_dir"
+    @siba_file.file_expand_path(dirname).must_equal File.join(tmp_dir,dirname), "Path relative to Siba.current_dir"
   end
 end

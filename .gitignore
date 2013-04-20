@@ -5,3 +5,4 @@ pkg/*
 *.swp
 *.log
 tags
+.DS_Store

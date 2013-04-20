@@ -17,11 +17,11 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.required_rubygems_version = '~>1.8'
+  s.required_rubygems_version = '>=1.9.0'
 
-  s.add_development_dependency 'minitest', '~>3.0'
-  s.add_development_dependency 'rake', '~>0.9'
-  s.add_development_dependency 'guard-minitest', '~>0.4'
+  s.add_development_dependency 'minitest', '~>4.7'
+  s.add_development_dependency 'rake', '~>10.0'
+  s.add_development_dependency 'guard-minitest', '~>0.5'
 
   # specify any dependencies here; for example:
   # s.add_development_dependency "rspec"

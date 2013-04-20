@@ -8,13 +8,18 @@ module SibaTest
   class << self
     include Siba::TmpDirPlug
 
+    attr_accessor :setup_hooks
+    attr_accessor :teardown_hooks
+
     def init
       require 'minitest/pride' unless SibaTest::IS_WINDOWS
 
       @loaded_options = {}
       @current_dir = siba_file.file_utils_pwd
+      @setup_hooks = []
+      @teardown_hooks = []
 
-      MiniTest::Unit::TestCase.add_setup_hook do
+      @setup_hooks << -> do
         Siba::SibaLogger.quiet = true
         Siba::SibaLogger.no_log = true
         Siba::LoggerPlug.create "Test", nil
@@ -25,14 +30,12 @@ module SibaTest
         SibaTest::KernelMock.mock_all_methods # prevents tests from accessing Kernel methods
       end
 
-      MiniTest::Unit::TestCase.add_teardown_hook do
-        Siba::LoggerPlug.close
-      end
+      @teardown_hooks << -> { Siba::LoggerPlug.close }
     end
 
     def init_unit
       init
-      MiniTest::Unit::TestCase.add_setup_hook do
+      @setup_hooks << -> do
         SibaTest::FileMock.mock_all_methods # prevents tests from doing file operations
         Siba.class_eval {@tmp_dir = SibaTest::TmpDirMocked}
       end
@@ -40,7 +43,7 @@ module SibaTest
 
     def init_integration
       init
-      MiniTest::Unit::TestCase.add_teardown_hook do
+      @teardown_hooks << -> do
         # cleanup after each integration test
         Siba.current_dir = @current_dir
         Siba.cleanup_tmp_dir
