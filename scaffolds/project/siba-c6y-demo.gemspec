@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency     'siba', '~>siba_version'
 
-  s.add_development_dependency  'minitest', '~>3.0'
-  s.add_development_dependency  'rake', '~>0.9'
-  s.add_development_dependency  'guard-minitest', '~>0.4'
+  s.add_development_dependency  'minitest', '~>4.7'
+  s.add_development_dependency  'rake', '~>10.0'
+  s.add_development_dependency  'guard-minitest', '~>0.5'
 end
