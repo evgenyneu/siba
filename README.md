@@ -5,7 +5,7 @@ SIBA is a simple backup and restore utility. It implements daily backup rotation
 ## SIBA is
 
 * **Easy to use:** configure, backup and restore with a single command.
-* **Feature-rich:** backup and restore files, MySQL, MongoDB databases to/from local or remote locations.
+* **Feature-rich:** backup and restore files, MySQL, MongoDB databases to local directory, FTP or Amazon S3.
 * **Secure:** all backups are encrypted before moving to destination.
 * **Cross platform:** runs on any computer with Ruby 1.9 or later.
 * **Easy to extend:** developers can easily add new backup sources, archivers, encryptions and destinations.
