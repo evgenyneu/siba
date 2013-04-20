@@ -18,7 +18,14 @@ SIBA is a simple backup and restore utility. It implements daily backup rotation
 
         $ gem install siba
 
-(assuming that Ruby 1.9 and RubyGems are installed)
+## GnuPG
+
+Siba uses [GnuPG](http://http://www.gnupg.org) for encryption.
+It needs `gpg` command line utility to be present on your system.
+
+Install `gpg` on Mac OS X:
+
+        $ brew install gnupg
 
 ## Usage
 
