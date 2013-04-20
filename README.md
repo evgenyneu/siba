@@ -11,9 +11,6 @@ SIBA is a simple backup and restore utility. It implements daily backup rotation
 * **Easy to extend:** developers can easily add new backup sources, archivers, encryptions and destinations.
 * **Free and open source:** use SIBA for any purpose without restrictions.
 
----
-<img src="http://webdevelopercv.com/images/works/siba.png" width="326" height="326">
-
 ## Installation
 
         $ gem install siba
@@ -83,3 +80,7 @@ It is recommended to run `siba backup` command daily or hourly. Use your favouri
 * **dir:** backup to local directory.
 * **aws-s3:** upload backup to Amazon S3 storage ([homepage](https://github.com/evgenyneu/siba-destination-aws-s3)).
 * **ftp:** store backups on FTP server ([homepage](https://github.com/evgenyneu/siba-destination-ftp)).
+
+
+---
+<img src="http://webdevelopercv.com/images/works/siba.png" width="326" height="326">
