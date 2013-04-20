@@ -17,7 +17,7 @@ SIBA is a simple backup and restore utility. It implements daily backup rotation
 ## GnuPG
 
 Siba uses [GnuPG](http://www.gnupg.org) for encryption.
-It needs `gpg` command line utility to be present on your system.
+It needs `gpg` command-line utility to be present on your system.
 
 Install `gpg` on Mac OS X:
 
