@@ -82,4 +82,4 @@ It is recommended to run `siba backup` command daily or hourly. Use your favouri
 
 
 ---
-<img src="http://webdevelopercv.com/images/works/siba.png" width="326" height="326">
+<img src="https://dl.dropboxusercontent.com/u/11143285/github_images/siba_backup_logo.png" width="326" height="326">
